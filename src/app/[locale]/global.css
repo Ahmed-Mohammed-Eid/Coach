@@ -1,0 +1,256 @@
+.toggleButton {
+    margin-left: auto;
+}
+
+@media (min-width: 991px) {
+    .toggleButton {
+        margin-left: auto !important;
+        margin-right: initial !important;
+    }
+}
+
+.viewButton {
+    background-color: #5cb85c;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px 10px;
+    transition: all 0.15s ease-in-out;
+    cursor: pointer;
+    border: 0;
+}
+
+.viewButton:hover {
+    background-color: #449d44;
+    color: #fff;
+}
+
+.viewButton:active {
+    transform: scale(0.95);
+}
+
+.editButton {
+    background-color: #136d88;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px 10px;
+    transition: all 0.15s ease-in-out;
+    cursor: pointer;
+    border: 0;
+}
+
+.editButton:hover {
+    background-color: #0a3c4d;
+    color: #fff;
+}
+
+.editButton:active {
+    transform: scale(0.95);
+}
+
+.deleteButton {
+    background-color: #d9534f;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px 10px;
+    transition: all 0.15s ease-in-out;
+    cursor: pointer;
+    border: 0;
+}
+
+.deleteButton:hover {
+    background-color: #a94442;
+    color: #fff;
+}
+
+.deleteButton:active {
+    transform: scale(0.95);
+}
+
+.deactivateButton {
+    background-color: #f0ad4e;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px 10px;
+    transition: all 0.15s ease-in-out;
+    cursor: pointer;
+    border: 0;
+}
+
+.deactivateButton:hover {
+    background-color: #df8a13;
+    color: #fff;
+}
+
+.deactivateButton:active {
+    transform: scale(0.95);
+}
+
+.activateButton {
+    background-color: #5cb85c;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px 10px;
+    transition: all 0.15s ease-in-out;
+    cursor: pointer;
+    border: 0;
+}
+
+.activateButton:hover {
+    background-color: #449d44;
+    color: #fff;
+}
+
+.activateButton:active {
+    transform: scale(0.95);
+}
+
+.freezeButton {
+    background-color: #5bc0de;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px 10px;
+    transition: all 0.15s ease-in-out;
+    cursor: pointer;
+    border: 0;
+}
+
+.freezeButton:hover {
+    background-color: #31b0d5;
+    color: #fff;
+}
+
+.freezeButton:active {
+    transform: scale(0.95);
+}
+
+.unfreezeButton {
+    background-color: #5cb85c;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px 10px;
+    transition: all 0.15s ease-in-out;
+    cursor: pointer;
+    border: 0;
+}
+
+.unfreezeButton:hover {
+    background-color: #449d44;
+    color: #fff;
+}
+
+.unfreezeButton:active {
+    transform: scale(0.95);
+}
+
+.copyButton {
+    background-color: #5bc0de;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px 10px;
+    transition: all 0.15s ease-in-out;
+    cursor: pointer;
+    border: 0;
+}
+
+.copyButton:hover {
+    background-color: #31b0d5;
+    color: #fff;
+}
+
+.copyButton:active {
+    transform: scale(0.95);
+}
+
+.cancelButton {
+    background-color: #efefef;
+    color: #101010;
+    border-radius: 5px;
+    padding: 5px 10px;
+    transition: all 0.15s ease-in-out;
+    cursor: pointer;
+    border: 0;
+}
+
+.cancelButton:hover {
+    background-color: #dfdfdf;
+    color: #fff;
+}
+
+.cancelButton:active {
+    transform: scale(0.95);
+}
+
+/*RESET THE SIZE OF THE CUSTOM FILE UPLOAD*/
+.p-fluid .p-fileupload .p-button {
+    width: 3rem !important;
+}
+
+/* ACTIVE TRANSITION AND SCALE */
+.scale-95 {
+    transition: all 0.15s ease-in-out;
+    cursor: pointer;
+}
+
+.scale-95:active {
+    transform: scale(0.95);
+}
+
+/*LOGOUT LINK STYLE*/
+a[href='/ar/login'],
+a[href='/en/login'] {
+    color: #ff0000 !important;
+    text-decoration: none !important;
+}
+
+.__btn {
+    margin: 0;
+    display: inline-flex;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    align-items: center;
+    vertical-align: bottom;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    color: #ffffff;
+    background: #6366f1;
+    border: 1px solid #6366f1;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    border-radius: 6px;
+    font-family: inherit;
+    font-feature-settings: inherit;
+    font-weight: normal;
+}
+
+.__btn:not(:disabled):hover {
+    background: #4f46e5;
+    color: #ffffff;
+    border-color: #4f46e5;
+}
+
+.__btn:not(:disabled):active {
+    background: #4338ca;
+    color: #ffffff;
+    border-color: #4338ca;
+}
+
+/* DIALOG SIZE*/
+.dialogSize {
+    width: 90% !important;
+}
+
+@media screen and (min-width: 576px) {
+    .dialogSize {
+        width: 70% !important;
+        max-width: 600px !important;
+    }
+}
+
+html[lang='ar'] .layout-menu ul a .layout-menuitem-icon {
+    margin-right: 0;
+    margin-left: 0.5rem;
+}
