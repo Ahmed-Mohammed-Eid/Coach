@@ -18,7 +18,7 @@ export default function MealVariations({ getVariation = () => {}, selectedVariat
     useEffect(() => {
         if (selectedVariation) {
             setVariation({
-                number: selectedVariation.length,
+                number: selectedVariation?.length || 0,
                 variationsArray: selectedVariation
             });
         }
@@ -70,7 +70,7 @@ export default function MealVariations({ getVariation = () => {}, selectedVariat
                                     id={`Protine${index}`}
                                     value={variation.variationsArray[index]?.protine}
                                     onValueChange={(e) => {
-                                        const ArrayOfVariations = [...variation.variationsArray];
+                                        const ArrayOfVariations = [...variation?.variationsArray];
                                         ArrayOfVariations[index] = {
                                             protine: e.value,
                                             title: ArrayOfVariations[index]?.title || '',

@@ -17,7 +17,8 @@ export default async function LocaleLayout({ children, params: { locale } }: { c
     return (
         <html>
             <head>
-                <link id="theme-css" href={`/themes/lara-light-indigo/theme.css`} rel="stylesheet"></link>
+                {/* <link id="theme-css" href={`/themes/lara-light-indigo/theme.css`} rel="stylesheet"></link> */}
+                <link id="theme-css" href={`/themes/lara-light-teal/theme.css`} rel="stylesheet"></link>
             </head>
             <body>
                 <NextIntlClientProvider messages={messages}>

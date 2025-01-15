@@ -1,9 +1,5 @@
-import UsersTable from '../components/UsersTable';
+import { redirect } from 'next/navigation';
 
 export default function UsersPage({ params: { locale } }) {
-    return (
-        <div className={'card mb-0'}>
-            <UsersTable locale={locale} isRTL={locale === 'ar'} />
-        </div>
-    );
+    redirect(`/${locale}/users/clients`);
 }

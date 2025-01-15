@@ -60,6 +60,11 @@ const AppMenu = () => {
                     label: t('AppMenu.createPackage'),
                     icon: 'pi pi-fw pi-plus',
                     to: `/${locale}/packages/create`
+                },
+                {
+                    label: t('AppMenu.flexBundle'),
+                    icon: 'pi pi-fw pi-cog',
+                    to: `/${locale}/packages/flex-bundle`
                 }
             ]
         },
@@ -118,7 +123,28 @@ const AppMenu = () => {
                 {
                     label: t('AppMenu.usersList'),
                     icon: 'pi pi-fw pi-list',
-                    to: `/${locale}/users`
+                    to: `/${locale}/users/clients`
+                },
+                {
+                    label: t('AppMenu.createUser'),
+                    icon: 'pi pi-fw pi-plus',
+                    to: `/${locale}/users/create/client`
+                }
+            ]
+        },
+        {
+            label: t('AppMenu.employees'),
+            icon: 'pi pi-fw pi-users',
+            items: [
+                {
+                    label: t('AppMenu.employeesList'),
+                    icon: 'pi pi-fw pi-list',
+                    to: `/${locale}/users/employees`
+                },
+                {
+                    label: t('AppMenu.createEmployee'),
+                    icon: 'pi pi-fw pi-plus',
+                    to: `/${locale}/users/create/employee`
                 }
             ]
         },

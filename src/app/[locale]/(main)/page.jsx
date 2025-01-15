@@ -60,7 +60,7 @@ const Dashboard = ({ params: { locale } }) => {
     }, []);
 
     return (
-        <div className="grid gap-1">
+        <div className="grid gap-1 mx-0">
             <div className="card mt-2 col-12 md:col-6 lg:col-6 mb-0">
                 <div className="card-header">
                     <h3 className="card-title text-center uppercase">{t('clientsChart')}</h3>

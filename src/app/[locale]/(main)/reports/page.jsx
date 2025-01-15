@@ -4,6 +4,7 @@ import React from 'react';
 import { useTranslations } from 'next-intl';
 import { Dropdown } from 'primereact/dropdown';
 import { Calendar } from 'primereact/calendar';
+import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import axios from 'axios';
@@ -15,18 +16,26 @@ export default function Reports({ params: { locale } }) {
     const [loading, setLoading] = React.useState(false);
     const [reportType, setReportType] = React.useState('');
     const [startDate, setStartDate] = React.useState('');
+    const [couponCode, setCouponCode] = React.useState('');
     const [endDate, setEndDate] = React.useState('');
 
     function handleSubmit(e) {
         e.preventDefault();
         setLoading(true);
+
+        const objectToSend = {
+            reportName: reportType,
+            dateFrom: startDate,
+            dateTo: endDate
+        };
+
+        if (reportType === 'couponHistory') {
+            objectToSend.couponCode = couponCode;
+        }
+
         axios
             .get(`${process.env.API_URL}/report`, {
-                params: {
-                    reportName: reportType,
-                    dateFrom: startDate,
-                    dateTo: endDate
-                },
+                params: objectToSend,
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
@@ -62,13 +71,15 @@ export default function Reports({ params: { locale } }) {
                             placeholder={t('reportType')}
                             options={[
                                 { label: t('activeClients'), value: 'active clients' },
-                                { label: t('kitchenMeals'), value: 'kitchenMeals' }
+                                { label: t('kitchenMeals'), value: 'kitchenMeals' },
+                                { label: t('packingList'), value: 'packingList' },
+                                { label: t('couponHistory'), value: 'couponHistory' }
                             ]}
                         />
                     </div>
 
-                    {reportType === 'kitchenMeals' && (
-                        <div className="field col-12 md:col-6">
+                    {(reportType === 'kitchenMeals' || reportType === 'packingList' || reportType === 'couponHistory') && (
+                        <div className={`field col-12 md:col-6 ${reportType === 'packingList' ? 'md:col-12' : ''}`}>
                             <label htmlFor="startDate">{t('startDate')}</label>
                             <Calendar
                                 id="startDate"
@@ -83,7 +94,7 @@ export default function Reports({ params: { locale } }) {
                         </div>
                     )}
 
-                    {reportType === 'kitchenMeals' && (
+                    {(reportType === 'kitchenMeals' || reportType === 'couponHistory') && (
                         <div className="field col-12 md:col-6">
                             <label htmlFor="endDate">{t('endDate')}</label>
                             <Calendar
@@ -96,6 +107,13 @@ export default function Reports({ params: { locale } }) {
                                 dateFormat="dd/mm/yy"
                                 showIcon={true}
                             />
+                        </div>
+                    )}
+
+                    {reportType === 'couponHistory' && (
+                        <div className="field col-12">
+                            <label htmlFor="couponCode">{t('couponCode')}</label>
+                            <InputText id="couponCode" type="text" value={couponCode} onChange={(e) => setCouponCode(e.target.value)} placeholder={t('couponCode')} />
                         </div>
                     )}
 

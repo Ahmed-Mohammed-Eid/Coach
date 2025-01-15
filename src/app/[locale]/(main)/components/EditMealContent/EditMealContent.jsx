@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CustomFileUpload from '../../components/customFileUpload';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
@@ -27,11 +27,16 @@ export default function EditMeal({ meal, id, locale, isRTL }) {
     const [maximumExtraNumber, setMaximumExtraNumber] = useState(0);
     const [types, setTypes] = useState();
     const [variations, setVariations] = useState();
+
+    // CATEGORIES STATE
+    const [categories, setCategories] = useState([]);
+
     const [form, setForm] = useState({
         mealTitle: '',
         mealTitleEn: '',
         mealPrice: '',
         mealCategory: '',
+        mealFoodCategory: '',
         mealType: '',
         carbohydrate: '',
         fat: '',
@@ -119,6 +124,34 @@ export default function EditMeal({ meal, id, locale, isRTL }) {
             });
     }
 
+    // GET CATEGORIES LIST HANDLER
+    const getCategoriesList = () => {
+        // GET THE TOKEN FROM LOCAL STORAGE
+        const token = localStorage.getItem('token');
+
+        // API CALL /categories
+        axios
+            .get(`${process.env.API_URL}/food/category/list`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            .then((res) => {
+                console.log(res.data);
+                setCategories(res.data?.categories || []);
+            })
+            .catch((err) => {
+                console.log(err);
+                toast.error(t('fetchCategoriesError'));
+            });
+    };
+
+    // EFFECT TO FETCH DATA
+    useEffect(() => {
+        // GET CATEGORIES LIST
+        getCategoriesList();
+    }, []);
+
     // EFFECT TO SET THE FORM DATA
     React.useEffect(() => {
         setForm({
@@ -163,6 +196,22 @@ export default function EditMeal({ meal, id, locale, isRTL }) {
                     <div className="field col-12 md:col-6">
                         <label htmlFor="mealTitleEn">{t('mealEnglishName')}</label>
                         <InputText id="mealTitleEn" type="text" placeholder={t('enterMealEnglishName')} value={form.mealTitleEn} onChange={(e) => setForm({ ...form, mealTitleEn: e.target.value })} />
+                    </div>
+
+                    {/* FOOD CATEGORY */}
+                    <div className="field col-12">
+                        <label htmlFor="mealCategory">{t('mealFoodCategory')}</label>
+                        <Dropdown
+                            id="mealCategory"
+                            placeholder={t('selectMealCategory')}
+                            options={
+                                categories?.map((category) => {
+                                    return { label: locale === 'ar' ? category.categoryNameAR : category.categoryNameEN, value: category._id };
+                                }) || []
+                            }
+                            value={form.mealFoodCategory}
+                            onChange={(e) => setForm({ ...form, mealFoodCategory: e.target.value })}
+                        />
                     </div>
                     <div className="field col-12 md:col-6">
                         <label htmlFor="mealCategory">{t('mealCategory')}</label>

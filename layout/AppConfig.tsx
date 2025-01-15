@@ -157,6 +157,12 @@ const AppConfig = (props: AppConfigProps) => {
                         <InputSwitch checked={layoutConfig.ripple as boolean} onChange={(e) => changeRipple(e)}></InputSwitch>
                     </>
                 )}
+                {/*
+                <h5>{t('coach')}</h5>
+                <button className="p-link w-2rem h-2rem" onClick={() => _changeTheme('lara-light-coach', 'light')}>
+                    <img src="/logo.png" className="w-2rem h-2rem" alt="Coach" />
+                </button> */}
+
                 <h5>{t('bootstrap')}</h5>
                 <div className="grid">
                     <div className="col-3">

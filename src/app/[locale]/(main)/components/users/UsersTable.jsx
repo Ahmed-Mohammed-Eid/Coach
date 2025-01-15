@@ -10,6 +10,7 @@ import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 import { TabMenu } from 'primereact/tabmenu';
 import { Dropdown } from 'primereact/dropdown';
+import { InputText } from 'primereact/inputtext';
 // TOAST
 import { toast } from 'react-hot-toast';
 
@@ -22,7 +23,6 @@ export default function UsersTable({ locale, isRTL }) {
     //STATE FOR THE USERS
     const [page, setPage] = React.useState(1);
     const [users, setUsers] = React.useState([]);
-    const [visible, setVisible] = React.useState(false);
     const [clientIdToDelete, setClientIdToDelete] = React.useState(null);
     const [employeeIdToDelete, setEmployeeIdToDelete] = React.useState(null);
     // LOAD MORE STATES
@@ -30,7 +30,8 @@ export default function UsersTable({ locale, isRTL }) {
     const [hasNextPage, setHasNextPage] = useState(false);
     // STATE
     const [activeTab, setActiveTab] = useState('clients');
-    const [clientData, setClientData] = useState(null);
+    // SEARCH STATE
+    const [search, setSearch] = useState('');
 
     // GET THE EMPLOYEES FROM THE API
     function getEmployees() {
@@ -201,44 +202,6 @@ export default function UsersTable({ locale, isRTL }) {
             });
     };
 
-    // const freezeOrUnfreezeClient = async (clientId, status) => {
-    //     const freezeUrl = `${process.env.API_URL}/client/pause`; // POST REQUEST
-    //     const unfreezeUrl = `${process.env.API_URL}/activate/client`; // PUT REQUEST
-    //
-    //     // GET THE TOKEN FROM THE LOCAL STORAGE
-    //     const token = localStorage.getItem("token");
-    //
-    //     // SET THE URL
-    //     const url = status === "paused" ? unfreezeUrl : freezeUrl;
-    //
-    //     // SET THE METHOD
-    //     const method = status === "paused" ? "put" : "post";
-    //
-    //     // SET THE DATA
-    //     const data = {
-    //         clientId: clientId
-    //     };
-    //
-    //     // SEND THE REQUEST
-    //     await axios[method](url, data, {
-    //         headers: {
-    //             Authorization: `Bearer ${token}`
-    //         }
-    //     })
-    //         .then(res => {
-    //             console.log(res);
-    //             // SHOW THE NOTIFICATION
-    //             toast.success(res.data.message);
-    //             // GET THE CLIENTS
-    //             getClients();
-    //         })
-    //         .catch(err => {
-    //             console.log(err);
-    //             toast.error(err?.response?.data?.message || "An error occurred while updating the client status.");
-    //         })
-    // }
-    //
-
     // DELETE CLIENT DIALOG FOOTER
     const clientFooterContent = (
         <div dir="ltr">
@@ -346,6 +309,11 @@ export default function UsersTable({ locale, isRTL }) {
                 </div>
             )}
 
+            {/* GLOBALE SEARCH BAR */}
+            <div className="w-full inline-block">
+                <InputText placeholder={t('search')} onChange={(e) => setSearch(e.target.value)} />
+            </div>
+
             <TabMenu
                 dir={isRTL ? 'rtl' : 'ltr'}
                 model={[
@@ -367,10 +335,13 @@ export default function UsersTable({ locale, isRTL }) {
                     value={users || []}
                     style={{ width: '100%' }}
                     paginator={true}
-                    rows={10}
-                    rowsPerPageOptions={[5, 10, 20]}
+                    rows={25}
+                    rowsPerPageOptions={[5, 10, 20, 25, 30, 40, 50]}
                     paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                     emptyMessage={t('noUsersFound')}
+                    globalFilter={search}
+                    globalFilterFields={['fullName', 'username', 'phoneNumber', 'address']}
+                    onGlobalFilterChange={(e) => setSearch(e.value)}
                 >
                     <Column
                         field="userImage"
@@ -466,10 +437,13 @@ export default function UsersTable({ locale, isRTL }) {
                     value={users || []}
                     style={{ width: '100%' }}
                     paginator={true}
-                    rows={10}
-                    rowsPerPageOptions={[5, 10, 20]}
+                    rows={25}
+                    rowsPerPageOptions={[5, 10, 20, 25, 30, 40, 50]}
                     paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                     emptyMessage={t('noUsersFound')}
+                    globalFilter={search}
+                    globalFilterFields={['clientName', 'phoneNumber']}
+                    onGlobalFilterChange={(e) => setSearch(e.value)}
                 >
                     <Column field="subscriptionId" header={t('membershipId')} sortable filter />
                     <Column field="clientName" header={t('name')} sortable filter />
@@ -514,7 +488,7 @@ export default function UsersTable({ locale, isRTL }) {
                                     <button
                                         className="viewButton"
                                         onClick={() => {
-                                            setClientData(rowData);
+                                            router.push(`/${locale}/users/view/${rowData._id}`);
                                         }}
                                     >
                                         {t('view')}
@@ -523,7 +497,6 @@ export default function UsersTable({ locale, isRTL }) {
                                     <button
                                         className="deleteButton"
                                         onClick={() => {
-                                            setVisible(true);
                                             setClientIdToDelete(rowData._id);
                                         }}
                                     >
@@ -564,102 +537,6 @@ export default function UsersTable({ locale, isRTL }) {
                 resizable={false}
             >
                 <p className="m-0">{t('deleteEmployeeConfirmation')}</p>
-            </Dialog>
-
-            {/*  SHOW THE CLIENT DATA  */}
-            <Dialog dir={isRTL ? 'rtl' : 'ltr'} header={t('clientData')} visible={clientData !== null} position={'center'} style={{ width: '90%', maxWidth: '650px' }} onHide={() => setClientData(null)} draggable={false} resizable={false}>
-                <div className="card">
-                    <div className="grid">
-                        <div className="col-12 md:col-6">
-                            <h5>{t('clientName')}</h5>
-                            <p>{clientData?.clientName}</p>
-                        </div>
-                        <div className="col-12 md:col-6">
-                            <h5>{t('clientPhone')}</h5>
-                            <p>{clientData?.phoneNumber}</p>
-                        </div>
-                        <div className="col-12 md:col-6">
-                            <h5>{t('clientEmail')}</h5>
-                            <p>{clientData?.email}</p>
-                        </div>
-                        <div className="col-12 md:col-6">
-                            <h5>{t('gender')}</h5>
-                            <p>{clientData?.gender}</p>
-                        </div>
-                        <div className="col-12 md:col-6">
-                            <h5>{t('governorate')}</h5>
-                            <p>{clientData?.governorate}</p>
-                        </div>
-                        <div className="col-12 md:col-6">
-                            <h5>{t('region')}</h5>
-                            <p>{clientData?.region}</p>
-                        </div>
-                        <div className="col-12 md:col-6">
-                            <h5>{t('block')}</h5>
-                            <p>{clientData?.block}</p>
-                        </div>
-                        <div className="col-12 md:col-6">
-                            <h5>{t('street')}</h5>
-                            <p>{clientData?.street}</p>
-                        </div>
-                        <div className="col-12 md:col-6">
-                            <h5>{t('alley')}</h5>
-                            <p>{clientData?.alley}</p>
-                        </div>
-                        <div className="col-12 md:col-6">
-                            <h5>{t('building')}</h5>
-                            <p>{clientData?.building}</p>
-                        </div>
-                        <div className="col-12 md:col-6">
-                            <h5>{t('floor')}</h5>
-                            <p>{clientData?.floor}</p>
-                        </div>
-                        <div className="col-12 md:col-6">
-                            <h5>{t('apartment')}</h5>
-                            <p>{clientData?.apartment}</p>
-                        </div>
-                        <div className="col-12 md:col-6">
-                            <h5>{t('clientStatus')}</h5>
-                            <p>{clientData?.clientStatus?.paused ? t('paused') : t('active')}</p>
-                        </div>
-                        <div className="col-12 md:col-6">
-                            <h5>{t('clientSubscription')}</h5>
-                            <p>{clientData?.subscriped ? t('subscribed') : t('notSubscribed')}</p>
-                        </div>
-                    </div>
-                </div>
-                <div className="card">
-                    <div className="grid">
-                        <div className="col-12 md:col-6">
-                            <h5>{t('bundleId')}</h5>
-                            <p>{clientData?.subscripedBundle?.bundleId}</p>
-                        </div>
-                        <div className="col-12 md:col-6">
-                            <h5>{t('startingDate')}</h5>
-                            <p>
-                                {new Date(clientData?.subscripedBundle?.startingDate).toLocaleDateString(locale, {
-                                    year: 'numeric',
-                                    month: 'long',
-                                    day: 'numeric'
-                                })}
-                            </p>
-                        </div>
-                        <div className="col-12 md:col-6">
-                            <h5>{t('endingDate')}</h5>
-                            <p>
-                                {new Date(clientData?.subscripedBundle?.endingDate).toLocaleDateString(locale, {
-                                    year: 'numeric',
-                                    month: 'long',
-                                    day: 'numeric'
-                                })}
-                            </p>
-                        </div>
-                        <div className="col-12 md:col-6">
-                            <h5>{t('bundlePeriod')}</h5>
-                            <p>{clientData?.subscripedBundle?.bundlePeriod}</p>
-                        </div>
-                    </div>
-                </div>
             </Dialog>
         </>
     );

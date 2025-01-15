@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CustomFileUpload from '../../components/customFileUpload';
 import ChooseExtra from '../../components/ChooseExtra';
 import ChooseTypes from '../../components/ChooseTypes';
@@ -28,11 +28,16 @@ export default function CreateMeal({ params: { locale } }) {
     const [maximumExtraNumber, setMaximumExtraNumber] = useState(0);
     const [types, setTypes] = useState();
     const [variations, setVariations] = useState();
+
+    // CATEGORIES STATE
+    const [categories, setCategories] = useState([]);
+
     const [form, setForm] = useState({
         mealTitle: '',
         mealTitleEn: '',
         mealPrice: '',
         mealCategory: '',
+        mealFoodCategory: '',
         mealType: '',
         carbohydrate: '',
         fat: '',
@@ -114,6 +119,34 @@ export default function CreateMeal({ params: { locale } }) {
             });
     }
 
+    // GET CATEGORIES LIST HANDLER
+    const getCategoriesList = () => {
+        // GET THE TOKEN FROM LOCAL STORAGE
+        const token = localStorage.getItem('token');
+
+        // API CALL /categories
+        axios
+            .get(`${process.env.API_URL}/food/category/list`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            .then((res) => {
+                console.log(res.data);
+                setCategories(res.data?.categories || []);
+            })
+            .catch((err) => {
+                console.log(err);
+                toast.error(t('fetchCategoriesError'));
+            });
+    };
+
+    // EFFECT TO FETCH DATA
+    useEffect(() => {
+        // GET CATEGORIES LIST
+        getCategoriesList();
+    }, []);
+
     return (
         <form onSubmit={createMeal} dir={isRTL ? 'rtl' : 'ltr'}>
             <div className={'card mb-2'}>
@@ -147,6 +180,23 @@ export default function CreateMeal({ params: { locale } }) {
                         <label htmlFor="mealTitleEn">{t('mealEnglishName')}</label>
                         <InputText id="mealTitleEn" type="text" placeholder={t('enterMealEnglishName')} value={form.mealTitleEn} onChange={(e) => setForm({ ...form, mealTitleEn: e.target.value })} />
                     </div>
+
+                    {/* FOOD CATEGORY */}
+                    <div className="field col-12">
+                        <label htmlFor="mealCategory">{t('mealFoodCategory')}</label>
+                        <Dropdown
+                            id="mealCategory"
+                            placeholder={t('mealFoodCategory')}
+                            options={
+                                categories?.map((category) => {
+                                    return { label: locale === 'ar' ? category.categoryNameAR : category.categoryNameEN, value: category._id };
+                                }) || []
+                            }
+                            value={form.mealFoodCategory}
+                            onChange={(e) => setForm({ ...form, mealFoodCategory: e.target.value })}
+                        />
+                    </div>
+
                     <div className="field col-12 md:col-6">
                         <label htmlFor="mealCategory">{t('mealCategory')}</label>
                         <Dropdown
