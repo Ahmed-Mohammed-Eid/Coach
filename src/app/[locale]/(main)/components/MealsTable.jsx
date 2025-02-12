@@ -10,14 +10,31 @@ import { useRouter } from 'next/navigation';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 import { TabMenu } from 'primereact/tabmenu';
+import Link from 'next/link';
 
 export default function MealsTable({ locale, isRTL }) {
     const t = useTranslations('meals');
-    const router = useRouter();
     const [meals, setMeals] = React.useState([]);
     const [visible, setVisible] = React.useState(false);
     const [mealIdToDelete, setMealIdToDelete] = React.useState(null);
-    const [menuType, setMenuType] = useState('orders');
+    const [menuType, setMenuType] = useState(() => {
+        if (typeof window !== 'undefined') {
+            return localStorage.getItem('mealsTableMenuType') || 'orders';
+        }
+        return 'orders';
+    });
+    const [first, setFirst] = useState(() => {
+        if (typeof window !== 'undefined') {
+            return parseInt(localStorage.getItem('mealsTablePageFirst')) || 0;
+        }
+        return 0;
+    });
+    const [activeIndex, setActiveIndex] = useState(() => {
+        if (typeof window !== 'undefined') {
+            return localStorage.getItem('mealsTableMenuType') === 'subscriptions' ? 1 : 0;
+        }
+        return 0;
+    });
 
     function getMeals() {
         const token = localStorage.getItem('token');
@@ -86,12 +103,21 @@ export default function MealsTable({ locale, isRTL }) {
         <>
             <TabMenu
                 dir={isRTL ? 'rtl' : 'ltr'}
+                activeIndex={activeIndex}
+                onTabChange={(e) => {
+                    setActiveIndex(e.index);
+                    setFirst(0);
+                    localStorage.setItem('mealsTablePageFirst', '0');
+                }}
+                activeItem={menuType}
                 model={[
                     {
                         label: t('orders'),
                         icon: 'pi pi-fw pi-home',
                         command: () => {
                             setMenuType('orders');
+                            localStorage.setItem('mealsTableMenuType', 'orders');
+                            setActiveIndex(0);
                         }
                     },
                     {
@@ -99,6 +125,8 @@ export default function MealsTable({ locale, isRTL }) {
                         icon: 'pi pi-fw pi-calendar',
                         command: () => {
                             setMenuType('subscriptions');
+                            localStorage.setItem('mealsTableMenuType', 'subscriptions');
+                            setActiveIndex(1);
                         }
                     }
                 ]}
@@ -108,8 +136,13 @@ export default function MealsTable({ locale, isRTL }) {
                 value={meals || []}
                 style={{ width: '100%' }}
                 paginator={true}
-                rows={10}
-                rowsPerPageOptions={[5, 10, 20]}
+                rows={25}
+                first={first}
+                onPage={(e) => {
+                    setFirst(e.first);
+                    localStorage.setItem('mealsTablePageFirst', e.first.toString());
+                }}
+                rowsPerPageOptions={[25, 50, 100, 200]}
                 paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                 emptyMessage={t('noMealsFound')}
             >
@@ -164,14 +197,9 @@ export default function MealsTable({ locale, isRTL }) {
                                 >
                                     {t('copyId')}
                                 </button>
-                                <button
-                                    className="editButton"
-                                    onClick={() => {
-                                        router.push(`/${locale}/meals/${rowData._id}`);
-                                    }}
-                                >
+                                <Link href={`/${locale}/meals/${rowData._id}`} className="editButton">
                                     {t('edit')}
-                                </button>
+                                </Link>
                                 <button
                                     className="deleteButton"
                                     onClick={() => {

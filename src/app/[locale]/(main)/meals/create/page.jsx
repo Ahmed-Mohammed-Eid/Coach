@@ -15,10 +15,15 @@ import axios from 'axios';
 import { MultiSelect } from 'primereact/multiselect';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 
 export default function CreateMeal({ params: { locale } }) {
     const t = useTranslations('createMeal');
     const isRTL = locale === 'ar';
+
+    // GET THE ROUTER
+    const router = useRouter();
+
     // LOADING STATE
     const [loading, setLoading] = useState(false);
 
@@ -112,6 +117,9 @@ export default function CreateMeal({ params: { locale } }) {
             .then((response) => {
                 toast.success(response.data?.message || t('mealCreatedSuccessfully'));
                 setLoading(false);
+
+                // REDIRECT TO THE MEALS PAGE
+                router.push(`/${locale}/meals`);
             })
             .catch((error) => {
                 toast.error(error?.response?.data?.message || t('errorCreatingMeal'));

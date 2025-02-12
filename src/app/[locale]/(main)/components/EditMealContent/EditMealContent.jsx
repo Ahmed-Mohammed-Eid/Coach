@@ -14,9 +14,13 @@ import ChooseExtra from '../ChooseExtra';
 import ChooseTypes from '../ChooseTypes';
 import MealVariations from '../MealVariations';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 
 export default function EditMeal({ meal, id, locale, isRTL }) {
     const t = useTranslations('editMeal');
+
+    // ROUTER
+    const router = useRouter();
 
     // LOADING STATE
     const [loading, setLoading] = useState(false);
@@ -117,6 +121,8 @@ export default function EditMeal({ meal, id, locale, isRTL }) {
             .then((response) => {
                 toast.success(t('mealCreatedSuccessfully'));
                 setLoading(false);
+                // REDIRECT TO THE MEALS PAGE
+                router.push(`/${locale}/meals`);
             })
             .catch((error) => {
                 toast.error(t('errorCreatingMeal'));
@@ -200,7 +206,7 @@ export default function EditMeal({ meal, id, locale, isRTL }) {
 
                     {/* FOOD CATEGORY */}
                     <div className="field col-12">
-                        <label htmlFor="mealCategory">{t('mealFoodCategory')}</label>
+                        <label htmlFor="mealCategory">{t('mealFoodCategoryr')}</label>
                         <Dropdown
                             id="mealCategory"
                             placeholder={t('selectMealCategory')}
