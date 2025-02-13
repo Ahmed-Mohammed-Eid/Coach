@@ -368,7 +368,9 @@
         "breakfast": "إفطار",
         "lunch": "غداء",
         "dinner": "عشاء",
-        "snack": "وجبة خفيفة"
+        "snack": "وجبة خفيفة",
+        "search": "بحث...",
+        "noRecordsFound": "لم يتم العثور على سجلات"
     },
     "cheffMenu": {
         "selectedDaysList": "قائمة الأيام المحددة",
@@ -384,7 +386,9 @@
         "breakfast": "إفطار",
         "lunch": "غداء",
         "dinner": "عشاء",
-        "snack": "وجبة خفيفة"
+        "snack": "وجبة خفيفة",
+        "search": "بحث...",
+        "noRecordsFound": "لم يتم العثور على سجلات"
     },
 
     "dayBoxes": {

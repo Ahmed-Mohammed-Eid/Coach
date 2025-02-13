@@ -7,6 +7,7 @@ import axios from 'axios';
 import Image from 'next/image';
 import { Button } from 'primereact/button';
 import { Dropdown } from 'primereact/dropdown';
+import { InputText } from 'primereact/inputtext';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
@@ -22,6 +23,7 @@ export default function ChefPage({ params: { locale } }) {
     const [selectedMenu, setSelectedMenu] = useState([]);
     const [selectedMenuIds, setSelectedMenuIds] = useState([]);
     const [selectedDay, setSelectedDay] = useState(new Date());
+    const [globalFilter, setGlobalFilter] = useState('');
 
     // FUNCTION TO GET THE MEALS
     const getMeals = async () => {
@@ -137,7 +139,13 @@ export default function ChefPage({ params: { locale } }) {
                 />
             </form>
             <div className={'card mb-0'} dir={isRTL ? 'rtl' : 'ltr'}>
-                <h3 className={'mb-4 uppercase'}>{t('chefMenu')}</h3>
+                <div className="flex flex-wrap align-items-center justify-content-between gap-2 mb-4">
+                    <h3 className="m-0 uppercase">{t('chefMenu')}</h3>
+                    <span className="p-input-icon-left">
+                        <i className="pi pi-search" />
+                        <InputText value={globalFilter} onChange={(e) => setGlobalFilter(e.target.value)} placeholder={t('search')} className="p-inputtext-sm" />
+                    </span>
+                </div>
                 <hr />
                 <DataTable
                     dir={isRTL ? 'rtl' : 'ltr'}
@@ -153,6 +161,8 @@ export default function ChefPage({ params: { locale } }) {
                     dataKey="_id"
                     paginator
                     rows={10}
+                    globalFilter={globalFilter}
+                    emptyMessage={t('noRecordsFound')}
                 >
                     <Column selectionMode="multiple" headerStyle={{ width: '3rem' }} exportable={false}></Column>
                     <Column

@@ -367,7 +367,9 @@
         "breakfast": "Breakfast",
         "lunch": "Lunch",
         "dinner": "Dinner",
-        "snack": "Snack"
+        "snack": "Snack",
+        "search": "Search...",
+        "noRecordsFound": "No records found"
     },
     "cheffMenu": {
         "selectedDaysList": "Selected Days List",
@@ -383,7 +385,9 @@
         "breakfast": "Breakfast",
         "lunch": "Lunch",
         "dinner": "Dinner",
-        "snack": "Snack"
+        "snack": "Snack",
+        "search": "Search...",
+        "noRecordsFound": "No records found"
     },
 
     "dayBoxes": {
