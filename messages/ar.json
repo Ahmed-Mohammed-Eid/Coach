@@ -370,7 +370,10 @@
         "dinner": "عشاء",
         "snack": "وجبة خفيفة",
         "search": "بحث...",
-        "noRecordsFound": "لم يتم العثور على سجلات"
+        "noRecordsFound": "لم يتم العثور على سجلات",
+        "edit": "تعديل",
+        "update": "تحديث",
+        "editMenuFor": "تعديل القائمة لـ"
     },
     "cheffMenu": {
         "selectedDaysList": "قائمة الأيام المحددة",
@@ -388,7 +391,10 @@
         "dinner": "عشاء",
         "snack": "وجبة خفيفة",
         "search": "بحث...",
-        "noRecordsFound": "لم يتم العثور على سجلات"
+        "noRecordsFound": "لم يتم العثور على سجلات",
+        "edit": "تعديل",
+        "update": "تحديث",
+        "editMenuFor": "تعديل القائمة لـ"
     },
 
     "dayBoxes": {

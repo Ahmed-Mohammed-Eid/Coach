@@ -369,7 +369,10 @@
         "dinner": "Dinner",
         "snack": "Snack",
         "search": "Search...",
-        "noRecordsFound": "No records found"
+        "noRecordsFound": "No records found",
+        "edit": "Edit",
+        "update": "Update",
+        "editMenuFor": "Edit Menu For "
     },
     "cheffMenu": {
         "selectedDaysList": "Selected Days List",
@@ -387,7 +390,10 @@
         "dinner": "Dinner",
         "snack": "Snack",
         "search": "Search...",
-        "noRecordsFound": "No records found"
+        "noRecordsFound": "No records found",
+        "edit": "Edit",
+        "update": "Update",
+        "editMenuFor": "Edit Menu For "
     },
 
     "dayBoxes": {
