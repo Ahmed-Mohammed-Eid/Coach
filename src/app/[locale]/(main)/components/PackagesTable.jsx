@@ -110,12 +110,12 @@ export default function PackagesTable({ locale }) {
                     body={(rowData) => {
                         return (
                             <Image
-                                src={rowData.bundleImageMale || '/img-not_found.jpg'}
-                                alt={rowData.bundleName}
+                                src={rowData?.bundleImageMale || '/img-not_found.jpg'}
+                                alt={rowData?.bundleName}
                                 width={50}
                                 height={50}
                                 placeholder={'blur'}
-                                blurDataURL={rowData.bundleImageMale}
+                                blurDataURL={rowData?.bundleImageMale || '/img-not_found.jpg'}
                                 style={{
                                     borderRadius: '50%',
                                     objectFit: 'cover'
@@ -130,12 +130,12 @@ export default function PackagesTable({ locale }) {
                     body={(rowData) => {
                         return (
                             <Image
-                                src={rowData.bundleImageFemale}
-                                alt={rowData.bundleName}
+                                src={rowData?.bundleImageFemale || '/img-not_found.jpg'}
+                                alt={rowData?.bundleName}
                                 width={50}
                                 height={50}
                                 placeholder={'blur'}
-                                blurDataURL={rowData.bundleImageFemale}
+                                blurDataURL={rowData?.bundleImageFemale || '/img-not_found.jpg'}
                                 style={{
                                     borderRadius: '50%',
                                     objectFit: 'cover'

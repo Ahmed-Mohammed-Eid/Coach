@@ -43,11 +43,11 @@ export default async function AppLayout({ children, params: { locale } }: { chil
         })
         .then((response) => {
             if (!response.data.success) {
-                redirect('/login');
+                redirect(`/${locale}/login`);
             }
         })
         .catch(() => {
-            redirect('/login');
+            redirect(`/${locale}/login`);
         });
 
     return <Layout>{children}</Layout>;

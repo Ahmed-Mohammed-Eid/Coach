@@ -101,7 +101,8 @@
         "settings": "الإعدادات",
         "logout": "تسجيل الخروج",
         "tools": "الأدوات",
-        "uploadMealsByExcel": "تحميل الوجبات بواسطة Excel"
+        "uploadMealsByExcel": "تحميل الوجبات بواسطة Excel",
+        "uploadRegionsByExcel": "تحميل المناطق بواسطة Excel"
     },
     "DashboardHome": {
         "all": "الكل",
@@ -261,7 +262,10 @@
         "uploadMealsByExcelError": "حدث خطأ أثناء تحميل الوجبات",
         "noFileSelected": "لم يتم اختيار ملف",
         "uploadFile": "تحميل الملف",
-        "ExcelFile": "ملف Excel"
+        "ExcelFile": "ملف Excel",
+        "uploadRegionsByExcel": "تحميل المناطق بواسطة Excel",
+        "uploadRegionsByExcelSuccess": "تم تحميل المناطق بنجاح",
+        "uploadRegionsByExcelError": "حدث خطأ أثناء تحميل المناطق"
     },
     "editMeal": {
         "editMeal": "تعديل الوجبة",

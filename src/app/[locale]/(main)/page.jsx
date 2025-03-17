@@ -1,91 +1,183 @@
 'use client';
-// IMPORTS
-import ClientsChart from './components/clientsChart';
-import CategoriesNumber from './components/categoriesNumber';
-import BestSelling from './components/bestSelling';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useTranslations } from 'next-intl';
+import { Toast } from 'primereact/toast';
+import axios from 'axios';
 
-const Dashboard = ({ params: { locale } }) => {
-    //STATES
-    const [categoriesNumber, setCategoriesNumber] = useState([]);
-    const [topSelling, setTopSelling] = useState([]);
-    const [clients, setClients] = useState({
+// Custom Components
+import StatCard from './components/dashboard/StatCard';
+import ClientsOverview from './components/dashboard/ClientsOverview';
+import CategoriesOverview from './components/dashboard/CategoriesOverview';
+import BestSellingOverview from './components/dashboard/BestSellingOverview';
+import ClientsMonitorOverview from './components/dashboard/ClientsMonitorOverview';
+
+const initialState = {
+    categories: [],
+    topSelling: [],
+    clients: {
         all: 0,
         active: 0,
         inActive: 0
-    });
+    },
+    clientsMonitor: {
+        newClients: [],
+        renewedClients: [],
+        endingClients: []
+    }
+};
 
+const Dashboard = ({ params: { locale } }) => {
+    const [loading, setLoading] = useState(true);
+    const [monitorLoading, setMonitorLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [dashboardData, setDashboardData] = useState(initialState);
+
+    const toast = useRef(null);
     const t = useTranslations('DashboardHome');
 
-    function getState() {
-        // GET THE TOKEN FROM THE LOCAL STORAGE
-        const token = localStorage.getItem('token');
+    const fetchDashboardData = async () => {
+        try {
+            setLoading(true);
+            setError(null);
+            const token = localStorage.getItem('token');
 
-        axios
-            .get(`${process.env.API_URL}/get/stats`, {
+            if (!token) {
+                throw new Error(locale === 'ar' ? 'لم يتم العثور على رمز المصادقة' : 'Authentication token not found');
+            }
+
+            const response = await axios.get(`${process.env.API_URL}/get/stats`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
-            })
-            .then((res) => {
-                setCategoriesNumber([
+            });
+
+            const { data } = response.data;
+
+            setDashboardData((prevState) => ({
+                ...prevState,
+                categories: [
                     {
                         name: 'Packages',
-                        number: res.data.data.bundlesNumber
+                        number: data?.bundlesNumber || 0
                     },
                     {
                         name: 'Meals',
-                        number: res.data.data.mealsNumber
+                        number: data?.mealsNumber || 0
                     }
-                    //     {
-                    //     name: "Doctors", number: res.data.data.specialistsNumber,
-                    // }
-                ]);
-                setTopSelling(res.data.data.bestSeller);
-                setClients({
-                    all: res.data.data.clientsStats.all,
-                    active: res.data.data.clientsStats.active,
-                    inActive: res.data.data.clientsStats.inactive
-                });
-            })
-            .then((err) => {
-                console.log(err);
+                ],
+                topSelling: data?.bestSeller || [],
+                clients: {
+                    all: data?.clientsStats?.all || 0,
+                    active: data?.clientsStats?.active || 0,
+                    inActive: data?.clientsStats?.inactive || 0
+                }
+            }));
+        } catch (err) {
+            const errorMessage = err.response?.data?.message || err.message;
+            setError(errorMessage);
+            toast.current.show({
+                severity: 'error',
+                summary: locale === 'ar' ? 'خطأ' : 'Error',
+                detail: errorMessage,
+                life: 5000
             });
-    }
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const fetchClientsMonitorData = async () => {
+        try {
+            setMonitorLoading(true);
+            const token = localStorage.getItem('token');
+
+            if (!token) {
+                throw new Error(locale === 'ar' ? 'لم يتم العثور على رمز المصادقة' : 'Authentication token not found');
+            }
+
+            const response = await axios.get(`${process.env.API_URL}/monitor/clients`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            const { newClients, renewedClients, endingClients } = response.data;
+
+            setDashboardData((prevState) => ({
+                ...prevState,
+                clientsMonitor: {
+                    newClients: newClients || [],
+                    renewedClients: renewedClients || [],
+                    endingClients: endingClients || []
+                }
+            }));
+        } catch (err) {
+            const errorMessage = err.response?.data?.message || err.message;
+            toast.current.show({
+                severity: 'error',
+                summary: locale === 'ar' ? 'خطأ' : 'Error',
+                detail: errorMessage,
+                life: 5000
+            });
+        } finally {
+            setMonitorLoading(false);
+        }
+    };
 
     useEffect(() => {
-        getState();
+        fetchDashboardData();
+        fetchClientsMonitorData();
     }, []);
 
     return (
-        <div className="grid gap-1 mx-0">
-            <div className="card mt-2 col-12 md:col-6 lg:col-6 mb-0">
-                <div className="card-header">
-                    <h3 className="card-title text-center uppercase">{t('clientsChart')}</h3>
+        <>
+            <Toast ref={toast} position="top-right" />
+
+            <div className="grid p-3">
+                {/* Stats Overview Section */}
+                <div className="col-12">
+                    <div className="grid">
+                        <div className="col-12 md:col-6 lg:col-3">
+                            <StatCard icon={{ name: 'pi-users', color: 'primary' }} title={locale === 'ar' ? 'إجمالي العملاء' : 'Total Clients'} value={dashboardData.clients.all} loading={loading} />
+                        </div>
+                        <div className="col-12 md:col-6 lg:col-3">
+                            <StatCard
+                                icon={{ name: 'pi-user-plus', color: 'success' }}
+                                title={locale === 'ar' ? 'العملاء النشطون' : 'Active Clients'}
+                                value={dashboardData.clients.active}
+                                trend="up"
+                                trendValue={`${Math.round((dashboardData.clients.active / dashboardData.clients.all || 0) * 100)}%`}
+                                loading={loading}
+                            />
+                        </div>
+                        <div className="col-12 md:col-6 lg:col-3">
+                            <StatCard icon={{ name: 'pi-box', color: 'warning' }} title={locale === 'ar' ? 'الباقات' : 'Packages'} value={dashboardData.categories[0]?.number || 0} loading={loading} />
+                        </div>
+                        <div className="col-12 md:col-6 lg:col-3">
+                            <StatCard icon={{ name: 'pi-shopping-bag', color: 'help' }} title={locale === 'ar' ? 'الوجبات' : 'Meals'} value={dashboardData.categories[1]?.number || 0} loading={loading} />
+                        </div>
+                    </div>
                 </div>
-                <div className="card-body flex justify-content-center">
-                    <ClientsChart clients={clients} locale={locale} />
+
+                {/* Charts Section */}
+                <div className="col-12 xl:col-6">
+                    <ClientsOverview data={dashboardData.clients} loading={loading} locale={locale} />
+                </div>
+                <div className="col-12 xl:col-6">
+                    <CategoriesOverview categories={dashboardData.categories} loading={loading} locale={locale} />
+                </div>
+
+                {/* Clients Monitor Section */}
+                <div className="col-12">
+                    <ClientsMonitorOverview data={dashboardData.clientsMonitor} loading={monitorLoading} locale={locale} />
+                </div>
+
+                {/* Best Selling Section */}
+                <div className="col-12">
+                    <BestSellingOverview packages={dashboardData.topSelling} loading={loading} locale={locale} />
                 </div>
             </div>
-            <div className="card mt-2 col mb-0">
-                <div className="card-header">
-                    <h3 className="card-title text-center uppercase">{t('categoriesNumber')}</h3>
-                </div>
-                <div className="card-body">
-                    <CategoriesNumber categories={categoriesNumber} locale={locale} />
-                </div>
-            </div>
-            <div className="card mt-2 col-12">
-                <div className="card-header">
-                    <h3 className="card-title text-center uppercase">{t('bestSellingPackages')}</h3>
-                </div>
-                <div className="card-body">
-                    <BestSelling packages={topSelling} locale={locale} />
-                </div>
-            </div>
-        </div>
+        </>
     );
 };
 

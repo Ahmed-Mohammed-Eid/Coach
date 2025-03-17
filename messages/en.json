@@ -100,7 +100,8 @@
         "settings": "Settings",
         "logout": "LogOut",
         "tools": "Tools",
-        "uploadMealsByExcel": "Upload Meals By Excel"
+        "uploadMealsByExcel": "Upload Meals By Excel",
+        "uploadRegionsByExcel": "Upload Regions By Excel"
     },
     "DashboardHome": {
         "all": "All",
@@ -260,7 +261,10 @@
         "uploadMealsByExcelError": "An error occurred while uploading meals",
         "noFileSelected": "No file selected",
         "uploadFile": "Upload File",
-        "ExcelFile": "Excel File"
+        "ExcelFile": "Excel File",
+        "uploadRegionsByExcel": "Upload Regions By Excel",
+        "uploadRegionsByExcelSuccess": "Regions uploaded successfully",
+        "uploadRegionsByExcelError": "An error occurred while uploading regions"
     },
     "editMeal": {
         "editMeal": "Edit Meal",

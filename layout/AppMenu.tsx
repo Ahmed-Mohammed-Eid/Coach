@@ -192,22 +192,22 @@ const AppMenu = () => {
                 }
             ]
         },
-        // {
-        //     label: t('AppMenu.coupons'),
-        //     icon: 'pi pi-fw pi-list',
-        //     items: [
-        //         {
-        //             label: t('AppMenu.couponsList'),
-        //             icon: 'pi pi-fw pi-list',
-        //             to: `/${locale}/coupons`
-        //         },
-        //         {
-        //             label: t('AppMenu.createCoupon'),
-        //             icon: 'pi pi-fw pi-plus',
-        //             to: `/${locale}/coupons/add`
-        //         }
-        //     ]
-        // },
+        {
+            label: t('AppMenu.coupons'),
+            icon: 'pi pi-fw pi-list',
+            items: [
+                {
+                    label: t('AppMenu.couponsList'),
+                    icon: 'pi pi-fw pi-list',
+                    to: `/${locale}/coupons`
+                },
+                {
+                    label: t('AppMenu.createCoupon'),
+                    icon: 'pi pi-fw pi-plus',
+                    to: `/${locale}/coupons/add`
+                }
+            ]
+        },
         {
             label: t('AppMenu.reports'),
             icon: 'pi pi-fw pi-chart-bar',
@@ -232,6 +232,11 @@ const AppMenu = () => {
                     label: t('AppMenu.uploadMealsByExcel'),
                     icon: 'pi pi-fw pi-upload',
                     to: `/${locale}/tools/upload-meals-by-excel`
+                },
+                {
+                    label: t('AppMenu.uploadRegionsByExcel'),
+                    icon: 'pi pi-fw pi-upload',
+                    to: `/${locale}/tools/upload-regions-by-excel`
                 }
             ]
         },
