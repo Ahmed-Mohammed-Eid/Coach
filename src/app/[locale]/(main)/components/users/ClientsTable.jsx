@@ -9,10 +9,8 @@ import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
-import { MultiSelect } from 'primereact/multiselect';
 import { Calendar } from 'primereact/calendar';
 import { Tag } from 'primereact/tag';
-import { FilterMatchMode, FilterOperator } from 'primereact/api';
 // TOAST
 import { toast } from 'react-hot-toast';
 
@@ -52,31 +50,10 @@ export default function ClientsTable({ locale, isRTL }) {
     });
     const [draftSearchInput, setDraftSearchInput] = useState('');
 
-    // Debounced search handler
-    const debouncedSearch = useCallback(
-        debounce((value) => {
-            setGlobalFilter(value);
-        }, 500),
-        []
-    );
-
     // Search input change handler
     const handleSearchChange = (e) => {
         setDraftSearchInput(e.target.value);
     };
-
-    // Debounce function
-    function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    }
 
     // GET THE CLIENTS FROM THE API
     async function getClients() {
