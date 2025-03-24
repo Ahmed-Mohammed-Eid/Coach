@@ -100,22 +100,6 @@ const AppMenu = () => {
                 }
             ]
         },
-        // {
-        //     label: t('AppMenu.dayBoxesList'),
-        //     icon: 'pi pi-fw pi-list',
-        //     items: [
-        //         {
-        //             label: t('AppMenu.dayBoxesList'),
-        //             icon: 'pi pi-fw pi-list',
-        //             to: `/${locale}/dayboxes`
-        //         },
-        //         {
-        //             label: t('AppMenu.createDayBox'),
-        //             icon: 'pi pi-fw pi-plus',
-        //             to: `/${locale}/dayboxes/create`
-        //         }
-        //     ]
-        // },
         {
             label: t('AppMenu.users'),
             icon: 'pi pi-fw pi-users',
@@ -148,34 +132,6 @@ const AppMenu = () => {
                 }
             ]
         },
-        // {
-        //     label: t('AppMenu.branches'),
-        //     icon: 'pi pi-fw pi-home',
-        //     items: [
-        //         {
-        //             label: t('AppMenu.branchesList'),
-        //             icon: 'pi pi-fw pi-list',
-        //             to: `/${locale}/branches`
-        //         }
-        //     ]
-        // },
-        // {
-        //     label: t('AppMenu.walletOffers'),
-        //     icon: 'pi pi-fw pi-wallet',
-        //     items: [
-        //         {
-        //             label: t('AppMenu.walletOffersList'),
-        //             icon: 'pi pi-fw pi-wallet',
-        //             to: `/${locale}/walletOffers`
-        //         },
-        //         // CREATE
-        //         {
-        //             label: t('AppMenu.createWalletOffer'),
-        //             icon: 'pi pi-fw pi-plus',
-        //             to: `/${locale}/walletOffers/create`
-        //         }
-        //     ]
-        // },
         {
             label: t('AppMenu.uiManagement'),
             icon: 'pi pi-fw pi-cog',
@@ -208,6 +164,23 @@ const AppMenu = () => {
                 }
             ]
         },
+        // Delivery
+        {
+            label: t('AppMenu.delivery'),
+            icon: 'pi pi-fw pi-list',
+            items: [
+                {
+                    label: t('AppMenu.deliveryList'),
+                    icon: 'pi pi-fw pi-list',
+                    to: `/${locale}/delivery`
+                },
+                {
+                    label: t('AppMenu.createDelivery'),
+                    icon: 'pi pi-fw pi-plus',
+                    to: `/${locale}/delivery/create`
+                }
+            ]
+        },
         {
             label: t('AppMenu.reports'),
             icon: 'pi pi-fw pi-chart-bar',
@@ -220,7 +193,23 @@ const AppMenu = () => {
                 {
                     label: t('AppMenu.dailyMealsReport'),
                     icon: 'pi pi-fw pi-list',
-                    to: `/${locale}/meals-report`
+                    to: `/${locale}/reports/meals-report`
+                },
+                {
+                    label: t('AppMenu.deliveryReport'),
+                    icon: 'pi pi-fw pi-list',
+                    to: `/${locale}/reports/delivery-report`
+                },
+                {
+                    label: t('AppMenu.kitchenMealsNotesReport'),
+                    icon: 'pi pi-fw pi-list',
+                    to: `/${locale}/reports/kitchen-meals-notes-report`
+                },
+                // TOTAL COOKING MEALS REPORT
+                {
+                    label: t('AppMenu.totalCookingMealsReport'),
+                    icon: 'pi pi-fw pi-list',
+                    to: `/${locale}/reports/totals-cooking-meals`
                 }
             ]
         },

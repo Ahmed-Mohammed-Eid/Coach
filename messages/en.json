@@ -97,11 +97,17 @@
         "reports": "Reports",
         "reportsList": "Reports List",
         "dailyMealsReport": "Daily Meals Report",
+        "deliveryReport": "Delivery Report",
+        "kitchenMealsNotesReport": "Kitchen Meals Notes Report",
         "settings": "Settings",
         "logout": "LogOut",
         "tools": "Tools",
         "uploadMealsByExcel": "Upload Meals By Excel",
-        "uploadRegionsByExcel": "Upload Regions By Excel"
+        "uploadRegionsByExcel": "Upload Regions By Excel",
+        "delivery": "Delivery",
+        "deliveryList": "Delivery Zones List",
+        "createDelivery": "Create Delivery Zone",
+        "totalCookingMealsReport": "Total Cooking Meals Report"
     },
     "DashboardHome": {
         "all": "All",
@@ -190,7 +196,17 @@
         "enterFridayPrice": "Enter Friday Price",
         "deactivate": "Deactivate",
         "selectPrices": "Select Prices",
-        "editPackageButton": "Edit Package"
+        "editPackageButton": "Edit Package",
+        "carb": "Carbohydrates",
+        "enterCarb": "Enter Carbohydrates",
+        "protein": "Protein",
+        "enterProtein": "Enter Protein",
+        "allowedBreakfast": "Allowed Breakfast",
+        "enterAllowedBreakfast": "Enter Allowed Breakfast",
+        "allowedLunch": "Allowed Lunch",
+        "enterAllowedLunch": "Enter Allowed Lunch",
+        "allowedDinner": "Allowed Dinner",
+        "enterAllowedDinner": "Enter Allowed Dinner"
     },
     "createPackage": {
         "maleImage": "Male Image",
@@ -233,7 +249,17 @@
         "packagePrice": "Package Price",
         "enterOptionPrice": "Enter Option Price",
         "add": "Add",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "carb": "Carbohydrates",
+        "enterCarb": "Enter Carbohydrates",
+        "protein": "Protein",
+        "enterProtein": "Enter Protein",
+        "allowedBreakfast": "Allowed Breakfast",
+        "enterAllowedBreakfast": "Enter Allowed Breakfast",
+        "allowedLunch": "Allowed Lunch",
+        "enterAllowedLunch": "Enter Allowed Lunch",
+        "allowedDinner": "Allowed Dinner",
+        "enterAllowedDinner": "Enter Allowed Dinner"
     },
     "meals": {
         "orders": "Orders",
@@ -816,13 +842,21 @@
         "submit": "Save Bundle Configuration",
         "enterValue": "Enter Value",
         "enterPrice": "Enter Price",
-        "bundleCreatedSuccessfully": "Bundle created successfully"
+        "bundleCreatedSuccessfully": "Bundle created successfully",
+        "allowedMeals": "Allowed Meals",
+        "allowedBreakfast": "Breakfast",
+        "enterAllowedBreakfast": "Enter allowed breakfast count",
+        "allowedLunch": "Lunch",
+        "enterAllowedLunch": "Enter allowed lunch count",
+        "allowedDinner": "Dinner",
+        "enterAllowedDinner": "Enter allowed dinner count"
     },
     "createClient": {
         "sections": {
             "basicInfo": "Basic Information",
             "address": "Address Information",
             "subscription": "Subscription Details",
+            "allowedMeals": "Allowed Meals",
             "payment": "Payment & Confirmation"
         },
         "governorates": {
@@ -912,7 +946,13 @@
         "tue": "Tuesday",
         "wed": "Wednesday",
         "thu": "Thursday",
-        "fri": "Friday"
+        "fri": "Friday",
+        "allowedBreakfastLabel": "Allowed Breakfast",
+        "allowedBreakfastPlaceholder": "Select allowed breakfast",
+        "allowedLunchLabel": "Allowed Lunch",
+        "allowedLunchPlaceholder": "Select allowed lunch",
+        "allowedDinnerLabel": "Allowed Dinner",
+        "allowedDinnerPlaceholder": "Select allowed dinner"
     },
     "userProfile": {
         "gender": {
@@ -948,13 +988,22 @@
                 "fillAllFields": "Please fill all required fields",
                 "success": "Subscription renewed successfully",
                 "error": "Failed to renew subscription",
-                "requirePayment": "Payment is required before starting",
-                "hasCoupon": "Have a Coupon?",
+                "requirePayment": "Payment required before starting",
+                "hasCoupon": "Have a coupon?",
                 "couponCode": "Coupon Code",
                 "couponPlaceholder": "Enter coupon code",
-                "selectPeriod": "Select Period",
-                "selectStartDate": "Select Start Date",
-                "selectBundle": "Select Bundle"
+                "hasCouponLabel": "Have a coupon?",
+                "couponLabel": "Coupon Code",
+                "selectStartDate": "Select start date",
+                "selectBundle": "Select bundle",
+                "currentPackage": "Current Package Details",
+                "currentPeriod": "Current Period",
+                "bundleName": "Bundle Name",
+                "protein": "Protein",
+                "carbs": "Carbohydrates",
+                "samePackage": "Same Package",
+                "newPackage": "New Package",
+                "selectPeriod": "Select Period"
             },
             "newSubscription": {
                 "title": "New Subscription",
@@ -983,7 +1032,8 @@
                 "floor": "Floor",
                 "apartment": "Apartment",
                 "protein": "Protein (grams)",
-                "carbs": "Carbohydrates (grams)"
+                "carbs": "Carbohydrates (grams)",
+                "subscriptionId": "Subscription ID"
             },
             "unsubscribe": {
                 "header": "Unsubscribe Client",
@@ -998,6 +1048,14 @@
                 "success": "User deleted successfully",
                 "error": "Failed to delete user",
                 "cancelled": "User deleted successfully"
+            },
+            "changeMeals": {
+                "title": "Change Meals Number",
+                "mealsNumber": "Meals Number",
+                "snacksNumber": "Snacks Number",
+                "allowedBreakfast": "Allowed Breakfast",
+                "allowedLunch": "Allowed Lunch",
+                "allowedDinner": "Allowed Dinner"
             }
         },
         "actions": {
@@ -1012,7 +1070,8 @@
             "renewPackage": "Renew Package",
             "save": "Save Changes",
             "cancel": "Cancel",
-            "apply": "Apply Changes"
+            "apply": "Apply Changes",
+            "changeMeals": "Change Meals Number"
         },
         "status": {
             "active": "Active",
@@ -1033,5 +1092,40 @@
             "grams": "grams",
             "days": "day / days"
         }
+    },
+    "delivery": {
+        "deliveryZones": "Delivery Zones",
+        "addNewZone": "Add New Zone",
+        "zoneName": "Zone Name",
+        "regions": "Regions",
+        "createdAt": "Created At",
+        "updatedAt": "Updated At",
+        "actions": "Actions",
+        "copyId": "Copy ID",
+        "edit": "Edit",
+        "delete": "Delete",
+        "deleteZone": "Delete Zone",
+        "deleteConfirmation": "Are you sure you want to delete this delivery zone? This action cannot be undone.",
+        "yes": "Yes",
+        "no": "No",
+        "zoneDeletedSuccess": "Delivery zone has been deleted successfully",
+        "zoneIdCopied": "Zone ID copied to clipboard",
+        "copyIdError": "Failed to copy zone ID",
+        "fetchError": "Failed to fetch delivery zones",
+        "deleteError": "Failed to delete delivery zone",
+        "noZonesFound": "No delivery zones found",
+        "createZone": "Create Delivery Zone",
+        "enterZoneName": "Enter zone name",
+        "selectRegions": "Select regions",
+        "fillAllFields": "Please fill all required fields",
+        "zoneCreatedSuccess": "Delivery zone created successfully",
+        "createError": "Failed to create delivery zone",
+        "governorate": "Governorate",
+        "selectGovernorate": "Select governorate",
+        "selectGovernorateFirst": "Please select a governorate first",
+        "fetchGovernoratesError": "Failed to fetch governorates",
+        "fetchRegionsError": "Failed to fetch regions",
+        "editZone": "Edit Delivery Zone",
+        "updateZone": "Update Delivery Zone"
     }
 }

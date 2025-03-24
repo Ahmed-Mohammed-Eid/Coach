@@ -19,7 +19,10 @@ export default function FlexBundleComponent({ locale }) {
         mealsType: [],
         snacksNumber: [],
         weekDays: [],
-        bundlePeriods: []
+        bundlePeriods: [],
+        allowedBreakfast: '',
+        allowedLunch: '',
+        allowedDinner: ''
     });
 
     // Days options for the dropdown
@@ -412,6 +415,25 @@ export default function FlexBundleComponent({ locale }) {
                 { name: 'weekCount', label: 'weekCount' },
                 { name: 'price', label: 'price' }
             ])}
+
+            {/* ALLOWED MEALS SECTION */}
+            <div className="card mb-2" dir={isRTL ? 'rtl' : 'ltr'}>
+                <h2 className="text-xl font-bold mb-3">{t('allowedMeals')}</h2>
+                <div className="grid formgrid p-fluid">
+                    <div className="field col-12 md:col-4">
+                        <label htmlFor="allowedBreakfast">{t('allowedBreakfast')}</label>
+                        <InputNumber id="allowedBreakfast" value={bundleData.allowedBreakfast} onValueChange={(e) => setBundleData({ ...bundleData, allowedBreakfast: e.value })} mode="decimal" placeholder={t('enterAllowedBreakfast')} />
+                    </div>
+                    <div className="field col-12 md:col-4">
+                        <label htmlFor="allowedLunch">{t('allowedLunch')}</label>
+                        <InputNumber id="allowedLunch" value={bundleData.allowedLunch} onValueChange={(e) => setBundleData({ ...bundleData, allowedLunch: e.value })} mode="decimal" placeholder={t('enterAllowedLunch')} />
+                    </div>
+                    <div className="field col-12 md:col-4">
+                        <label htmlFor="allowedDinner">{t('allowedDinner')}</label>
+                        <InputNumber id="allowedDinner" value={bundleData.allowedDinner} onValueChange={(e) => setBundleData({ ...bundleData, allowedDinner: e.value })} mode="decimal" placeholder={t('enterAllowedDinner')} />
+                    </div>
+                </div>
+            </div>
 
             <div className="flex justify-content-end mt-2 w-full">
                 <Button type="submit" label={t('submit')} icon="pi pi-save" severity="primary" className="w-full" />

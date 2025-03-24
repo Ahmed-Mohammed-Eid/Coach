@@ -98,11 +98,17 @@
         "reports": "التقارير",
         "reportsList": "قائمة التقارير",
         "dailyMealsReport": "تقرير الوجبات اليومي",
+        "deliveryReport": "تقرير التوصيل",
+        "kitchenMealsNotesReport": "تقرير ملاحظات الوجبات في المطبخ",
         "settings": "الإعدادات",
         "logout": "تسجيل الخروج",
         "tools": "الأدوات",
         "uploadMealsByExcel": "تحميل الوجبات بواسطة Excel",
-        "uploadRegionsByExcel": "تحميل المناطق بواسطة Excel"
+        "uploadRegionsByExcel": "تحميل المناطق بواسطة Excel",
+        "delivery": "التوصيل",
+        "deliveryList": "قائمة مناطق التوصيل",
+        "createDelivery": "إنشاء منطقة توصيل",
+        "totalCookingMealsReport": "تقرير إجمالي الوجبات المطبوخة"
     },
     "DashboardHome": {
         "all": "الكل",
@@ -191,7 +197,17 @@
         "enterFridayPrice": "أدخل سعر الجمعة",
         "deactivate": "إلغاء التفعيل",
         "selectPrices": "اختر الأسعار",
-        "editPackageButton": "تحرير الحزمة"
+        "editPackageButton": "تحرير الحزمة",
+        "carb": "الكربوهيدرات",
+        "enterCarb": "أدخل الكربوهيدرات",
+        "protein": "البروتين",
+        "enterProtein": "أدخل البروتين",
+        "allowedBreakfast": "الإفطار المسموح به",
+        "enterAllowedBreakfast": "أدخل الإفطار المسموح به",
+        "allowedLunch": "الغداء المسموح به",
+        "enterAllowedLunch": "أدخل الغداء المسموح به",
+        "allowedDinner": "العشاء المسموح به",
+        "enterAllowedDinner": "أدخل العشاء المسموح به"
     },
     "createPackage": {
         "maleImage": "صورة الذكر",
@@ -234,7 +250,17 @@
         "packagePrice": "سعر الباقة",
         "enterOptionPrice": "أدخل سعر الخيار",
         "add": "إضافة",
-        "cancel": "إلغاء"
+        "cancel": "إلغاء",
+        "carb": "الكربوهيدرات",
+        "enterCarb": "أدخل الكربوهيدرات",
+        "protein": "البروتين",
+        "enterProtein": "أدخل البروتين",
+        "allowedBreakfast": "الإفطار المسموح به",
+        "enterAllowedBreakfast": "أدخل الإفطار المسموح به",
+        "allowedLunch": "الغداء المسموح به",
+        "enterAllowedLunch": "أدخل الغداء المسموح به",
+        "allowedDinner": "العشاء المسموح به",
+        "enterAllowedDinner": "أدخل العشاء المسموح به"
     },
     "meals": {
         "orders": "الطلبات",
@@ -820,7 +846,14 @@
         "submit": "حفظ تكوين الباقة",
         "enterValue": "أدخل القيمة",
         "enterPrice": "أدخل السعر",
-        "bundleCreatedSuccessfully": "تم إنشاء الباقة بنجاح"
+        "bundleCreatedSuccessfully": "تم إنشاء الباقة بنجاح",
+        "allowedMeals": "الوجبات المسموح بها",
+        "allowedBreakfast": "الإفطار",
+        "enterAllowedBreakfast": "أدخل عدد الإفطار المسموح به",
+        "allowedLunch": "الغداء",
+        "enterAllowedLunch": "أدخل عدد الغداء المسموح به",
+        "allowedDinner": "العشاء",
+        "enterAllowedDinner": "أدخل عدد العشاء المسموح به"
     },
     "userProfile": {
         "gender": {
@@ -900,7 +933,8 @@
                 "floor": "الطابق",
                 "apartment": "الشقة",
                 "protein": "البروتين (جرام)",
-                "carbs": "الكربوهيدرات (جرام)"
+                "carbs": "الكربوهيدرات (جرام)",
+                "subscriptionId": "معرف الاشتراك"
             },
             "unsubscribe": {
                 "header": "إلغاء الاشتراك",
@@ -915,6 +949,14 @@
                 "success": "تم حذف المستخدم بنجاح",
                 "error": "فشل في حذف المستخدم",
                 "cancelled": "تم حذف المستخدم"
+            },
+            "changeMeals": {
+                "title": "تغيير عدد الوجبات",
+                "mealsNumber": "عدد الوجبات",
+                "snacksNumber": "عدد الوجبات الخفيفة",
+                "allowedBreakfast": "الإفطار المسموح",
+                "allowedLunch": "الغداء المسموح",
+                "allowedDinner": "العشاء المسموح"
             }
         },
         "actions": {
@@ -929,7 +971,8 @@
             "renewPackage": "تجديد الباقة",
             "save": "حفظ التغييرات",
             "cancel": "إلغاء",
-            "apply": "تطبيق التغييرات"
+            "apply": "تطبيق التغييرات",
+            "changeMeals": "تغيير عدد الوجبات"
         },
         "status": {
             "active": "نشط",
@@ -956,6 +999,7 @@
             "basicInfo": "المعلومات الأساسية",
             "address": "معلومات العنوان",
             "subscription": "تفاصيل الاشتراك",
+            "allowedMeals": "الوجبات المسموح بها",
             "payment": "الدفع والتأكيد"
         },
         "governorates": {
@@ -1045,6 +1089,47 @@
         "tue": "الثلاثاء",
         "wed": "الأربعاء",
         "thu": "الخميس",
-        "fri": "الجمعة"
+        "fri": "الجمعة",
+        "allowedBreakfastLabel": "الإفطار المسموح به",
+        "allowedBreakfastPlaceholder": "اختر الإفطار المسموح به",
+        "allowedLunchLabel": "الغداء المسموح به",
+        "allowedLunchPlaceholder": "اختر الغداء المسموح به",
+        "allowedDinnerLabel": "العشاء المسموح به",
+        "allowedDinnerPlaceholder": "اختر العشاء المسموح به"
+    },
+    "delivery": {
+        "deliveryZones": "مناطق التوصيل",
+        "addNewZone": "إضافة منطقة جديدة",
+        "zoneName": "اسم المنطقة",
+        "regions": "المناطق",
+        "createdAt": "تاريخ الإنشاء",
+        "updatedAt": "تاريخ التحديث",
+        "actions": "الإجراءات",
+        "copyId": "نسخ المعرف",
+        "edit": "تعديل",
+        "delete": "حذف",
+        "deleteZone": "حذف المنطقة",
+        "deleteConfirmation": "هل أنت متأكد من حذف منطقة التوصيل هذه؟ لا يمكن التراجع عن هذا الإجراء.",
+        "yes": "نعم",
+        "no": "لا",
+        "zoneDeletedSuccess": "تم حذف منطقة التوصيل بنجاح",
+        "zoneIdCopied": "تم نسخ معرف المنطقة",
+        "copyIdError": "فشل نسخ معرف المنطقة",
+        "fetchError": "فشل في جلب مناطق التوصيل",
+        "deleteError": "فشل في حذف منطقة التوصيل",
+        "noZonesFound": "لم يتم العثور على مناطق توصيل",
+        "createZone": "إنشاء منطقة توصيل",
+        "enterZoneName": "أدخل اسم المنطقة",
+        "selectRegions": "اختر المناطق",
+        "fillAllFields": "يرجى ملء جميع الحقول المطلوبة",
+        "zoneCreatedSuccess": "تم إنشاء منطقة التوصيل بنجاح",
+        "createError": "فشل في إنشاء منطقة التوصيل",
+        "governorate": "المحافظة",
+        "selectGovernorate": "اختر المحافظة",
+        "selectGovernorateFirst": "الرجاء اختيار المحافظة أولاً",
+        "fetchGovernoratesError": "فشل في جلب المحافظات",
+        "fetchRegionsError": "فشل في جلب المناطق",
+        "editZone": "تعديل منطقة التوصيل",
+        "updateZone": "تحديث منطقة التوصيل"
     }
 }

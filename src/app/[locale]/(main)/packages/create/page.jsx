@@ -41,7 +41,12 @@ export default function CreatePackage({ params: { locale } }) {
         fridayPrice: '',
         breakfast: false,
         lunch: false,
-        dinner: false
+        dinner: false,
+        carb: '',
+        protine: '',
+        allowedBreakfast: '',
+        allowedLunch: '',
+        allowedDinner: ''
     });
 
     // HANDLERS
@@ -84,6 +89,11 @@ export default function CreatePackage({ params: { locale } }) {
         formData.append('dinner', form.dinner);
         formData.append('periodPrices', JSON.stringify(prices));
         formData.append('fridayPrice', form.fridayPrice || 0);
+        formData.append('carb', form.carb || 0);
+        formData.append('protine', form.protine || 0);
+        formData.append('allowedBreakfast', form.allowedBreakfast || 0);
+        formData.append('allowedLunch', form.allowedLunch || 0);
+        formData.append('allowedDinner', form.allowedDinner || 0);
 
         // SEND THE REQUEST
         axios
@@ -228,6 +238,63 @@ export default function CreatePackage({ params: { locale } }) {
                             onChange={(e) => setForm({ ...form, snacksNumber: e.value })}
                         />
                     </div>
+                    {/* carb */}
+                    <div className="field col-12 md:col-6">
+                        <label htmlFor="carb">{t('carb')}</label>
+                        <InputNumber id="carb" placeholder={t('enterCarb')} mode="decimal" minFractionDigits={0} maxFractionDigits={0} min={0} max={1000} value={form.carb} onChange={(e) => setForm({ ...form, carb: e.value })} />
+                    </div>
+                    {/* protein */}
+                    <div className="field col-12 md:col-6">
+                        <label htmlFor="protein">{t('protein')}</label>
+                        <InputNumber id="protein" placeholder={t('enterProtein')} mode="decimal" minFractionDigits={0} maxFractionDigits={0} min={0} max={1000} value={form.protine} onChange={(e) => setForm({ ...form, protine: e.value })} />
+                    </div>
+
+                    {/* allowed meals */}
+                    <div className="field col-12 md:col-6">
+                        <label htmlFor="allowedBreakfast">{t('allowedBreakfast')}</label>
+                        <InputNumber
+                            id="allowedBreakfast"
+                            placeholder={t('enterAllowedBreakfast')}
+                            mode="decimal"
+                            minFractionDigits={0}
+                            maxFractionDigits={0}
+                            min={0}
+                            max={100}
+                            value={form.allowedBreakfast}
+                            onChange={(e) => setForm({ ...form, allowedBreakfast: e.value })}
+                        />
+                    </div>
+
+                    <div className="field col-12 md:col-6">
+                        <label htmlFor="allowedLunch">{t('allowedLunch')}</label>
+                        <InputNumber
+                            id="allowedLunch"
+                            placeholder={t('enterAllowedLunch')}
+                            mode="decimal"
+                            minFractionDigits={0}
+                            maxFractionDigits={0}
+                            min={0}
+                            max={100}
+                            value={form.allowedLunch}
+                            onChange={(e) => setForm({ ...form, allowedLunch: e.value })}
+                        />
+                    </div>
+
+                    <div className="field col-12">
+                        <label htmlFor="allowedDinner">{t('allowedDinner')}</label>
+                        <InputNumber
+                            id="allowedDinner"
+                            placeholder={t('enterAllowedDinner')}
+                            mode="decimal"
+                            minFractionDigits={0}
+                            maxFractionDigits={0}
+                            min={0}
+                            max={100}
+                            value={form.allowedDinner}
+                            onChange={(e) => setForm({ ...form, allowedDinner: e.value })}
+                        />
+                    </div>
+
                     <div className="field col-12 md:col-6">
                         <label htmlFor="arText">{t('arabicTextOnCard')}</label>
                         <Dropdown
@@ -238,6 +305,8 @@ export default function CreatePackage({ params: { locale } }) {
                             options={[
                                 // 80 - 100 - 120 - 150 - 180 - 200
                                 { name: '٨٠ بروتين ٨٠ كارب', value: '٨٠ بروتين ٨٠ كارب' },
+                                // 90
+                                { name: '٩٠ بروتين ٩٠ كارب', value: '٩٠ بروتين ٩٠ كارب' },
                                 { name: '١٠٠ بروتين ١٠٠ كارب', value: '١٠٠ بروتين ١٠٠ كارب' },
                                 { name: '١٢٠ بروتين ١٢٠ كارب', value: '١٢٠ بروتين ١٢٠ كارب' },
                                 { name: '١٥٠ بروتين ١٥٠ كارب', value: '١٥٠ بروتين ١٥٠ كارب' },
@@ -258,6 +327,8 @@ export default function CreatePackage({ params: { locale } }) {
                             options={[
                                 // 80 - 100 - 120 - 150 - 180 - 200
                                 { name: '80 Protein 80 Carb', value: '80 Protein 80 Carb' },
+                                // 90
+                                { name: '90 Protein 90 Carb', value: '90 Protein 90 Carb' },
                                 { name: '100 Protein 100 Carb', value: '100 Protein 100 Carb' },
                                 { name: '120 Protein 120 Carb', value: '120 Protein 120 Carb' },
                                 { name: '150 Protein 150 Carb', value: '150 Protein 150 Carb' },
@@ -282,16 +353,6 @@ export default function CreatePackage({ params: { locale } }) {
                             onChange={(e) => setForm({ ...form, offersDays: e.value })}
                         />
                     </div>
-                    {/*<div className="field col-12 md:col-6">*/}
-                    {/*    <label htmlFor="calories">CALORIES (NUMBER)</label>*/}
-                    {/*    <InputNumber*/}
-                    {/*        id="calories"*/}
-                    {/*        placeholder={"Enter CALORIES (NUMBER)"}*/}
-                    {/*        min={0}*/}
-                    {/*        value={form.calories}*/}
-                    {/*        onChange={(e) => setForm({...form, calories: e.value})}*/}
-                    {/*    />*/}
-                    {/*</div>*/}
                     <div className="field col-12 md:col-6">
                         <div className="flex flex-wrap justify-content-start gap-3">
                             <div className="flex align-items-center">

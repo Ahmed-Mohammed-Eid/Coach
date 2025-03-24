@@ -25,6 +25,13 @@ export default function CreateClient({ params: { locale } }) {
     // STATE
     const [bundles, setBundles] = useState([]);
     const [flexBundleOptions, setFlexBundleOptions] = useState(null);
+
+    const [maximums, setMaximums] = useState({
+        maxAllowedBreakfast: 0,
+        maxAllowedLunch: 0,
+        maxAllowedDinner: 0
+    });
+
     const [form, setForm] = useState({
         clientName: '',
         phoneNumber: '',
@@ -56,7 +63,10 @@ export default function CreateClient({ params: { locale } }) {
         },
         hasCoupon: false,
         couponCode: '',
-        selectedPeriodPrice: null
+        selectedPeriodPrice: null,
+        allowedBreakfast: '',
+        allowedLunch: '',
+        allowedDinner: ''
     });
 
     // Options for the top bar
@@ -84,6 +94,11 @@ export default function CreateClient({ params: { locale } }) {
                 });
                 console.log(flexOptionsResponse.data?.flexOptions);
                 setFlexBundleOptions(flexOptionsResponse.data?.flexOptions);
+                setMaximums({
+                    maxAllowedBreakfast: flexOptionsResponse.data?.flexOptions?.allowedBreakfast,
+                    maxAllowedLunch: flexOptionsResponse.data?.flexOptions?.allowedLunch,
+                    maxAllowedDinner: flexOptionsResponse.data?.flexOptions?.allowedDinner
+                });
             } catch (error) {
                 toast.error(error?.response?.data?.message || 'Error fetching data');
             }
@@ -153,6 +168,9 @@ export default function CreateClient({ params: { locale } }) {
         if (options.hasCoupon) {
             requestData.hasCoupon = true;
             requestData.couponCode = form.couponCode;
+            requestData.allowedBreakfast = form.allowedBreakfast;
+            requestData.allowedLunch = form.allowedLunch;
+            requestData.allowedDinner = form.allowedDinner;
         }
 
         try {
@@ -617,6 +635,90 @@ export default function CreateClient({ params: { locale } }) {
                         </div>
                     </div>
 
+                    <Divider />
+
+                    {/* ALLOWED MEALS NUMBER SECTION */}
+                    {options.bundleType === 'custom' && (
+                        <div className="surface-section p-4 border-round">
+                            <h2 className="text-xl font-semibold mb-4">{t('sections.allowedMeals')}</h2>
+                            <div className="grid formgrid p-fluid">
+                                <div className="field col-12 md:col-6 mb-4">
+                                    <label htmlFor="allowedBreakfast" className="block font-medium mb-2">
+                                        {t('allowedBreakfastLabel')} (Max: {maximums.maxAllowedBreakfast})
+                                    </label>
+                                    <InputText
+                                        id="allowedBreakfast"
+                                        value={form.allowedBreakfast}
+                                        onChange={(e) => {
+                                            const value = e.target.value;
+                                            // Only allow numbers
+                                            if (/^\d*$/.test(value)) {
+                                                // If value exceeds maximum, set to maximum
+                                                const numValue = value === '' ? '' : parseInt(value, 10);
+                                                if (numValue !== '' && numValue > maximums.maxAllowedBreakfast) {
+                                                    setForm({ ...form, allowedBreakfast: maximums.maxAllowedBreakfast.toString() });
+                                                } else {
+                                                    setForm({ ...form, allowedBreakfast: value });
+                                                }
+                                            }
+                                        }}
+                                        placeholder={t('allowedBreakfastPlaceholder')}
+                                        className="w-full"
+                                    />
+                                </div>
+
+                                <div className="field col-12 md:col-6 mb-4">
+                                    <label htmlFor="allowedLunch" className="block font-medium mb-2">
+                                        {t('allowedLunchLabel')} (Max: {maximums.maxAllowedLunch})
+                                    </label>
+                                    <InputText
+                                        id="allowedLunch"
+                                        value={form.allowedLunch}
+                                        onChange={(e) => {
+                                            const value = e.target.value;
+                                            // Only allow numbers
+                                            if (/^\d*$/.test(value)) {
+                                                // If value exceeds maximum, set to maximum
+                                                const numValue = value === '' ? '' : parseInt(value, 10);
+                                                if (numValue !== '' && numValue > maximums.maxAllowedLunch) {
+                                                    setForm({ ...form, allowedLunch: maximums.maxAllowedLunch.toString() });
+                                                } else {
+                                                    setForm({ ...form, allowedLunch: value });
+                                                }
+                                            }
+                                        }}
+                                        placeholder={t('allowedLunchPlaceholder')}
+                                        className="w-full"
+                                    />
+                                </div>
+
+                                <div className="field col-12 mb-4">
+                                    <label htmlFor="allowedDinner" className="block font-medium mb-2">
+                                        {t('allowedDinnerLabel')} (Max: {maximums.maxAllowedDinner})
+                                    </label>
+                                    <InputText
+                                        id="allowedDinner"
+                                        value={form.allowedDinner}
+                                        onChange={(e) => {
+                                            const value = e.target.value;
+                                            // Only allow numbers
+                                            if (/^\d*$/.test(value)) {
+                                                // If value exceeds maximum, set to maximum
+                                                const numValue = value === '' ? '' : parseInt(value, 10);
+                                                if (numValue !== '' && numValue > maximums.maxAllowedDinner) {
+                                                    setForm({ ...form, allowedDinner: maximums.maxAllowedDinner.toString() });
+                                                } else {
+                                                    setForm({ ...form, allowedDinner: value });
+                                                }
+                                            }
+                                        }}
+                                        placeholder={t('allowedDinnerPlaceholder')}
+                                        className="w-full"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    )}
                     <Divider />
 
                     {/* Payment Section */}
