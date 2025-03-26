@@ -126,8 +126,8 @@ npm start
 Use environment variables to configure staging environment:
 
 ```env
-API_URL=https://staging.coach.kportals.net/api/v1
-WEBSITE_URL=https://staging.coach.kportals.net
+API_URL=https://example.com/api/v1
+WEBSITE_URL=https://example.com
 ```
 
 ## 🔒 Security
