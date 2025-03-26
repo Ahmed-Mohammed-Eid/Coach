@@ -1,7 +1,7 @@
 import React from 'react';
 import SubscriptionDays from '../../../../../../components/users/sections/SubscriptionDays';
 
-export function page({ params: { id, locale } }) {
+function EditDayMealsPage({ params: { id, locale } }) {
     const isRTL = locale === 'ar';
 
     return (
@@ -11,4 +11,4 @@ export function page({ params: { id, locale } }) {
     );
 }
 
-export default page;
+export default EditDayMealsPage;
