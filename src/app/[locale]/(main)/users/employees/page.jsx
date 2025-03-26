@@ -1,4 +1,4 @@
-import EmployeesTable from '../../components/users/EmployeesTable';
+import EmployeesTable from '../../../../../components/users/EmployeesTable';
 
 export default function EmployeesPage({ params: { locale } }) {
     const isRTL = locale === 'ar';

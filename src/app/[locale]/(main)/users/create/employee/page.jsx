@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import CustomFileUpload from '../../../components/customFileUpload';
+import CustomFileUpload from '../../../../../../components/customFileUpload';
 import { InputText } from 'primereact/inputtext';
 import { InputMask } from 'primereact/inputmask';
 import { Dropdown } from 'primereact/dropdown';

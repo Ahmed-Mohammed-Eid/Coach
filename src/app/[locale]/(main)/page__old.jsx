@@ -1,8 +1,8 @@
 'use client';
 // IMPORTS
-import ClientsChart from './components/clientsChart';
-import CategoriesNumber from './components/categoriesNumber';
-import BestSelling from './components/bestSelling';
+import ClientsChart from '../../../components/clientsChart';
+import CategoriesNumber from '../../../components/categoriesNumber';
+import BestSelling from '../../../components/bestSelling';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';

@@ -1,4 +1,4 @@
-import MealsReportTable from '../../components/MealsReportTable';
+import MealsReportTable from '../../../../../components/MealsReportTable';
 
 export default async function Packages({ params: { locale } }) {
     return (

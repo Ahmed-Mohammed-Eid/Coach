@@ -7,7 +7,7 @@ import { Tag } from 'primereact/tag';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { Divider } from 'primereact/divider';
-import { formatDate } from '../../../../../utils/helpers';
+import { formatDate } from '../../utils/helpers';
 
 const ClientsMonitorOverview = ({ data, loading, locale }) => {
     const [activeIndex, setActiveIndex] = useState(0);

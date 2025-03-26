@@ -1,4 +1,4 @@
-import ClientsTable from '../../components/users/ClientsTable';
+import ClientsTable from '../../../../../components/users/ClientsTable';
 
 export default function ClientsPage({ params: { locale } }) {
     const isRTL = locale === 'ar';

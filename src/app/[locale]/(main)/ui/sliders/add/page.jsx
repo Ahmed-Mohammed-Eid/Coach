@@ -1,4 +1,4 @@
-import SliderForm from '../../../components/SliderForm/SliderForm';
+import SliderForm from '../../../../../../components/SliderForm/SliderForm';
 
 export default function SliderPage({ params: { locale } }) {
     return (

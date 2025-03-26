@@ -1,4 +1,4 @@
-import CategoriesList from '../components/FoodCategories/CategoriesList/CategoriesList';
+import CategoriesList from '../../../../components/FoodCategories/CategoriesList/CategoriesList';
 
 export default function Categories() {
     return <CategoriesList />;

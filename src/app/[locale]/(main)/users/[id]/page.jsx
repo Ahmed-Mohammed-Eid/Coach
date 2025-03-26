@@ -1,4 +1,4 @@
-import EditEmployeeContent from '../../components/EditEmployeeContent/EditEmployeeContent';
+import EditEmployeeContent from '../../../../../components/EditEmployeeContent/EditEmployeeContent';
 import axios from 'axios';
 import { cookies } from 'next/headers';
 

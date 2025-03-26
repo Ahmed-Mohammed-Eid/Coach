@@ -1,4 +1,4 @@
-import SliderList from '../../components/SliderList/SliderList';
+import SliderList from '../../../../../components/SliderList/SliderList';
 
 export default function Slider({ params: { locale } }) {
     return (

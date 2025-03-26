@@ -1,4 +1,4 @@
-import PackagesTable from '../components/PackagesTable';
+import PackagesTable from '../../../../components/PackagesTable';
 
 export default async function Packages({ params: { locale } }) {
     return (

@@ -1,4 +1,4 @@
-import EditPackageContent from '../../components/EditPackageContent/EditPackageContent';
+import EditPackageContent from '../../../../../components/EditPackageContent/EditPackageContent';
 import axios from 'axios';
 import { cookies } from 'next/headers';
 

@@ -1,4 +1,4 @@
-import WalletOffersTable from '../components/walletOffers/WalletsTable';
+import WalletOffersTable from '../../../../components/walletOffers/WalletsTable';
 
 export default async function Packages({ params: { locale } }) {
     return (

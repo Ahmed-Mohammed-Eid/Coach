@@ -788,9 +788,12 @@
         "somethingWentWrong": "Something went wrong"
     },
     "reports": {
-        "getReport": "GET Report",
+        "getReport": "Get Report",
         "reportType": "Report Type",
         "activeClients": "Active Clients",
+        "packingList": "Packing List",
+        "couponHistory": "Coupon History Report",
+        "couponCode": "Coupon Code",
         "kitchenMeals": "Kitchen Meals",
         "startDate": "Start Date",
         "endDate": "End Date",
@@ -1071,7 +1074,8 @@
             "save": "Save Changes",
             "cancel": "Cancel",
             "apply": "Apply Changes",
-            "changeMeals": "Change Meals Number"
+            "changeMeals": "Change Meals Number",
+            "editDayMeals": "Edit Day Meals"
         },
         "status": {
             "active": "Active",

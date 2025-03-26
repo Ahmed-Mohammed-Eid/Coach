@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 import axios from 'axios';
-import Wallets from '../../../components/Wallets';
+import Wallets from '../../../../../../components/Wallets';
 
 const getUserWallet = async (id) => {
     // GET THE TOKEN FROM THE COOKIE

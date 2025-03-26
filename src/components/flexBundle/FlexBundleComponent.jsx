@@ -81,7 +81,10 @@ export default function FlexBundleComponent({ locale }) {
                         dayName: day.dayName,
                         price: day.price
                     })) || [],
-                bundlePeriods: flexOptions?.bundlePeriods || []
+                bundlePeriods: flexOptions?.bundlePeriods || [],
+                allowedBreakfast: flexOptions?.allowedBreakfast || '',
+                allowedLunch: flexOptions?.allowedLunch || '',
+                allowedDinner: flexOptions?.allowedDinner || ''
             });
         }
     };

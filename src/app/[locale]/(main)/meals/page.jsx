@@ -1,4 +1,4 @@
-import MealsTable from '../components/MealsTable';
+import MealsTable from '../../../../components/MealsTable';
 
 export default async function Packages({ params: { locale } }) {
     return (

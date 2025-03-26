@@ -553,6 +553,7 @@ export default function UserProfile({ id, locale }) {
                 onPaymentHistory={getPaymentHistory}
                 onRenew={handleRenew}
                 onChangeMeals={() => setShowChangeMealsDialog(true)}
+                onEditDayMeals={() => router.push(`/${locale}/users/edit-day-meals/${id}`)}
                 clientData={clientData}
                 id={id}
                 locale={locale}

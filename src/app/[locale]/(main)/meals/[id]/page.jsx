@@ -1,4 +1,4 @@
-import EditMealContent from '../../components/EditMealContent/EditMealContent';
+import EditMealContent from '../../../../../components/EditMealContent/EditMealContent';
 import axios from 'axios';
 import { cookies } from 'next/headers';
 

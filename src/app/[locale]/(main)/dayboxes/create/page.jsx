@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
-import CustomFileUpload from '../../components/customFileUpload';
-import DayBoxMenu from '../../components/DayBoxMenu';
+import CustomFileUpload from '../../../../../components/customFileUpload';
+import DayBoxMenu from '../../../../../components/DayBoxMenu';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
 import axios from 'axios';

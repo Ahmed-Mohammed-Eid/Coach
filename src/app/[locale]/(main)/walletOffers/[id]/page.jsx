@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { cookies } from 'next/headers';
-import EditOffer from '../../components/walletOffers/EditOffer';
+import EditOffer from '../../../../../components/walletOffers/EditOffer';
 
 const getOffer = async (id) => {
     // GET THE TOKEN FROM THE COOKIE

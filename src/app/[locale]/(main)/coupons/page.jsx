@@ -1,4 +1,4 @@
-import CouponsList from '../components/Coupons/CouponsList/CouponsList';
+import CouponsList from '../../../../components/Coupons/CouponsList/CouponsList';
 
 export default function CouponsPage({ params: { locale } }) {
     return (

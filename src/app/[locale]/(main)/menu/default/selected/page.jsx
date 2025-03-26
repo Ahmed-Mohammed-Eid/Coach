@@ -6,7 +6,6 @@ import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import Image from 'next/image';
 import { Button } from 'primereact/button';
-import { Dropdown } from 'primereact/dropdown';
 import { useTranslations } from 'next-intl';
 import { Sidebar } from 'primereact/sidebar';
 import { InputText } from 'primereact/inputtext';

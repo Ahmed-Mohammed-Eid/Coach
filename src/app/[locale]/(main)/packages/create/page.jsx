@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import CustomFileUpload from '../../components/customFileUpload';
+import CustomFileUpload from '../../../../../components/customFileUpload';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
 import { InputNumber } from 'primereact/inputnumber';
@@ -13,7 +13,7 @@ import axios from 'axios';
 import { useTranslations } from 'next-intl';
 
 // IMPORTS
-import ChoosePrices from '../../components/ChoosePrices';
+import ChoosePrices from '../../../../../components/ChoosePrices';
 
 export default function CreatePackage({ params: { locale } }) {
     const t = useTranslations('createPackage');

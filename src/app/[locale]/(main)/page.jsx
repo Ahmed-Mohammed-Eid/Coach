@@ -5,11 +5,11 @@ import { Toast } from 'primereact/toast';
 import axios from 'axios';
 
 // Custom Components
-import StatCard from './components/dashboard/StatCard';
-import ClientsOverview from './components/dashboard/ClientsOverview';
-import CategoriesOverview from './components/dashboard/CategoriesOverview';
-import BestSellingOverview from './components/dashboard/BestSellingOverview';
-import ClientsMonitorOverview from './components/dashboard/ClientsMonitorOverview';
+import StatCard from '../../../components/dashboard/StatCard';
+import ClientsOverview from '../../../components/dashboard/ClientsOverview';
+import CategoriesOverview from '../../../components/dashboard/CategoriesOverview';
+import BestSellingOverview from '../../../components/dashboard/BestSellingOverview';
+import ClientsMonitorOverview from '../../../components/dashboard/ClientsMonitorOverview';
 
 const initialState = {
     categories: [],

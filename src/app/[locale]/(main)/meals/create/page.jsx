@@ -1,9 +1,9 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import CustomFileUpload from '../../components/customFileUpload';
-import ChooseExtra from '../../components/ChooseExtra';
-import ChooseTypes from '../../components/ChooseTypes';
-import MealVariations from '../../components/MealVariations';
+import CustomFileUpload from '../../../../../components/customFileUpload';
+import ChooseExtra from '../../../../../components/ChooseExtra';
+import ChooseTypes from '../../../../../components/ChooseTypes';
+import MealVariations from '../../../../../components/MealVariations';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
 import { InputNumber } from 'primereact/inputnumber';

@@ -1,4 +1,4 @@
-import EditBoxContent from '../../components/EditBoxContent/EditBoxContent';
+import EditBoxContent from '../../../../../components/EditBoxContent/EditBoxContent';
 import { cookies } from 'next/headers';
 import axios from 'axios';
 // REVALIDATE THE DATA EVERY 0 SECONDS

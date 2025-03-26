@@ -1,4 +1,4 @@
-import DayboxesTable from '../components/DayboxesTable';
+import DayboxesTable from '../../../../components/DayboxesTable';
 
 export default function DayboxPage({ params: { locale } }) {
     return (
