@@ -1,14 +1,10 @@
 import React from 'react';
-import SubscriptionDays from '../../../../../../components/users/sections/SubscriptionDays';
+import ChangeDayMealsClient from '../../../../../../components/users/sections/ChangeDayMealsClient';
 
 function EditDayMealsPage({ params: { id, locale } }) {
     const isRTL = locale === 'ar';
 
-    return (
-        <div>
-            <SubscriptionDays isRTL={isRTL} clientId={id} />
-        </div>
-    );
+    return <ChangeDayMealsClient isRTL={isRTL} id={id} />;
 }
 
 export default EditDayMealsPage;
