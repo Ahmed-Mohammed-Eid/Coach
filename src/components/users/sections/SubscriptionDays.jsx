@@ -1,49 +1,16 @@
 'use client';
 
-import React, { useCallback, useState } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { formatDate } from '../../../utils/helpers';
 import { InputText } from 'primereact/inputtext';
 import styles from './SubscriptionDays.module.scss';
 
-function SubscriptionDays({ isRTL, clientId }) {
-    const [planDays, setPlanDays] = useState(null);
+function SubscriptionDays({ isRTL, planDays, setSelectedDayToEdit }) {
     const [globalFilter, setGlobalFilter] = useState('');
 
-    const fetchClientData = useCallback(async () => {
-        const token = localStorage.getItem('token');
-
-        try {
-            const response = await axios.get(`${process.env.API_URL}/client/details?clientId=${clientId}`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`
-                }
-            });
-            return response.data;
-        } catch (error) {
-            console.error('Error fetching client data:', error);
-            return null;
-        }
-    }, [clientId]);
-
-    React.useEffect(() => {
-        const getClientData = async () => {
-            const data = await fetchClientData();
-            if (data) {
-                setPlanDays(data.planDays);
-            } else {
-                toast.error(isRTL ? 'فشل في جلب بيانات العميل أو لا توجد أيام خطة متاحة.' : 'Failed to fetch client data or no plan days available.');
-            }
-        };
-
-        getClientData();
-    }, [fetchClientData, isRTL]);
-
     const handleEditDay = (dayId) => {
-        console.log(`Editing day with ID: ${dayId}`);
-        toast.success(isRTL ? 'تم النقر على زر التعديل' : 'Edit button clicked');
+        setSelectedDayToEdit(dayId);
     };
 
     const filterDays = (days) => {
