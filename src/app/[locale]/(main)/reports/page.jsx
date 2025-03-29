@@ -23,7 +23,7 @@ export default function Reports({ params: { locale } }) {
         e.preventDefault();
         setLoading(true);
 
-        const objectToSend = {
+        let objectToSend = {
             reportName: reportType,
             dateFrom: startDate,
             dateTo: endDate
@@ -31,6 +31,13 @@ export default function Reports({ params: { locale } }) {
 
         if (reportType === 'couponHistory') {
             objectToSend.couponCode = couponCode;
+        }
+
+        if (reportType === 'addressLabels') {
+            objectToSend = {
+                reportName: 'addressLabels',
+                date: startDate
+            };
         }
 
         axios
@@ -73,21 +80,23 @@ export default function Reports({ params: { locale } }) {
                                 { label: t('activeClients'), value: 'active clients' },
                                 { label: t('kitchenMeals'), value: 'kitchenMeals' },
                                 { label: t('packingList'), value: 'packingList' },
-                                { label: t('couponHistory'), value: 'couponHistory' }
+                                { label: t('couponHistory'), value: 'couponHistory' },
+                                // Clients Address Labels
+                                { label: t('clientsAddressLabels'), value: 'addressLabels' }
                             ]}
                         />
                     </div>
 
-                    {(reportType === 'kitchenMeals' || reportType === 'packingList' || reportType === 'couponHistory') && (
-                        <div className={`field col-12 md:col-6 ${reportType === 'packingList' ? 'md:col-12' : ''}`}>
-                            <label htmlFor="startDate">{t('startDate')}</label>
+                    {(reportType === 'kitchenMeals' || reportType === 'packingList' || reportType === 'couponHistory' || reportType === 'addressLabels') && (
+                        <div className={`field col-12 md:col-6 ${reportType === 'packingList' || reportType === 'addressLabels' ? 'md:col-12' : ''}`}>
+                            <label htmlFor="startDate">{reportType === 'addressLabels' ? t('date') : t('startDate')}</label>
                             <Calendar
                                 id="startDate"
                                 value={startDate}
                                 onChange={(e) => {
                                     setStartDate(e.target.value);
                                 }}
-                                placeholder={t('startDate')}
+                                placeholder={reportType === 'addressLabels' ? t('date') : t('startDate')}
                                 dateFormat="dd/mm/yy"
                                 showIcon={true}
                             />

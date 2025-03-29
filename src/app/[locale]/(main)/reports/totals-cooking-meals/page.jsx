@@ -97,14 +97,17 @@ function TotalsCookingMealsReport({ params: { locale } }) {
             setExportLoading(true);
 
             // Transform data for Excel export
-            const excelData = reportData.categories.flatMap((category) =>
+            const excelData = reportData.reportData.categories.flatMap((category) =>
                 category.items.map((item) => ({
                     Category: category.name,
                     Name: item.name,
-                    90: item.values[0],
-                    120: item.values[1],
-                    150: item.values[2],
-                    200: item.values[3],
+                    80: item.values[0],
+                    90: item.values[1],
+                    100: item.values[2],
+                    120: item.values[3],
+                    150: item.values[4],
+                    180: item.values[5],
+                    200: item.values[6],
                     Total: item.total,
                     'Total in Grams': item.totalInGrams
                 }))
@@ -113,9 +116,12 @@ function TotalsCookingMealsReport({ params: { locale } }) {
             const columns = [
                 { header: 'Category', accessor: 'Category' },
                 { header: 'Name', accessor: 'Name' },
+                { header: '80', accessor: '80' },
                 { header: '90', accessor: '90' },
+                { header: '100', accessor: '100' },
                 { header: '120', accessor: '120' },
                 { header: '150', accessor: '150' },
+                { header: '180', accessor: '180' },
                 { header: '200', accessor: '200' },
                 { header: 'Total', accessor: 'Total' },
                 { header: 'Total in Grams', accessor: 'Total in Grams' }

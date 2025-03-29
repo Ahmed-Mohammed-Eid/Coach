@@ -99,11 +99,10 @@
     }
 
     .gridItem {
-        aspect-ratio: 6/3;
         min-height: 150px;
+        height: 100%;
 
         @media screen and (max-width: 450px) {
-            aspect-ratio: 4/3;
             min-height: 200px;
         }
 

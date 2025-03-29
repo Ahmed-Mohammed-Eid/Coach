@@ -795,7 +795,9 @@
         "couponHistory": "Coupon History Report",
         "couponCode": "Coupon Code",
         "kitchenMeals": "Kitchen Meals",
+        "clientsAddressLabels": "Clients Address Labels",
         "startDate": "Start Date",
+        "date": "Date",
         "endDate": "End Date",
         "submit": "Submit"
     },

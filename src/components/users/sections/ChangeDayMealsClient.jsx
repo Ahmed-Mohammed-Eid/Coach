@@ -71,6 +71,14 @@ function ChangeDayMealsClient({ isRTL, id }) {
                 }
             });
             setDayMeals(response?.data ?? {});
+            // Update selected meals while preserving notes
+            const selectedMeals = response?.data?.selectedMeals?.map((meal) => {
+                return {
+                    id: meal?._id,
+                    note: meal?.note || ''
+                };
+            });
+            setSelectedMealsToSend(selectedMeals || []);
             return response.data;
         } catch (error) {
             toast.error(error.response?.data?.message || isRTL ? 'فشل في جلب بيانات الوجبات.' : 'Failed to fetch meal data.');
@@ -88,16 +96,25 @@ function ChangeDayMealsClient({ isRTL, id }) {
 
     // SELECT MEAL TO SEND
     const handleSelectMeal = (mealId) => {
-        const selectedMealsCopy = [...selectedMealsToSend];
-        const updatedMeals = [...selectedMealsCopy, { id: mealId, note: '' }];
-        setSelectedMealsToSend(updatedMeals);
+        setSelectedMealsToSend((prev) => {
+            // Check if meal already exists
+            if (prev.some((meal) => meal.id === mealId)) {
+                return prev;
+            }
+            // Add new meal
+            return [...prev, { id: mealId, note: '' }];
+        });
+        toast.success(isRTL ? 'تم إضافة الوجبة بنجاح' : 'Meal added successfully');
     };
 
     // SEND UPDATE REQUEST
     const handleSaveAndSendRequest = async () => {
         const token = localStorage.getItem('token');
         const data = {
-            meals: selectedMealsToSend,
+            meals: selectedMealsToSend.map((meal) => ({
+                mealId: meal.id,
+                note: meal.note || ''
+            })),
             dateId: selectedDayToEdit,
             flag: 'edit',
             clientId: id
@@ -164,16 +181,31 @@ function ChangeDayMealsClient({ isRTL, id }) {
                 {/* SELECTED DAY INFO */}
                 <h2>{isRTL ? 'تفاصيل اليوم المحدد' : 'Selected Day Details'}</h2>
                 <div className="grid grid-nogutter mt-3">
-                    <span className="col-6 text-500 font-medium">{isRTL ? 'تاريخ اليوم' : 'Day Date'}</span>
-                    <span className="col-6 text-600 font-medium">
-                        {planDays?.find((day) => day._id === selectedDayToEdit)?.date
-                            ? new Date(planDays.find((day) => day._id === selectedDayToEdit).date).toLocaleDateString('en-US', {
-                                  year: 'numeric',
-                                  month: '2-digit',
-                                  day: '2-digit'
-                              })
-                            : ''}
-                    </span>
+                    <div className="col-6">
+                        <span className="text-500 font-medium">{isRTL ? 'تاريخ اليوم' : 'Day Date'}: </span>
+                        <span className="text-600 font-medium">
+                            {planDays?.find((day) => day._id === selectedDayToEdit)?.date
+                                ? new Date(planDays.find((day) => day._id === selectedDayToEdit).date).toLocaleDateString('en-US', {
+                                      year: 'numeric',
+                                      month: '2-digit',
+                                      day: '2-digit'
+                                  })
+                                : ''}
+                        </span>
+                    </div>
+                    <div className="col-6">
+                        {/* ALLOWED MEALS TYPES */}
+                        <span className="text-500 font-medium">{isRTL ? 'نوع الوجبات المسموح بها' : 'Allowed Meals Types'}: </span>
+                        <span className="text-600 font-medium">
+                            {dayMeals?.bundleMealsTypes?.map((mealType, index) => {
+                                return (
+                                    <span key={mealType}>
+                                        {mealType} {index < dayMeals?.bundleMealsTypes?.length - 1 ? ', ' : ''}
+                                    </span>
+                                );
+                            })}
+                        </span>
+                    </div>
                     <div className="col-6 mt-2">
                         <span className="text-500 font-medium">{isRTL ? 'عدد الوجبات' : 'Meals Number'}</span>
                         <span className="text-600 font-medium">: {dayMeals?.numberOfMeals}</span>
@@ -184,8 +216,71 @@ function ChangeDayMealsClient({ isRTL, id }) {
                     </div>
                 </div>
                 <hr />
-                <h4 className="mt-2">{isRTL ? 'الوجبات الختارة' : 'Selected Meals'}</h4>
-                {/* TODO: SELECTED MEALS TO APPEAR HERE */}
+                <h4 className="mt-2">{isRTL ? 'الوجبات المختارة' : 'Selected Meals'}</h4>
+                <div className="grid">
+                    {selectedMealsToSend.map((selectedMeal) => {
+                        console.log('selectedMeal', selectedMeal);
+                        const meal = dayMeals?.filter?.find((m) => m.mealId?._id === selectedMeal.id);
+                        console.log('meal', meal);
+                        if (!meal) return null;
+
+                        return (
+                            <div key={selectedMeal.id} className="col-12 md:col-6">
+                                <div className="card p-3 mb-2">
+                                    <div className="flex align-items-center">
+                                        <Image
+                                            src={meal?.mealId?.imagePath ?? '/img-not_found.jpg'}
+                                            alt={meal?.mealId?.mealTitle}
+                                            width={50}
+                                            height={50}
+                                            style={{
+                                                objectFit: 'cover',
+                                                borderRadius: '8px'
+                                            }}
+                                        />
+                                        <div className="ml-3 flex-1">
+                                            <h6 className="mb-1" dir={isRTL ? 'rtl' : 'ltr'}>
+                                                {isRTL ? meal?.mealId?.mealTitle : meal?.mealId?.mealTitleEn}
+                                            </h6>
+                                            {selectedMeal.note && (
+                                                <small className="text-500">
+                                                    {isRTL ? 'ملاحظة: ' : 'Note: '}
+                                                    {selectedMeal.note}
+                                                </small>
+                                            )}
+                                        </div>
+                                        <div className="flex gap-2">
+                                            <Button
+                                                icon="pi pi-file-edit"
+                                                outlined
+                                                size="small"
+                                                className="p-button-rounded"
+                                                onClick={() =>
+                                                    setMealNoteObject({
+                                                        mealId: selectedMeal.id,
+                                                        note: selectedMeal.note || ''
+                                                    })
+                                                }
+                                            />
+                                            <Button
+                                                icon="pi pi-trash"
+                                                severity="danger"
+                                                outlined
+                                                size="small"
+                                                className="p-button-rounded"
+                                                onClick={() => {
+                                                    setSelectedMealsToSend((prev) => prev.filter((m) => m.id !== selectedMeal.id));
+                                                    toast.success(isRTL ? 'تم حذف الوجبة بنجاح' : 'Meal removed successfully');
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+
                 <hr />
                 {/* FILTER FOR MENY TYPE */}
                 <div className="grid grid-nogutter mt-3">
