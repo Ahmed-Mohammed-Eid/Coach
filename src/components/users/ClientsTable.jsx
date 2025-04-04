@@ -421,18 +421,6 @@ export default function ClientsTable({ locale, isRTL }) {
                     showGridlines
                     className="p-datatable-sm"
                 >
-                    <Column field="subscriptionId" header={t('membershipId')} sortable filter style={{ minWidth: '8rem' }} />
-                    <Column field="clientName" header={t('name')} sortable filter style={{ minWidth: '12rem' }} />
-                    <Column field="phoneNumber" header={t('mobile')} sortable filter style={{ minWidth: '10rem' }} />
-                    <Column field="email" header={t('clientEmail')} sortable filter style={{ minWidth: '12rem' }} />
-                    <Column field="subscriped" header="Subscription Status" body={subscriptionStatusTemplate} sortable style={{ minWidth: '10rem' }} />
-                    <Column field="clientStatus.paused" header="Pause Status" body={pauseStatusTemplate} sortable style={{ minWidth: '8rem' }} />
-                    <Column field="subscripedBundle.bundlePeriod" header={t('bundlePeriod')} body={bundlePeriodTemplate} sortable style={{ minWidth: '10rem' }} />
-                    <Column field="subscripedBundle.startingDate" header={t('startingDate')} body={(rowData) => dateTemplate(rowData, 'startingDate')} sortable style={{ minWidth: '10rem' }} />
-                    <Column field="subscripedBundle.endingDate" header={t('endingDate')} body={(rowData) => dateTemplate(rowData, 'endingDate')} sortable style={{ minWidth: '10rem' }} />
-                    <Column header="Meals Submitted" body={mealsSubmittedTemplate} style={{ minWidth: '8rem' }} />
-                    <Column header="Meals Delivered" body={mealsDeliveredTemplate} style={{ minWidth: '8rem' }} />
-                    <Column header="Meals Suspended" body={mealsSuspendedTemplate} style={{ minWidth: '8rem' }} />
                     <Column
                         field={'_id'}
                         header={t('actions')}
@@ -476,6 +464,18 @@ export default function ClientsTable({ locale, isRTL }) {
                         }}
                         style={{ minWidth: '12rem' }}
                     />
+                    <Column field="subscriptionId" header={t('membershipId')} sortable filter style={{ minWidth: '8rem' }} />
+                    <Column field="clientName" header={t('name')} sortable filter style={{ minWidth: '12rem' }} />
+                    <Column field="phoneNumber" header={t('mobile')} sortable filter style={{ minWidth: '10rem' }} />
+                    <Column field="email" header={t('clientEmail')} sortable filter style={{ minWidth: '12rem' }} />
+                    <Column field="subscriped" header="Subscription Status" body={subscriptionStatusTemplate} sortable style={{ minWidth: '10rem' }} />
+                    <Column field="clientStatus.paused" header="Pause Status" body={pauseStatusTemplate} sortable style={{ minWidth: '8rem' }} />
+                    <Column field="subscripedBundle.bundlePeriod" header={t('bundlePeriod')} body={bundlePeriodTemplate} sortable style={{ minWidth: '10rem' }} />
+                    <Column field="subscripedBundle.startingDate" header={t('startingDate')} body={(rowData) => dateTemplate(rowData, 'startingDate')} sortable style={{ minWidth: '10rem' }} />
+                    <Column field="subscripedBundle.endingDate" header={t('endingDate')} body={(rowData) => dateTemplate(rowData, 'endingDate')} sortable style={{ minWidth: '10rem' }} />
+                    <Column header="Meals Submitted" body={mealsSubmittedTemplate} style={{ minWidth: '8rem' }} />
+                    <Column header="Meals Delivered" body={mealsDeliveredTemplate} style={{ minWidth: '8rem' }} />
+                    <Column header="Meals Suspended" body={mealsSuspendedTemplate} style={{ minWidth: '8rem' }} />
                 </DataTable>
             </div>
 
