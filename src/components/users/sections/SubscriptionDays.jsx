@@ -55,40 +55,23 @@ function SubscriptionDays({ isRTL, planDays, setSelectedDayToEdit }) {
                         {filteredDays.length > 0 ? (
                             <ul className={styles.gridList}>
                                 {filteredDays.map((day, index) => {
-                                    const selectedNumber = day?.dayMeals?.length ?? 0;
-                                    const dayMealsNumber = day?.mealsNumber * 1 + day?.snacksNumber * 1;
+                                    // Using submitted property to determine if day is selected
+                                    const isSubmitted = day?.submitted === true;
 
-                                    /*
-                                        - IF SELECTED IS 0 THEN NOT SELECTED IF BETWEEN 0 AND DAY MEALS NUMBER THEN SELECTED SOME IF BETWEEN DAY MEALS NUMBER AND DAY MEALS NUMBER + SNACKS NUMBER THEN SELECTED ALL
-                                    */
-
-                                    let selectedStatus =
-                                        selectedNumber === 0
-                                            ? 'notSelected'
-                                            : selectedNumber > 0 && selectedNumber < dayMealsNumber
-                                            ? 'selectedSome'
-                                            : selectedNumber >= dayMealsNumber && selectedNumber <= dayMealsNumber + day?.snacksNumber
-                                            ? 'selectedAll'
-                                            : 'notSelected';
-
-                                    const statusText = {
-                                        notSelected: isRTL ? 'غير محدد' : 'Not Selected',
-                                        selectedSome: isRTL ? 'محدد جزئياً' : 'Partially Selected',
-                                        selectedAll: isRTL ? 'محدد بالكامل' : 'Fully Selected'
-                                    };
+                                    const statusText = isSubmitted ? (isRTL ? 'محدد' : 'Submitted') : isRTL ? 'غير محدد' : 'Not Submitted';
 
                                     return (
                                         <li key={index} className={styles.gridItem}>
-                                            <div className={`${styles.itemContent} ${day.isSelected ? styles.selected : styles.notSelected}`}>
+                                            <div className={`${styles.itemContent} ${isSubmitted ? styles.selected : styles.notSelected}`}>
                                                 <div>
                                                     <div className={styles.dateSection}>
-                                                        <i className={`pi ${day.isSelected ? 'pi-check-circle' : 'pi-clock'} ${day.isSelected ? styles.selected : styles.notSelected}`}></i>
+                                                        <i className={`pi ${isSubmitted ? 'pi-check-circle' : 'pi-clock'} ${isSubmitted ? styles.selected : styles.notSelected}`}></i>
                                                         <div className={styles.date}>{day?.date ? formatDate(day.date) : isRTL ? 'تاريخ غير محدد' : 'No date'}</div>
                                                     </div>
                                                     <div>
-                                                        <span className={`${styles.statusBadge} ${day.isSelected ? styles.selected : styles.notSelected}`}>
-                                                            <i className={`pi ${day.isSelected ? 'pi-check' : 'pi-times'}`}></i>
-                                                            {statusText[selectedStatus]}
+                                                        <span className={`${styles.statusBadge} ${isSubmitted ? styles.selected : styles.notSelected}`}>
+                                                            <i className={`pi ${isSubmitted ? 'pi-check' : 'pi-times'}`}></i>
+                                                            {statusText}
                                                         </span>
                                                     </div>
                                                 </div>

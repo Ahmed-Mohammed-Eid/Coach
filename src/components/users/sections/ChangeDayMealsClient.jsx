@@ -298,7 +298,7 @@ function ChangeDayMealsClient({ isRTL, id }) {
                                 { label: isRTL ? 'افطار' : 'Breakfast', value: 'افطار' },
                                 { label: isRTL ? 'غداء' : 'Lunch', value: 'غداء' },
                                 { label: isRTL ? 'عشاء' : 'Dinner', value: 'عشاء' },
-                                { label: isRTL ? 'وجبة خفيفة' : 'Snack', value: 'وجبة خفيفة' }
+                                { label: isRTL ? 'وجبة خفيفة' : 'Snack', value: 'سناك' }
                             ]}
                             onChange={(e) => setMenuType(e.value)}
                             placeholder={isRTL ? 'اختر نوع الوجبة' : 'Select Menu Type'}
