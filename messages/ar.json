@@ -975,7 +975,8 @@
             "cancel": "إلغاء",
             "apply": "تطبيق التغييرات",
             "changeMeals": "تغيير عدد الوجبات",
-            "editDayMeals": "تعديل وجبات اليوم"
+            "editDayMeals": "تعديل وجبات اليوم",
+            "goBack": "العودة"
         },
         "status": {
             "active": "نشط",

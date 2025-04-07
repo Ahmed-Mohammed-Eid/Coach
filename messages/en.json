@@ -1077,7 +1077,8 @@
             "cancel": "Cancel",
             "apply": "Apply Changes",
             "changeMeals": "Change Meals Number",
-            "editDayMeals": "Edit Day Meals"
+            "editDayMeals": "Edit Day Meals",
+            "goBack": "Go Back"
         },
         "status": {
             "active": "Active",

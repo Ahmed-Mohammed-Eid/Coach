@@ -1,9 +1,14 @@
 'use client';
 import { Button } from 'primereact/button';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 
 export default function ActionButtons({ onDelete, onFreeze, onUnfreeze, onUnsubscribe, onEdit, onWallet, onModifyDays, onPaymentHistory, onEditDayMeals, onRenew, onChangeMeals, clientData, id, locale }) {
+    // Translations
     const t = useTranslations('userProfile');
+
+    // Router
+    const router = useRouter();
 
     return (
         <div className="mb-4">
@@ -37,6 +42,16 @@ export default function ActionButtons({ onDelete, onFreeze, onUnfreeze, onUnsubs
                     </div>
                     <div className="flex gap-2">
                         <Button label={t('actions.renewPackage')} icon="pi pi-refresh" onClick={onRenew} className="p-button-outlined" />
+                        {/* GO BACK TO  */}
+                        <Button
+                            icon={locale === 'ar' ? 'pi pi-arrow-left' : 'pi pi-arrow-right'}
+                            severity="secondary"
+                            onClick={() => {
+                                router.push(`/${locale}/users`);
+                            }}
+                            tooltip={t('actions.goBack')}
+                            tooltipOptions={{ position: 'top' }}
+                        />
                     </div>
                 </div>
             </div>
