@@ -69,6 +69,7 @@
         "packagesList": "Packages List",
         "createPackage": "Create Package",
         "flexBundle": "Flex Bundle Options",
+        "flexBundlePricing": "Flex Bundle Pricing",
         "meals": "Meals",
         "mealsList": "Meals List",
         "createMeal": "Create Meal",
@@ -1134,5 +1135,24 @@
         "fetchRegionsError": "Failed to fetch regions",
         "editZone": "Edit Delivery Zone",
         "updateZone": "Update Delivery Zone"
+    },
+    "flexBundlePricing": {
+        "title": "Flex Bundle Pricing",
+        "description": "Manage the pricing parameters for flex bundle meals. These values will be used to calculate the final price for customer packages.",
+        "breakfastGramPrice": "Breakfast Gram Price",
+        "enterBreakfastGramPrice": "Enter breakfast gram price",
+        "lunchGramPrice": "Lunch Gram Price",
+        "enterLunchGramPrice": "Enter lunch gram price",
+        "dinnerGramPrice": "Dinner Gram Price",
+        "enterDinnerGramPrice": "Enter dinner gram price",
+        "snackPrice": "Snack Price",
+        "enterSnackPrice": "Enter snack price",
+        "fixedExpenses": "Fixed Expenses",
+        "enterFixedExpenses": "Enter fixed expenses",
+        "saveButton": "Save Pricing",
+        "fetchError": "Failed to load pricing data",
+        "updateSuccess": "Pricing updated successfully",
+        "updateError": "Failed to update pricing",
+        "authError": "Authentication error. Please log in again"
     }
 }

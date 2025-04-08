@@ -65,6 +65,11 @@ const AppMenu = () => {
                     label: t('AppMenu.flexBundle'),
                     icon: 'pi pi-fw pi-cog',
                     to: `/${locale}/packages/flex-bundle`
+                },
+                {
+                    label: t('AppMenu.flexBundlePricing'),
+                    icon: 'pi pi-fw pi-cog',
+                    to: `/${locale}/packages/flex-bundle/pricing`
                 }
             ]
         },

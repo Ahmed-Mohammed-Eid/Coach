@@ -69,7 +69,7 @@
         "packagesList": "قائمة الباقات",
         "createPackage": "إنشاء باقة",
         "flexBundle": "خيارات الباقات المرنة",
-
+        "flexBundlePricing": "أسعار خيارات الباقات المرنة",
         "meals": "الوجبات",
         "mealsList": "قائمة الوجبات",
         "createMeal": "إنشاء وجبة",
@@ -1135,5 +1135,24 @@
         "fetchRegionsError": "فشل في جلب المناطق",
         "editZone": "تعديل منطقة التوصيل",
         "updateZone": "تحديث منطقة التوصيل"
+    },
+    "flexBundlePricing": {
+        "title": "تسعير الباقة المرنة",
+        "description": "إدارة معايير التسعير لوجبات الباقة المرنة. سيتم استخدام هذه القيم لحساب السعر النهائي لباقات العملاء.",
+        "breakfastGramPrice": "سعر الجرام للإفطار",
+        "enterBreakfastGramPrice": "أدخل سعر الجرام للإفطار",
+        "lunchGramPrice": "سعر الجرام للغداء",
+        "enterLunchGramPrice": "أدخل سعر الجرام للغداء",
+        "dinnerGramPrice": "سعر الجرام للعشاء",
+        "enterDinnerGramPrice": "أدخل سعر الجرام للعشاء",
+        "snackPrice": "سعر الوجبة الخفيفة",
+        "enterSnackPrice": "أدخل سعر الوجبة الخفيفة",
+        "fixedExpenses": "المصاريف الثابتة",
+        "enterFixedExpenses": "أدخل المصاريف الثابتة",
+        "saveButton": "حفظ التسعير",
+        "fetchError": "فشل في تحميل بيانات التسعير",
+        "updateSuccess": "تم تحديث التسعير بنجاح",
+        "updateError": "فشل في تحديث التسعير",
+        "authError": "خطأ في المصادقة. الرجاء تسجيل الدخول مرة أخرى"
     }
 }
