@@ -958,7 +958,9 @@
         "allowedLunchLabel": "Allowed Lunch",
         "allowedLunchPlaceholder": "Select allowed lunch",
         "allowedDinnerLabel": "Allowed Dinner",
-        "allowedDinnerPlaceholder": "Select allowed dinner"
+        "allowedDinnerPlaceholder": "Select allowed dinner",
+        "calculateError": "Failed to calculate amount",
+        "calculatePrice": "Calculate Price"
     },
     "userProfile": {
         "gender": {

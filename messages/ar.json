@@ -1099,7 +1099,9 @@
         "allowedLunchLabel": "الغداء المسموح به",
         "allowedLunchPlaceholder": "اختر الغداء المسموح به",
         "allowedDinnerLabel": "العشاء المسموح به",
-        "allowedDinnerPlaceholder": "اختر العشاء المسموح به"
+        "allowedDinnerPlaceholder": "اختر العشاء المسموح به",
+        "calculateError": "فشل في حساب المبلغ",
+        "calculatePrice": "حساب السعر"
     },
     "delivery": {
         "deliveryZones": "مناطق التوصيل",

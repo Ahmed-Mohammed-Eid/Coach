@@ -97,7 +97,21 @@ export default function FlexBundleComponent({ locale }) {
         e.preventDefault();
         // GET TOKEN
         const token = localStorage.getItem('token');
-        console.log(bundleData);
+
+        // Create a deep copy to modify before sending
+        const dataToSend = JSON.parse(JSON.stringify(bundleData));
+
+        // Set price to 0 for relevant sections
+        ['carb', 'protine', 'mealsNumber', 'mealsType', 'snacksNumber', 'weekDays', 'bundlePeriods'].forEach((section) => {
+            if (dataToSend[section] && Array.isArray(dataToSend[section])) {
+                dataToSend[section] = dataToSend[section].map((item) => ({
+                    ...item,
+                    price: 0
+                }));
+            }
+        });
+
+        console.log(dataToSend); // Log the data being sent
 
         try {
             const response = await fetch(`${process.env.API_URL}/create/flex/bundle`, {
@@ -106,17 +120,20 @@ export default function FlexBundleComponent({ locale }) {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`
                 },
-                body: JSON.stringify(bundleData)
+                body: JSON.stringify(dataToSend) // Send the modified data
             });
 
             if (!response.ok) {
-                throw new Error('Failed to save bundle configuration');
+                const errorData = await response.json(); // Try to get error details
+                console.error('Server response:', errorData);
+                throw new Error(errorData.message || 'Failed to save bundle configuration');
             }
 
             const data = await response.json();
             toast.success(t('bundleCreatedSuccessfully'));
         } catch (error) {
             console.error('Error:', error);
+            toast.error(error.message || t('failedToSaveBundle')); // Show specific error or generic one
         }
     };
 
@@ -128,7 +145,9 @@ export default function FlexBundleComponent({ locale }) {
                     <div className="grid formgrid p-fluid">
                         {bundleData[section].map((item, index) => (
                             <React.Fragment key={item._id || index}>
-                                <div className="field col-12 md:col-5">
+                                <div className="field col-12 md:col-10">
+                                    {' '}
+                                    {/* Adjusted width */}
                                     <label htmlFor={`${section}-dayName-${index}`}>{t('dayName')}</label>
                                     <Dropdown
                                         id={`${section}-dayName-${index}`}
@@ -150,29 +169,6 @@ export default function FlexBundleComponent({ locale }) {
                                         disabled={!!item._id}
                                     />
                                 </div>
-                                <div className="field col-12 md:col-5">
-                                    <label htmlFor={`${section}-price-${index}`}>{t('price')}</label>
-                                    <InputNumber
-                                        id={`${section}-price-${index}`}
-                                        value={item.price}
-                                        onValueChange={(e) => {
-                                            const newData = [...bundleData[section]];
-                                            newData[index] = {
-                                                ...newData[index],
-                                                price: e.value,
-                                                _id: item._id
-                                            };
-                                            setBundleData({
-                                                ...bundleData,
-                                                [section]: newData
-                                            });
-                                        }}
-                                        mode="currency"
-                                        currency="KWD"
-                                        locale="en-US"
-                                        placeholder={t('enterPrice')}
-                                    />
-                                </div>
                                 <div className="field col-12 md:col-2 flex justify-content-end align-items-end">
                                     <Button
                                         icon="pi pi-times"
@@ -206,7 +202,7 @@ export default function FlexBundleComponent({ locale }) {
                             onClick={() => {
                                 setBundleData({
                                     ...bundleData,
-                                    [section]: [...bundleData[section], { dayName: '', price: 0 }]
+                                    [section]: [...bundleData[section], { dayName: '' }] // Removed price
                                 });
                             }}
                             disabled={bundleData[section].length >= 7}
@@ -223,7 +219,9 @@ export default function FlexBundleComponent({ locale }) {
                     <div className="grid formgrid p-fluid">
                         {bundleData[section].map((item, index) => (
                             <React.Fragment key={index}>
-                                <div className="field col-12 md:col-5">
+                                <div className="field col-12 md:col-10">
+                                    {' '}
+                                    {/* Adjusted width */}
                                     <label htmlFor={`${section}-mealType-${index}`}>{t('mealType')}</label>
                                     <Dropdown
                                         id={`${section}-mealType-${index}`}
@@ -243,28 +241,6 @@ export default function FlexBundleComponent({ locale }) {
                                         optionLabel="label"
                                         placeholder={t('mealType')}
                                         className="w-full"
-                                    />
-                                </div>
-                                <div className="field col-12 md:col-5">
-                                    <label htmlFor={`${section}-price-${index}`}>{t('price')}</label>
-                                    <InputNumber
-                                        id={`${section}-price-${index}`}
-                                        value={item.price}
-                                        onValueChange={(e) => {
-                                            const newData = [...bundleData[section]];
-                                            newData[index] = {
-                                                ...newData[index],
-                                                price: e.value
-                                            };
-                                            setBundleData({
-                                                ...bundleData,
-                                                [section]: newData
-                                            });
-                                        }}
-                                        mode="currency"
-                                        currency="KWD"
-                                        locale="en-US"
-                                        placeholder={t('enterPrice')}
                                     />
                                 </div>
                                 <div className="field col-12 md:col-2 flex justify-content-end align-items-end">
@@ -299,7 +275,7 @@ export default function FlexBundleComponent({ locale }) {
                             onClick={() => {
                                 setBundleData({
                                     ...bundleData,
-                                    [section]: [...bundleData[section], { mealType: '', price: 0 }]
+                                    [section]: [...bundleData[section], { mealType: '' }] // Removed price
                                 });
                             }}
                         />
@@ -308,36 +284,40 @@ export default function FlexBundleComponent({ locale }) {
             );
         }
 
+        // Generic section rendering (carb, protine, mealsNumber, snacksNumber, bundlePeriods)
         return (
             <div className="card mb-2" dir={isRTL ? 'rtl' : 'ltr'}>
                 <h2 className="text-xl font-bold mb-3">{t(section)}</h2>
                 <div className="grid formgrid p-fluid">
                     {bundleData[section].map((item, index) => (
                         <React.Fragment key={index}>
-                            {fields.map((field) => (
-                                <div key={field.name} className="field col-12 md:col-5">
-                                    <label htmlFor={`${section}-${field.name}-${index}`}>{t(field.label)}</label>
-                                    <InputNumber
-                                        id={`${section}-${field.name}-${index}`}
-                                        value={item[field.name]}
-                                        onValueChange={(e) => {
-                                            const newData = [...bundleData[section]];
-                                            newData[index] = {
-                                                ...newData[index],
-                                                [field.name]: e.value
-                                            };
-                                            setBundleData({
-                                                ...bundleData,
-                                                [section]: newData
-                                            });
-                                        }}
-                                        mode={field.name === 'price' ? 'currency' : 'decimal'}
-                                        currency={field.name === 'price' ? 'KWD' : undefined}
-                                        locale="en-US"
-                                        placeholder={t(field.name === 'price' ? 'enterPrice' : 'enterValue')}
-                                    />
-                                </div>
-                            ))}
+                            {fields
+                                .filter((field) => field.name !== 'price') // Filter out price field
+                                .map((field) => (
+                                    <div key={field.name} className="field col-12 md:col-10">
+                                        {' '}
+                                        {/* Adjusted width */}
+                                        <label htmlFor={`${section}-${field.name}-${index}`}>{t(field.label)}</label>
+                                        <InputNumber
+                                            id={`${section}-${field.name}-${index}`}
+                                            value={item[field.name]}
+                                            onValueChange={(e) => {
+                                                const newData = [...bundleData[section]];
+                                                newData[index] = {
+                                                    ...newData[index],
+                                                    [field.name]: e.value
+                                                };
+                                                setBundleData({
+                                                    ...bundleData,
+                                                    [section]: newData
+                                                });
+                                            }}
+                                            mode={'decimal'} // Always decimal now
+                                            locale="en-US"
+                                            placeholder={t('enterValue')}
+                                        />
+                                    </div>
+                                ))}
                             <div className="field col-12 md:col-2 flex justify-content-end align-items-end">
                                 <Button
                                     icon="pi pi-times"
@@ -369,9 +349,11 @@ export default function FlexBundleComponent({ locale }) {
                         severity="help"
                         onClick={() => {
                             const newItem = {};
-                            fields.forEach((field) => {
-                                newItem[field.name] = 0;
-                            });
+                            fields
+                                .filter((field) => field.name !== 'price') // Filter out price field
+                                .forEach((field) => {
+                                    newItem[field.name] = 0; // Initialize non-price fields
+                                });
                             setBundleData({
                                 ...bundleData,
                                 [section]: [...bundleData[section], newItem]
@@ -388,38 +370,38 @@ export default function FlexBundleComponent({ locale }) {
             {/* <h1 className="text-3xl font-bold mb-4">{t('title')}</h1> */}
 
             {renderSection('carb', [
-                { name: 'carbValue', label: 'carbValue' },
-                { name: 'price', label: 'price' }
+                { name: 'carbValue', label: 'carbValue' }
+                // { name: 'price', label: 'price' } // Removed price
             ])}
 
             {renderSection('protine', [
-                { name: 'protineValue', label: 'proteinValue' },
-                { name: 'price', label: 'price' }
+                { name: 'protineValue', label: 'proteinValue' }
+                // { name: 'price', label: 'price' } // Removed price
             ])}
 
             {renderSection('mealsNumber', [
-                { name: 'mealsCount', label: 'mealsCount' },
-                { name: 'price', label: 'price' }
+                { name: 'mealsCount', label: 'mealsCount' }
+                // { name: 'price', label: 'price' } // Removed price
             ])}
 
             {renderSection('mealsType', [
-                { name: 'mealType', label: 'mealType' },
-                { name: 'price', label: 'price' }
+                { name: 'mealType', label: 'mealType' }
+                // { name: 'price', label: 'price' } // Removed price
             ])}
 
             {renderSection('snacksNumber', [
-                { name: 'snackCount', label: 'snackCount' },
-                { name: 'price', label: 'price' }
+                { name: 'snackCount', label: 'snackCount' }
+                // { name: 'price', label: 'price' } // Removed price
             ])}
 
             {renderSection('weekDays')}
 
             {renderSection('bundlePeriods', [
-                { name: 'weekCount', label: 'weekCount' },
-                { name: 'price', label: 'price' }
+                { name: 'weekCount', label: 'weekCount' }
+                // { name: 'price', label: 'price' } // Removed price
             ])}
 
-            {/* ALLOWED MEALS SECTION */}
+            {/* ALLOWED MEALS SECTION - Remains unchanged */}
             <div className="card mb-2" dir={isRTL ? 'rtl' : 'ltr'}>
                 <h2 className="text-xl font-bold mb-3">{t('allowedMeals')}</h2>
                 <div className="grid formgrid p-fluid">

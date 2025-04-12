@@ -106,19 +106,38 @@ export default function CreateClient({ params: { locale } }) {
         fetchData();
     }, []);
 
-    // Calculate total price for custom bundle
-    const calculateCustomBundleTotal = () => {
-        if (!form.bundleOptions) return 0;
+    // State for API calculated price
+    const [calculatedPrice, setCalculatedPrice] = useState(null);
 
-        const carbPrice = form.bundleOptions.carb?.price || 0;
-        const proteinPrice = form.bundleOptions.protine?.price || 0;
-        const mealsPrice = form.bundleOptions.mealsNumber?.price || 0;
-        const snacksPrice = form.bundleOptions.snacksNumber?.price || 0;
-        const periodPrice = form.bundleOptions.bundlePeriods?.price || 0;
-        const weekDaysPrice = form.bundleOptions.weekDays?.reduce((sum, day) => sum + (flexBundleOptions?.weekDays.find((d) => d.dayName === day.dayName)?.price || 0), 0) || 0;
-        const mealsTypePrice = form.bundleOptions.mealsType?.reduce((sum, type) => sum + type.price, 0) || 0;
+    // Calculate total price for custom bundle using API
+    const calculateCustomBundleTotal = async () => {
+        const token = localStorage.getItem('token');
+        if (!form.bundleOptions || !token) return;
 
-        return carbPrice + proteinPrice + mealsPrice + snacksPrice + periodPrice + weekDaysPrice + mealsTypePrice;
+        try {
+            const mealTypes = form.bundleOptions.mealsType.map((type) => type.mealType);
+            // Calculate the number of days based on selected weekdays and weeks
+            const numberOfSelectedDays = form.bundleOptions.weekDays.length;
+            const numberOfWeeks = form.bundleOptions.bundlePeriods?.weekCount || 0;
+            const numberOfDays = numberOfSelectedDays * numberOfWeeks;
+
+            const response = await axios.get(`${process.env.API_URL}/calculate/flex/bundle`, {
+                params: {
+                    protineValue: form.bundleOptions.protine?.protineValue || 0,
+                    numberOfMeals: form.bundleOptions.mealsNumber?.mealsCount || 0,
+                    numberOfSnacks: form.bundleOptions.snacksNumber?.snackCount || 0,
+                    numberOfDays: numberOfDays, // Use the calculated number of days
+                    mealsTypes: JSON.stringify(mealTypes)
+                },
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            if (response.data.success) {
+                setCalculatedPrice(response.data.bundlePrice);
+            }
+        } catch (error) {
+            toast.error(error?.response?.data?.message || t('calculateError'));
+        }
     };
 
     // HANDLERS
@@ -443,7 +462,7 @@ export default function CreateClient({ params: { locale } }) {
                                             id="carbValue"
                                             value={form.bundleOptions.carb}
                                             options={flexBundleOptions?.carb.map((option) => ({
-                                                label: `${option.carbValue}g - ${option.price} KWD`,
+                                                label: `${option.carbValue}g`, // Removed price display
                                                 value: option
                                             }))}
                                             onChange={(e) =>
@@ -469,7 +488,7 @@ export default function CreateClient({ params: { locale } }) {
                                             id="protineValue"
                                             value={form.bundleOptions.protine}
                                             options={flexBundleOptions?.protine.map((option) => ({
-                                                label: `${option.protineValue}g - ${option.price} KWD`,
+                                                label: `${option.protineValue}g`, // Removed price display
                                                 value: option
                                             }))}
                                             onChange={(e) =>
@@ -495,7 +514,7 @@ export default function CreateClient({ params: { locale } }) {
                                             id="mealsCount"
                                             value={form.bundleOptions.mealsNumber}
                                             options={flexBundleOptions?.mealsNumber.map((option) => ({
-                                                label: `${option.mealsCount} meals - ${option.price} KWD`,
+                                                label: `${option.mealsCount} meals`, // Removed price display
                                                 value: option
                                             }))}
                                             onChange={(e) =>
@@ -521,7 +540,7 @@ export default function CreateClient({ params: { locale } }) {
                                             id="snackCount"
                                             value={form.bundleOptions.snacksNumber}
                                             options={flexBundleOptions?.snacksNumber.map((option) => ({
-                                                label: `${option.snackCount} snacks - ${option.price} KWD`,
+                                                label: `${option.snackCount} snacks`, // Removed price display
                                                 value: option
                                             }))}
                                             onChange={(e) =>
@@ -544,7 +563,7 @@ export default function CreateClient({ params: { locale } }) {
                                         <MultiSelect
                                             value={form.bundleOptions.mealsType}
                                             options={flexBundleOptions?.mealsType.map((type) => ({
-                                                label: `${type.mealType} - ${type.price} KWD`,
+                                                label: `${type.mealType}`, // Removed price display
                                                 value: type
                                             }))}
                                             onChange={(e) => {
@@ -589,7 +608,7 @@ export default function CreateClient({ params: { locale } }) {
                                                             checked={form.bundleOptions.weekDays.some((d) => d.dayName === day)}
                                                         />
                                                         <label htmlFor={day} className={`${isRTL ? 'mr-2' : 'ml-2'} font-medium inline-block`}>
-                                                            {t(day.toLowerCase())} - {dayPrice} KWD
+                                                            {t(day.toLowerCase())} {/* Removed price display */}
                                                         </label>
                                                     </div>
                                                 );
@@ -605,7 +624,7 @@ export default function CreateClient({ params: { locale } }) {
                                             id="bundlePeriods"
                                             value={form.bundleOptions.bundlePeriods}
                                             options={flexBundleOptions?.bundlePeriods.map((option) => ({
-                                                label: `${option.weekCount} weeks - ${option.price} KWD`,
+                                                label: `${option.weekCount} weeks`, // Removed price display
                                                 value: option
                                             }))}
                                             onChange={(e) =>
@@ -623,13 +642,18 @@ export default function CreateClient({ params: { locale } }) {
                                         />
                                     </div>
 
-                                    <div className="col-12">
-                                        <div className="text-center p-4 border-round bg-primary-50">
-                                            <span className="text-xl font-bold text-primary-900">
-                                                {t('totalPrice')}: {calculateCustomBundleTotal()} KWD
-                                            </span>
-                                        </div>
+                                    <div className="col-12 mb-4">
+                                        <Button type="button" label={t('calculatePrice')} onClick={calculateCustomBundleTotal} className="p-button-primary w-full" />
                                     </div>
+                                    {calculatedPrice && (
+                                        <div className="col-12">
+                                            <div className="text-center p-4 border-round bg-primary-50">
+                                                <span className="text-xl font-bold text-primary-900">
+                                                    {t('totalPrice')}: {calculatedPrice} KWD
+                                                </span>
+                                            </div>
+                                        </div>
+                                    )}
                                 </>
                             )}
                         </div>
