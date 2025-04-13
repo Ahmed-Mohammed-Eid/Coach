@@ -58,7 +58,7 @@ export default function CreatePackage({ params: { locale } }) {
         const token = localStorage.getItem('token');
 
         // VALIDATE THE FORM
-        if (!form.arName || !form.enName || !form.mealsNumber || !form.snacksNumber || !form.arText || !form.enText) {
+        if (!form.arName || !form.enName || !form.mealsNumber || !form.snacksNumber) {
             return toast.error(t('pleaseFillAllFields'));
         }
 
