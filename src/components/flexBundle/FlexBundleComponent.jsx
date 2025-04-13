@@ -11,7 +11,6 @@ import toast from 'react-hot-toast';
 export default function FlexBundleComponent({ locale }) {
     const t = useTranslations('flexBundle');
     const isRTL = locale === 'ar';
-
     const [bundleData, setBundleData] = useState({
         carb: [],
         protine: [],
@@ -20,9 +19,9 @@ export default function FlexBundleComponent({ locale }) {
         snacksNumber: [],
         weekDays: [],
         bundlePeriods: [],
-        allowedBreakfast: '',
-        allowedLunch: '',
-        allowedDinner: ''
+        allowedBreakfast: null,
+        allowedLunch: null,
+        allowedDinner: null
     });
 
     // Days options for the dropdown
