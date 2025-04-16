@@ -25,6 +25,8 @@ export default function CreateClient({ params: { locale } }) {
     // STATE
     const [bundles, setBundles] = useState([]);
     const [flexBundleOptions, setFlexBundleOptions] = useState(null);
+    const [governoratesList, setGovernoratesList] = useState([]);
+    const [regionsList, setRegionsList] = useState([]);
 
     const [maximums, setMaximums] = useState({
         maxAllowedBreakfast: 0,
@@ -99,6 +101,12 @@ export default function CreateClient({ params: { locale } }) {
                     maxAllowedLunch: flexOptionsResponse.data?.flexOptions?.allowedLunch,
                     maxAllowedDinner: flexOptionsResponse.data?.flexOptions?.allowedDinner
                 });
+
+                // Fetch governorates
+                const governoratesResponse = await axios.get(`${process.env.API_URL}/governorates`);
+                if (governoratesResponse.data?.success) {
+                    setGovernoratesList(governoratesResponse.data.governorates);
+                }
             } catch (error) {
                 toast.error(error?.response?.data?.message || 'Error fetching data');
             }
@@ -137,6 +145,29 @@ export default function CreateClient({ params: { locale } }) {
             }
         } catch (error) {
             toast.error(error?.response?.data?.message || t('calculateError'));
+        }
+    };
+
+    // Fetch regions based on selected governorate
+    const fetchRegions = async (governorateId) => {
+        if (!governorateId) {
+            setRegionsList([]);
+            return;
+        }
+
+        const token = localStorage.getItem('token');
+        try {
+            const response = await axios.get(`${process.env.API_URL}/gove/regions`, {
+                params: { governorateId },
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            if (response.data?.success) {
+                setRegionsList(response.data.regions);
+            }
+        } catch (error) {
+            toast.error(error?.response?.data?.message || 'Error fetching regions');
+            setRegionsList([]);
         }
     };
 
@@ -206,16 +237,12 @@ export default function CreateClient({ params: { locale } }) {
         } finally {
             setLoading(false);
         }
-    }
-
-    const governorateOptions = [
-        { label: t('governorates.jahra'), value: 'الجهراء' },
-        { label: t('governorates.hawally'), value: 'حولي' },
-        { label: t('governorates.capital'), value: 'العاصمة' },
-        { label: t('governorates.farwaniya'), value: 'الفروانيه' },
-        { label: t('governorates.mubarakAlKabeer'), value: 'مبارك الكبير' },
-        { label: t('governorates.ahmadi'), value: 'الاحمدي' }
-    ];
+    } // Convert governorates list to dropdown options with both ID and name
+    const governorateOptions = governoratesList.map((gov) => ({
+        label: gov.governorate,
+        value: gov.governorate,
+        id: gov._id // Include ID for region fetching
+    }));
 
     const genderOptions = [
         { label: t('gender.male'), value: 'male' },
@@ -331,55 +358,76 @@ export default function CreateClient({ params: { locale } }) {
                     <div className="surface-section p-4 border-round">
                         <h2 className="text-xl font-semibold mb-4">{t('sections.address')}</h2>
                         <div className="grid formgrid p-fluid">
+                            {' '}
                             <div className="field col-12 md:col-6 mb-4">
                                 <label htmlFor="governorate" className="block font-medium mb-2">
                                     {t('governorateLabel')}
-                                </label>
-                                <Dropdown id="governorate" value={form.governorate} options={governorateOptions} onChange={(e) => setForm({ ...form, governorate: e.value })} placeholder={t('governoratePlaceholder')} className="w-full" />
+                                </label>{' '}
+                                <Dropdown
+                                    id="governorate"
+                                    value={form.governorate}
+                                    options={governorateOptions}
+                                    onChange={(e) => {
+                                        // Find the selected governorate option to get its ID
+                                        const selectedOption = governorateOptions.find((option) => option.value === e.value);
+                                        setForm({
+                                            ...form,
+                                            governorate: e.value, // Store the name
+                                            region: '' // Reset region when governorate changes
+                                        });
+                                        // Use the ID for fetching regions
+                                        if (selectedOption) {
+                                            fetchRegions(selectedOption.id);
+                                        }
+                                    }}
+                                    placeholder={t('governoratePlaceholder')}
+                                    className="w-full"
+                                />
                             </div>
-
                             <div className="field col-12 md:col-6 mb-4">
                                 <label htmlFor="region" className="block font-medium mb-2">
                                     {t('regionLabel')}
                                 </label>
-                                <InputText id="region" value={form.region} onChange={(e) => setForm({ ...form, region: e.target.value })} placeholder={t('regionPlaceholder')} className="w-full" />
+                                <Dropdown
+                                    id="region"
+                                    value={form.region}
+                                    options={regionsList.map((region) => ({ label: region, value: region }))}
+                                    onChange={(e) => setForm({ ...form, region: e.value })}
+                                    placeholder={t('regionPlaceholder')}
+                                    disabled={!form.governorate || regionsList.length === 0}
+                                    className="w-full"
+                                />
                             </div>
-
                             <div className="field col-12 md:col-3 mb-4">
                                 <label htmlFor="block" className="block font-medium mb-2">
                                     {t('blockLabel')}
                                 </label>
                                 <InputText id="block" value={form.block} onChange={(e) => setForm({ ...form, block: e.target.value })} placeholder={t('blockPlaceholder')} className="w-full" />
                             </div>
-
                             <div className="field col-12 md:col-3 mb-4">
                                 <label htmlFor="street" className="block font-medium mb-2">
                                     {t('streetLabel')}
                                 </label>
                                 <InputText id="street" value={form.street} onChange={(e) => setForm({ ...form, street: e.target.value })} placeholder={t('streetPlaceholder')} className="w-full" />
                             </div>
-
                             <div className="field col-12 md:col-3 mb-4">
                                 <label htmlFor="alley" className="block font-medium mb-2">
                                     {t('alleyLabel')}
                                 </label>
                                 <InputText id="alley" value={form.alley} onChange={(e) => setForm({ ...form, alley: e.target.value })} placeholder={t('alleyPlaceholder')} className="w-full" />
                             </div>
-
                             <div className="field col-12 md:col-3 mb-4">
                                 <label htmlFor="building" className="block font-medium mb-2">
                                     {t('buildingLabel')}
                                 </label>
                                 <InputText id="building" value={form.building} onChange={(e) => setForm({ ...form, building: e.target.value })} placeholder={t('buildingPlaceholder')} className="w-full" />
                             </div>
-
                             <div className="field col-12 md:col-6 mb-4">
                                 <label htmlFor="floor" className="block font-medium mb-2">
                                     {t('floorLabel')}
                                 </label>
                                 <InputText id="floor" value={form.floor} onChange={(e) => setForm({ ...form, floor: e.target.value })} placeholder={t('floorPlaceholder')} className="w-full" />
                             </div>
-
                             <div className="field col-12 md:col-6 mb-4">
                                 <label htmlFor="appartment" className="block font-medium mb-2">
                                     {t('appartmentLabel')}

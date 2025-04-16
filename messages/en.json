@@ -1101,7 +1101,8 @@
             "carbs": "Carbohydrates",
             "grams": "grams",
             "days": "day / days"
-        }
+        },
+        "regionPlaceholder": "Select Region"
     },
     "delivery": {
         "deliveryZones": "Delivery Zones",

@@ -136,7 +136,9 @@ function DeliveryReport({ params: { locale } }) {
                     zoneName: zone.zoneName,
                     clientName: client.clientName,
                     phoneNumber: client.phoneNumber,
-                    address: `${client.governorate}, ${client.region}, ${client.street}, ${client.building}, ${client.floor}`,
+                    address: `${isRTL ? 'Gov: ' : 'المحافظة: '} ${client.governorate}, ${isRTL ? 'Reg: ' : 'المنطقة: '} ${client.region}, ${isRTL ? 'St: ' : 'الشارع: '} ${client.street}, ${isRTL ? 'Bldg: ' : 'المبنى: '} ${client.building}, ${
+                        isRTL ? 'Fl: ' : 'الطابق: '
+                    } ${client.floor}`,
                     bundleName: client.subscripedBundle?.bundleId?.bundleName || '-',
                     deliveryNote: client.mealsPlan?.meals[0]?.deliveryNote || '-'
                 }))
@@ -179,7 +181,9 @@ function DeliveryReport({ params: { locale } }) {
                     zoneName: zone.zoneName,
                     clientName: client.clientName,
                     phoneNumber: client.phoneNumber,
-                    address: `${client.governorate}, ${client.region}, ${client.street}, ${client.building}, ${client.floor}`,
+                    address: `${isRTL ? 'Gov: ' : 'المحافظة: '} ${client.governorate}, ${isRTL ? 'Reg: ' : 'المنطقة: '} ${client.region}, ${isRTL ? 'St: ' : 'الشارع: '} ${client.street}, ${isRTL ? 'Bldg: ' : 'المبنى: '} ${client.building}, ${
+                        isRTL ? 'Fl: ' : 'الطابق: '
+                    } ${client.floor}`,
                     bundleName: client.subscripedBundle?.bundleId?.bundleName || '-',
                     deliveryNote: client.mealsPlan?.meals[0]?.deliveryNote || '-'
                 }))
@@ -210,7 +214,8 @@ function DeliveryReport({ params: { locale } }) {
     const addressTemplate = (client) => {
         return (
             <span>
-                {client.governorate}, {client.region}, {client.street}, {client.building}, {client.floor}
+                <b>{isRTL ? 'المحافظة' : 'Gov'}:</b> {client.governorate},<b>{isRTL ? 'المنطقة' : 'Rg'}:</b> {client.region},<b>{isRTL ? 'الشارع' : 'St'}:</b> {client.street},<b>{isRTL ? 'المبنى' : 'Bldg'}:</b> {client.building},
+                <b>{isRTL ? 'الطابق' : 'Fl'}:</b> {client.floor}
             </span>
         );
     };

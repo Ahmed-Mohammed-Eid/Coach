@@ -74,22 +74,39 @@ export default function UserProfile({ id, locale }) {
         couponCode: '',
         requirePayment: false,
         startingAt: null
-    });
-
-    // Options
+    }); // Options
     const genderOptions = [
         { label: t('gender.male'), value: 'male' },
         { label: t('gender.female'), value: 'female' }
     ];
 
-    const governorateOptions = [
-        { label: t('governorates.jahra'), value: 'الجهراء' },
-        { label: t('governorates.hawally'), value: 'حولي' },
-        { label: t('governorates.capital'), value: 'العاصمة' },
-        { label: t('governorates.farwaniya'), value: 'الفروانيه' },
-        { label: t('governorates.mubarakAlKabeer'), value: 'مبارك الكبير' },
-        { label: t('governorates.ahmadi'), value: 'الاحمدي' }
-    ];
+    const [governoratesList, setGovernoratesList] = useState([]);
+    const [governorateOptions, setGovernorateOptions] = useState([]);
+
+    // Fetch governorates
+    const fetchGovernorates = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await axios.get(`${process.env.API_URL}/governorates`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            setGovernoratesList(response.data?.governorates || []);
+
+            // Convert to options format with both name and ID
+            const options =
+                response.data?.governorates.map((gov) => ({
+                    label: gov.governorate,
+                    value: gov.governorate,
+                    id: gov._id
+                })) || [];
+
+            setGovernorateOptions(options);
+        } catch (error) {
+            console.error('Error fetching governorates:', error);
+        }
+    };
 
     // Fetch Data
     const getUserData = async () => {
@@ -125,6 +142,7 @@ export default function UserProfile({ id, locale }) {
 
     useEffect(() => {
         getUserData();
+        fetchGovernorates(); // Fetch governorates data when component mounts
     }, []);
 
     useEffect(() => {

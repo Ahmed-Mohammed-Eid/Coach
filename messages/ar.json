@@ -996,7 +996,8 @@
             "carbs": "الكربوهيدرات",
             "grams": "جرام",
             "days": "يوم / أيام"
-        }
+        },
+        "regionPlaceholder": "أدخل المنطقة"
     },
     "createClient": {
         "sections": {
