@@ -250,41 +250,21 @@ export default function EditPackage({ bundle, id, locale }) {
                     </div>
                     <div className="field col-12 md:col-6">
                         <label htmlFor="mealsNumber">{t('mealsNumber')}</label>
-                        <InputNumber
-                            id="mealsNumber"
-                            placeholder={t('enterMealsNumber')}
-                            mode="decimal"
-                            minFractionDigits={0}
-                            maxFractionDigits={0}
-                            min={0}
-                            max={100}
-                            value={form.mealsNumber}
-                            onChange={(e) => setForm({ ...form, mealsNumber: e.value })}
-                        />
+                        <InputNumber id="mealsNumber" placeholder={t('enterMealsNumber')} mode="decimal" minFractionDigits={0} maxFractionDigits={0} min={0} value={form.mealsNumber} onChange={(e) => setForm({ ...form, mealsNumber: e.value })} />
                     </div>
                     <div className="field col-12 md:col-6">
                         <label htmlFor="snacksNumber">{t('snacksNumber')}</label>
-                        <InputNumber
-                            id="snacksNumber"
-                            placeholder={t('enterSnacksNumber')}
-                            mode="decimal"
-                            minFractionDigits={0}
-                            maxFractionDigits={0}
-                            min={0}
-                            max={100}
-                            value={form.snacksNumber}
-                            onChange={(e) => setForm({ ...form, snacksNumber: e.value })}
-                        />
+                        <InputNumber id="snacksNumber" placeholder={t('enterSnacksNumber')} mode="decimal" minFractionDigits={0} maxFractionDigits={0} min={0} value={form.snacksNumber} onChange={(e) => setForm({ ...form, snacksNumber: e.value })} />
                     </div>
                     {/* carb */}
                     <div className="field col-12 md:col-6">
                         <label htmlFor="carb">{t('carb')}</label>
-                        <InputNumber id="carb" placeholder={t('enterCarb')} mode="decimal" minFractionDigits={0} maxFractionDigits={0} min={0} max={100} value={form.carb} onChange={(e) => setForm({ ...form, carb: e.value })} />
+                        <InputNumber id="carb" placeholder={t('enterCarb')} mode="decimal" minFractionDigits={0} maxFractionDigits={0} min={0} value={form.carb} onChange={(e) => setForm({ ...form, carb: e.value })} />
                     </div>
                     {/* protein */}
                     <div className="field col-12 md:col-6">
                         <label htmlFor="protein">{t('protein')}</label>
-                        <InputNumber id="protein" placeholder={t('enterProtein')} mode="decimal" minFractionDigits={0} maxFractionDigits={0} min={0} max={100} value={form.protine} onChange={(e) => setForm({ ...form, protine: e.value })} />
+                        <InputNumber id="protein" placeholder={t('enterProtein')} mode="decimal" minFractionDigits={0} maxFractionDigits={0} min={0} value={form.protine} onChange={(e) => setForm({ ...form, protine: e.value })} />
                     </div>
 
                     {/* allowed meals */}
@@ -297,7 +277,6 @@ export default function EditPackage({ bundle, id, locale }) {
                             minFractionDigits={0}
                             maxFractionDigits={0}
                             min={0}
-                            max={100}
                             value={form.allowedBreakfast}
                             onChange={(e) => setForm({ ...form, allowedBreakfast: e.value })}
                         />
@@ -305,17 +284,7 @@ export default function EditPackage({ bundle, id, locale }) {
 
                     <div className="field col-12 md:col-6">
                         <label htmlFor="allowedLunch">{t('allowedLunch')}</label>
-                        <InputNumber
-                            id="allowedLunch"
-                            placeholder={t('enterAllowedLunch')}
-                            mode="decimal"
-                            minFractionDigits={0}
-                            maxFractionDigits={0}
-                            min={0}
-                            max={100}
-                            value={form.allowedLunch}
-                            onChange={(e) => setForm({ ...form, allowedLunch: e.value })}
-                        />
+                        <InputNumber id="allowedLunch" placeholder={t('enterAllowedLunch')} mode="decimal" minFractionDigits={0} maxFractionDigits={0} min={0} value={form.allowedLunch} onChange={(e) => setForm({ ...form, allowedLunch: e.value })} />
                     </div>
 
                     <div className="field col-12">
@@ -327,7 +296,6 @@ export default function EditPackage({ bundle, id, locale }) {
                             minFractionDigits={0}
                             maxFractionDigits={0}
                             min={0}
-                            max={100}
                             value={form.allowedDinner}
                             onChange={(e) => setForm({ ...form, allowedDinner: e.value })}
                         />
@@ -377,17 +345,7 @@ export default function EditPackage({ bundle, id, locale }) {
                     </div>
                     <div className="field col-12">
                         <label htmlFor="offersDays">{t('offersDays')}</label>
-                        <InputNumber
-                            id="offersDays"
-                            placeholder={t('enterOffersDays')}
-                            mode="decimal"
-                            minFractionDigits={0}
-                            maxFractionDigits={0}
-                            min={0}
-                            max={100}
-                            value={form.offersDays}
-                            onChange={(e) => setForm({ ...form, offersDays: e.value })}
-                        />
+                        <InputNumber id="offersDays" placeholder={t('enterOffersDays')} mode="decimal" minFractionDigits={0} maxFractionDigits={0} min={0} value={form.offersDays} onChange={(e) => setForm({ ...form, offersDays: e.value })} />
                     </div>
                     <div className="field col-12 md:col-6">
                         <div className="flex flex-wrap justify-content-start gap-3">

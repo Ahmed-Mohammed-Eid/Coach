@@ -212,31 +212,11 @@ export default function CreatePackage({ params: { locale } }) {
                     </div>
                     <div className="field col-12 md:col-6">
                         <label htmlFor="mealsNumber">{t('mealsNumber')}</label>
-                        <InputNumber
-                            id="mealsNumber"
-                            placeholder={t('enterMealsNumber')}
-                            mode="decimal"
-                            minFractionDigits={0}
-                            maxFractionDigits={0}
-                            min={0}
-                            max={100}
-                            value={form.mealsNumber}
-                            onChange={(e) => setForm({ ...form, mealsNumber: e.value })}
-                        />
+                        <InputNumber id="mealsNumber" placeholder={t('enterMealsNumber')} mode="decimal" minFractionDigits={0} maxFractionDigits={0} min={0} value={form.mealsNumber} onChange={(e) => setForm({ ...form, mealsNumber: e.value })} />
                     </div>
                     <div className="field col-12 md:col-6">
                         <label htmlFor="snacksNumber">{t('snacksNumber')}</label>
-                        <InputNumber
-                            id="snacksNumber"
-                            placeholder={t('enterSnacksNumber')}
-                            mode="decimal"
-                            minFractionDigits={0}
-                            maxFractionDigits={0}
-                            min={0}
-                            max={100}
-                            value={form.snacksNumber}
-                            onChange={(e) => setForm({ ...form, snacksNumber: e.value })}
-                        />
+                        <InputNumber id="snacksNumber" placeholder={t('enterSnacksNumber')} mode="decimal" minFractionDigits={0} maxFractionDigits={0} min={0} value={form.snacksNumber} onChange={(e) => setForm({ ...form, snacksNumber: e.value })} />
                     </div>
                     {/* carb */}
                     <div className="field col-12 md:col-6">
@@ -259,7 +239,6 @@ export default function CreatePackage({ params: { locale } }) {
                             minFractionDigits={0}
                             maxFractionDigits={0}
                             min={0}
-                            max={100}
                             value={form.allowedBreakfast}
                             onChange={(e) => setForm({ ...form, allowedBreakfast: e.value })}
                         />
@@ -267,17 +246,7 @@ export default function CreatePackage({ params: { locale } }) {
 
                     <div className="field col-12 md:col-6">
                         <label htmlFor="allowedLunch">{t('allowedLunch')}</label>
-                        <InputNumber
-                            id="allowedLunch"
-                            placeholder={t('enterAllowedLunch')}
-                            mode="decimal"
-                            minFractionDigits={0}
-                            maxFractionDigits={0}
-                            min={0}
-                            max={100}
-                            value={form.allowedLunch}
-                            onChange={(e) => setForm({ ...form, allowedLunch: e.value })}
-                        />
+                        <InputNumber id="allowedLunch" placeholder={t('enterAllowedLunch')} mode="decimal" minFractionDigits={0} maxFractionDigits={0} min={0} value={form.allowedLunch} onChange={(e) => setForm({ ...form, allowedLunch: e.value })} />
                     </div>
 
                     <div className="field col-12">
@@ -289,7 +258,6 @@ export default function CreatePackage({ params: { locale } }) {
                             minFractionDigits={0}
                             maxFractionDigits={0}
                             min={0}
-                            max={100}
                             value={form.allowedDinner}
                             onChange={(e) => setForm({ ...form, allowedDinner: e.value })}
                         />
@@ -341,17 +309,7 @@ export default function CreatePackage({ params: { locale } }) {
                     </div>
                     <div className="field col-12">
                         <label htmlFor="offersDays">{t('offersDays')}</label>
-                        <InputNumber
-                            id="offersDays"
-                            placeholder={t('enterOffersDays')}
-                            mode="decimal"
-                            minFractionDigits={0}
-                            maxFractionDigits={0}
-                            min={0}
-                            max={100}
-                            value={form.offersDays}
-                            onChange={(e) => setForm({ ...form, offersDays: e.value })}
-                        />
+                        <InputNumber id="offersDays" placeholder={t('enterOffersDays')} mode="decimal" minFractionDigits={0} maxFractionDigits={0} min={0} value={form.offersDays} onChange={(e) => setForm({ ...form, offersDays: e.value })} />
                     </div>
                     <div className="field col-12 md:col-6">
                         <div className="flex flex-wrap justify-content-start gap-3">
