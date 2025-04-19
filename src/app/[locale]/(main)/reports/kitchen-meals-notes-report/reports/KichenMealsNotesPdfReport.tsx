@@ -21,6 +21,8 @@ const KichenMealsNotesPdfReport = ({ reportData, date, isRtl, t }: KichenMealsNo
                         <tr style={{ backgroundColor: '#f8f9fa', textAlign: isRtl ? 'right' : 'left' }}>
                             <th style={{ padding: '10px', border: '1px solid #ddd' }}>{t.customerName}</th>
                             <th style={{ padding: '10px', border: '1px solid #ddd' }}>{t.mealTitle}</th>
+                            <th style={{ padding: '10px', border: '1px solid #ddd' }}>{t.protine}</th>
+                            <th style={{ padding: '10px', border: '1px solid #ddd' }}>{t.carb}</th>
                             <th style={{ padding: '10px', border: '1px solid #ddd' }}>{t.mealNote}</th>
                         </tr>
                     </thead>
@@ -30,6 +32,8 @@ const KichenMealsNotesPdfReport = ({ reportData, date, isRtl, t }: KichenMealsNo
                                 <tr key={index} style={{ backgroundColor: index % 2 === 0 ? '#fff' : '#f9f9f9' }}>
                                     <td style={{ padding: '10px', border: '1px solid #ddd', textAlign: isRtl ? 'right' : 'left' }}>{item.customerName}</td>
                                     <td style={{ padding: '10px', border: '1px solid #ddd', textAlign: isRtl ? 'right' : 'left' }}>{item.mealTitle}</td>
+                                    <td style={{ padding: '10px', border: '1px solid #ddd', textAlign: isRtl ? 'right' : 'left' }}>{item.protine}</td>
+                                    <td style={{ padding: '10px', border: '1px solid #ddd', textAlign: isRtl ? 'right' : 'left' }}>{item.carb}</td>
                                     <td style={{ padding: '10px', border: '1px solid #ddd', textAlign: isRtl ? 'right' : 'left' }}>{item.mealNote}</td>
                                 </tr>
                             ))

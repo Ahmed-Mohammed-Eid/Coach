@@ -37,7 +37,7 @@ const DeliveryReportPdf = ({ reportData, date, isRtl, t, zoneName }: DeliveryRep
                                     <td style={{ padding: '10px', border: '1px solid #ddd', textAlign: isRtl ? 'right' : 'left' }}>{item.zoneName}</td>
                                     <td style={{ padding: '10px', border: '1px solid #ddd', textAlign: isRtl ? 'right' : 'left' }}>{item.clientName}</td>
                                     <td style={{ padding: '10px', border: '1px solid #ddd', textAlign: isRtl ? 'right' : 'left' }}>{item.phoneNumber}</td>
-                                    <td style={{ padding: '10px', border: '1px solid #ddd', textAlign: isRtl ? 'right' : 'left' }}>{item.address}</td>
+                                    <td style={{ padding: '10px', border: '1px solid #ddd', textAlign: isRtl ? 'left' : 'left' }}>{item.address}</td>
                                     <td style={{ padding: '10px', border: '1px solid #ddd', textAlign: isRtl ? 'right' : 'left' }}>{item.bundleName}</td>
                                     <td style={{ padding: '10px', border: '1px solid #ddd', textAlign: isRtl ? 'right' : 'left' }}>{item.deliveryNote}</td>
                                 </tr>

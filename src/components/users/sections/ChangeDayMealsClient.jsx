@@ -16,6 +16,9 @@ function ChangeDayMealsClient({ isRTL, id }) {
     const [selectedDayToEdit, setSelectedDayToEdit] = useState(null);
     const [deliveryNote, setDeliveryNote] = useState('');
     const [dayMeals, setDayMeals] = useState(null);
+    const [clientData, setClientData] = useState({
+        dislikedMeals: []
+    }); // Assuming you have a client data state
     const [menuType, setMenuType] = useState(''); // Assuming you have a menu type state
     const [mealNoteObject, setMealNoteObject] = useState({
         mealId: null,
@@ -46,6 +49,7 @@ function ChangeDayMealsClient({ isRTL, id }) {
             const data = await fetchClientData();
             if (data) {
                 setPlanDays(data.planDays);
+                setClientData(data.clientData);
             } else {
                 toast.error(isRTL ? 'فشل في جلب بيانات العميل أو لا توجد أيام خطة متاحة.' : 'Failed to fetch client data or no plan days available.');
             }
@@ -213,6 +217,10 @@ function ChangeDayMealsClient({ isRTL, id }) {
                     <div className="col-6 mt-2">
                         <span className="text-500 font-medium">{isRTL ? 'عدد الوجبات الخفيفة' : 'Snacks Number'}</span>
                         <span className="text-600 font-medium">: {dayMeals?.numberOfSnacks}</span>
+                    </div>
+                    <div className="col-12 mt-2">
+                        <span className="text-500 font-medium">{isRTL ? 'الوجبات غير المرغوبة' : 'Disliked Meals'}</span>
+                        <span className="text-600 font-medium">: {clientData?.dislikedMeals.join(', ')}</span>
                     </div>
                 </div>
                 <hr />

@@ -136,9 +136,7 @@ function DeliveryReport({ params: { locale } }) {
                     zoneName: zone.zoneName,
                     clientName: client.clientName,
                     phoneNumber: client.phoneNumber,
-                    address: `${isRTL ? 'Gov: ' : 'المحافظة: '} ${client.governorate}, ${isRTL ? 'Reg: ' : 'المنطقة: '} ${client.region}, ${isRTL ? 'St: ' : 'الشارع: '} ${client.street}, ${isRTL ? 'Bldg: ' : 'المبنى: '} ${client.building}, ${
-                        isRTL ? 'Fl: ' : 'الطابق: '
-                    } ${client.floor}`,
+                    address: `Gov: ${client.governorate}, Reg: ${client.region}, St: ${client.street}, Bldg: ${client.building}, Fl: ${client.floor}`,
                     bundleName: client.subscripedBundle?.bundleId?.bundleName || '-',
                     deliveryNote: client.mealsPlan?.meals[0]?.deliveryNote || '-'
                 }))
@@ -181,9 +179,7 @@ function DeliveryReport({ params: { locale } }) {
                     zoneName: zone.zoneName,
                     clientName: client.clientName,
                     phoneNumber: client.phoneNumber,
-                    address: `${isRTL ? 'Gov: ' : 'المحافظة: '} ${client.governorate}, ${isRTL ? 'Reg: ' : 'المنطقة: '} ${client.region}, ${isRTL ? 'St: ' : 'الشارع: '} ${client.street}, ${isRTL ? 'Bldg: ' : 'المبنى: '} ${client.building}, ${
-                        isRTL ? 'Fl: ' : 'الطابق: '
-                    } ${client.floor}`,
+                    address: `Gov: ${client.governorate}, Reg: ${client.region}, St: ${client.street}, Bldg: ${client.building}, Fl: ${client.floor}`,
                     bundleName: client.subscripedBundle?.bundleId?.bundleName || '-',
                     deliveryNote: client.mealsPlan?.meals[0]?.deliveryNote || '-'
                 }))
@@ -214,8 +210,7 @@ function DeliveryReport({ params: { locale } }) {
     const addressTemplate = (client) => {
         return (
             <span>
-                <b>{isRTL ? 'المحافظة' : 'Gov'}:</b> {client.governorate},<b>{isRTL ? 'المنطقة' : 'Rg'}:</b> {client.region},<b>{isRTL ? 'الشارع' : 'St'}:</b> {client.street},<b>{isRTL ? 'المبنى' : 'Bldg'}:</b> {client.building},
-                <b>{isRTL ? 'الطابق' : 'Fl'}:</b> {client.floor}
+                <b>Gov:</b> {client.governorate}, <b>Rg:</b> {client.region}, <b>St:</b> {client.street}, <b>Bldg:</b> {client.building}, <b>Fl:</b> {client.floor}
             </span>
         );
     };

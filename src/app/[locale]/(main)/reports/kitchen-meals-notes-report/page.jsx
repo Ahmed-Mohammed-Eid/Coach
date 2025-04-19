@@ -42,7 +42,9 @@ function KitchenMealsNotesReport({ params: { locale } }) {
             mealTitle: 'Meal Title',
             mealNote: 'Meal Note',
             noData: 'No data available for the report',
-            pdfReportTitle: 'Kitchen Meals Notes Report'
+            pdfReportTitle: 'Kitchen Meals Notes Report',
+            protine: 'Protein',
+            carb: 'Carb'
         },
         ar: {
             reportTitle: 'تقرير ملاحظات وجبات المطبخ',
@@ -54,7 +56,9 @@ function KitchenMealsNotesReport({ params: { locale } }) {
             mealTitle: 'عنوان الوجبة',
             mealNote: 'ملاحظة الوجبة',
             noData: 'لا توجد بيانات متاحة للتقرير',
-            pdfReportTitle: 'تقرير ملاحظات وجبات المطبخ'
+            pdfReportTitle: 'تقرير ملاحظات وجبات المطبخ',
+            protine: 'بروتين',
+            carb: 'كربوهيدرات'
         }
     };
 
@@ -112,6 +116,8 @@ function KitchenMealsNotesReport({ params: { locale } }) {
             const columns = [
                 { header: isRTL ? 'اسم العميل' : 'Customer Name', accessor: 'customerName' },
                 { header: isRTL ? 'عنوان الوجبة' : 'Meal Title', accessor: 'mealTitle' },
+                { header: isRTL ? 'بروتين' : 'Protein', accessor: 'protine' },
+                { header: isRTL ? 'كربوهيدرات' : 'Carb', accessor: 'carb' },
                 { header: isRTL ? 'ملاحظة الوجبة' : 'Meal Note', accessor: 'mealNote' }
             ];
 
@@ -178,6 +184,9 @@ function KitchenMealsNotesReport({ params: { locale } }) {
                     >
                         <Column field="customerName" header={t.customerName} sortable />
                         <Column field="mealTitle" header={t.mealTitle} sortable />
+                        <Column field="protine" header={isRTL ? 'بروتين' : 'Protein'} sortable />
+                        <Column field="carb" header={isRTL ? 'كربوهيدرات' : 'Carb'} sortable />
+                        {/* Meal Note */}
                         <Column field="mealNote" header={t.mealNote} body={mealNoteTemplate} />
                     </DataTable>
                 ) : (
