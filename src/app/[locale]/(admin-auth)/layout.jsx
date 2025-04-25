@@ -8,11 +8,11 @@ export const metadata = {
         title: 'YOUR COACH | Login',
         url: process.env.WEBSITE_URL,
         description: 'COACH Login',
-        images: ['/logo.png'],
+        images: ['/logo.svg'],
         ttl: 604800
     },
     icons: {
-        icon: '/logo.png'
+        icon: '/logo.svg'
     }
 };
 

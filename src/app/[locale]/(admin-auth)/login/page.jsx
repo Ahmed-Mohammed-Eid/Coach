@@ -100,7 +100,7 @@ const LoginPage = ({ params: { locale } }) => {
                     )}
                 </div>
                 <div className="flex align-items-center justify-content-center mb-4">
-                    <Image src="/logo.png" width={120} height={75} alt="logo" />
+                    <Image src="/logo.svg" width={120} height={75} alt="logo" />
                 </div>
                 <div className={styles.formWrapper}>
                     <form onSubmit={handleLogin} className={styles.form}>

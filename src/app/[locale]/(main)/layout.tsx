@@ -18,11 +18,11 @@ export const metadata: Metadata = {
         title: 'YOUR COACH | Dashboard',
         url: process.env.WEBSITE_URL,
         description: 'YOUR COACH Dashboard',
-        images: ['/logo.png'],
+        images: ['/logo.svg'],
         ttl: 604800
     },
     icons: {
-        icon: '/logo.png'
+        icon: '/logo.svg'
     }
 };
 

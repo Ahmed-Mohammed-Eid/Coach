@@ -17,14 +17,14 @@ const ManufacturingReport = ({ reportData }) => {
                 <div className={styles.header}>
                     <div className={styles.logoContainer}>
                         <div className={styles.logoBorder}></div>
-                        <img src="/logo.png" alt="Fresh Cuisine Logo" className={styles.logo} />
+                        <img src="/logo.svg" alt="Fresh Cuisine Logo" className={styles.logo} />
                     </div>
 
                     <h2 className={styles.title}>Manufacturing Report</h2>
 
                     <div className={styles.logoContainer}>
                         <div className={styles.logoBorder}></div>
-                        <img src="/logo.png" alt="Fresh Cuisine Logo" className={styles.logo} />
+                        <img src="/logo.svg" alt="Fresh Cuisine Logo" className={styles.logo} />
                     </div>
                 </div>
 

@@ -21,7 +21,7 @@ const AppTopbar = forwardRef<AppTopbarRef>((props, ref) => {
     return (
         <div className="layout-topbar">
             <Link href="/" className="layout-topbar-logo">
-                <img src={`/logo.png`} width="47.22px" height={'35px'} alt="logo" />
+                <img src={`/logo.svg`} width="47.22px" height={'35px'} alt="logo" />
                 <span>COACH DASHBOARD</span>
             </Link>
 
