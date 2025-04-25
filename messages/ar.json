@@ -936,7 +936,9 @@
                 "apartment": "الشقة",
                 "protein": "البروتين (جرام)",
                 "carbs": "الكربوهيدرات (جرام)",
-                "subscriptionId": "معرف الاشتراك"
+                "subscriptionId": "معرف الاشتراك",
+                "dislikedMeals": "وجبات غير مرغوبة",
+                "dislikedMealsPlaceholder": "أدخل الوجبات غير ألمرغوبة"
             },
             "unsubscribe": {
                 "header": "إلغاء الاشتراك",

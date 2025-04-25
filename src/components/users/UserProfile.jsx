@@ -59,7 +59,8 @@ export default function UserProfile({ id, locale }) {
         floor: '',
         appartment: '',
         carb: '',
-        protine: ''
+        protine: '',
+        dislikedMeals: []
     });
 
     const [modifyDaysData, setModifyDaysData] = useState({
@@ -161,7 +162,8 @@ export default function UserProfile({ id, locale }) {
                 floor: clientData.floor,
                 appartment: clientData.appartment,
                 carb: clientData.carb,
-                protine: clientData.protine
+                protine: clientData.protine,
+                dislikedMeals: clientData.dislikedMeals || []
             });
         }
     }, [userData]);

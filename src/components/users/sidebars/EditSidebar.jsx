@@ -4,6 +4,8 @@ import { Dropdown } from 'primereact/dropdown';
 import { InputNumber } from 'primereact/inputnumber';
 import { InputText } from 'primereact/inputtext';
 import { Sidebar } from 'primereact/sidebar';
+import { Chips } from 'primereact/chips';
+
 import { useTranslations } from 'next-intl';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -177,6 +179,16 @@ export default function EditSidebar({ visible, onHide, onSubmit, editFormData, s
                                 {t('dialogs.edit.carbs')}
                             </label>
                             <InputNumber id="carb" value={editFormData.carb} onValueChange={(e) => setEditFormData({ ...editFormData, carb: e.value })} className="w-full" min={0} />
+                        </div>
+                    </div>
+                </div>
+                <div className="grid formgrid p-fluid">
+                    <div className="col-12">
+                        <div className="field">
+                            <label htmlFor="dislikedMeals" className="font-medium mb-2 block">
+                                {t('dialogs.edit.dislikedMeals')}
+                            </label>
+                            <Chips id="dislikedMeals" value={editFormData.dislikedMeals} onChange={(e) => setEditFormData({ ...editFormData, dislikedMeals: e.value })} className="w-full" placeholder={t('dialogs.edit.dislikedMealsPlaceholder')} />
                         </div>
                     </div>
                 </div>

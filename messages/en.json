@@ -1041,7 +1041,9 @@
                 "apartment": "Apartment",
                 "protein": "Protein (grams)",
                 "carbs": "Carbohydrates (grams)",
-                "subscriptionId": "Subscription ID"
+                "subscriptionId": "Subscription ID",
+                "dislikedMeals": "Disliked Meals",
+                "dislikedMealsPlaceholder": "Enter disliked meals"
             },
             "unsubscribe": {
                 "header": "Unsubscribe Client",
