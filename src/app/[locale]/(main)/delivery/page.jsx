@@ -124,7 +124,7 @@ export default function DeliveryZones({ params: { locale } }) {
     );
 
     return (
-        <div className="card">
+        <div className="card" dir={isRTL ? 'rtl' : 'ltr'}>
             <div className="flex justify-between items-center mb-4">
                 <h1 className="text-2xl font-bold">{t('deliveryZones')}</h1>
             </div>

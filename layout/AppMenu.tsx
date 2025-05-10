@@ -180,6 +180,11 @@ const AppMenu = () => {
                     to: `/${locale}/delivery`
                 },
                 {
+                    label: t('AppMenu.deliveryPeriods'),
+                    icon: 'pi pi-fw pi-list',
+                    to: `/${locale}/delivery/periods`
+                },
+                {
                     label: t('AppMenu.createDelivery'),
                     icon: 'pi pi-fw pi-plus',
                     to: `/${locale}/delivery/create`

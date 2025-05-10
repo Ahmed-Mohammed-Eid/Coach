@@ -60,6 +60,8 @@ export default function UserProfile({ id, locale }) {
         appartment: '',
         carb: '',
         protine: '',
+        allergy: '',
+        deliveryTime: '',
         dislikedMeals: []
     });
 
@@ -163,7 +165,9 @@ export default function UserProfile({ id, locale }) {
                 appartment: clientData.appartment,
                 carb: clientData.carb,
                 protine: clientData.protine,
-                dislikedMeals: clientData.dislikedMeals || []
+                dislikedMeals: clientData.dislikedMeals || [],
+                allergy: clientData.allergy,
+                deliveryTime: clientData.deliveryTime
             });
         }
     }, [userData]);

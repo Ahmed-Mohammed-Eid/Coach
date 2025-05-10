@@ -108,6 +108,7 @@
         "delivery": "التوصيل",
         "deliveryList": "قائمة مناطق التوصيل",
         "createDelivery": "إنشاء منطقة توصيل",
+        "deliveryPeriods": "فترات التوصيل",
         "totalCookingMealsReport": "تقرير إجمالي الوجبات المطبوخة"
     },
     "DashboardHome": {
@@ -938,7 +939,11 @@
                 "carbs": "الكربوهيدرات (جرام)",
                 "subscriptionId": "معرف الاشتراك",
                 "dislikedMeals": "وجبات غير مرغوبة",
-                "dislikedMealsPlaceholder": "أدخل الوجبات غير ألمرغوبة"
+                "dislikedMealsPlaceholder": "أدخل الوجبات غير ألمرغوبة",
+                "allergyLabel": "الحساسية",
+                "allergyPlaceholder": "أدخل الحساسية",
+                "deliveryPeriodLabel": "فترة التوصيل",
+                "deliveryPeriodPlaceholder": "اختر فترة التوصيل"
             },
             "unsubscribe": {
                 "header": "إلغاء الاشتراك",
@@ -1104,7 +1109,11 @@
         "allowedDinnerLabel": "العشاء المسموح به",
         "allowedDinnerPlaceholder": "اختر العشاء المسموح به",
         "calculateError": "فشل في حساب المبلغ",
-        "calculatePrice": "حساب السعر"
+        "calculatePrice": "حساب السعر",
+        "allergyLabel": "الحساسية",
+        "allergyPlaceholder": "أدخل الحساسية",
+        "deliveryPeriodLabel": "فترة التوصيل",
+        "deliveryPeriodPlaceholder": "اختر فترة التوصيل"
     },
     "delivery": {
         "deliveryZones": "مناطق التوصيل",
@@ -1159,5 +1168,13 @@
         "updateSuccess": "تم تحديث التسعير بنجاح",
         "updateError": "فشل في تحديث التسعير",
         "authError": "خطأ في المصادقة. الرجاء تسجيل الدخول مرة أخرى"
+    },
+    "deliveryPeriods": {
+        "pageTitle": "إدارة فترات التوصيل",
+        "chipsPlaceholder": "أدخل فترات التوصيل (مثال: صباحية، مسائية)",
+        "saveButtonLabel": "حفظ الفترات",
+        "fetchPeriodsError": "فشل في جلب فترات التوصيل. يرجى المحاولة مرة أخرى.",
+        "periodsSavedSuccess": "تم حفظ فترات التوصيل بنجاح!",
+        "savePeriodsError": "فشل في حفظ فترات التوصيل. يرجى المحاولة مرة أخرى."
     }
 }

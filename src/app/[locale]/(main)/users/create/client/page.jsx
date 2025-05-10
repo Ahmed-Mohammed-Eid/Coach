@@ -14,6 +14,7 @@ import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import { useTranslations } from 'next-intl';
 import { MultiSelect } from 'primereact/multiselect';
+import { Chips } from 'primereact/chips';
 
 export default function CreateClient({ params: { locale } }) {
     const t = useTranslations('createClient');
@@ -24,6 +25,7 @@ export default function CreateClient({ params: { locale } }) {
 
     // STATE
     const [bundles, setBundles] = useState([]);
+    const [periods, setPeriods] = useState([]);
     const [flexBundleOptions, setFlexBundleOptions] = useState(null);
     const [governoratesList, setGovernoratesList] = useState([]);
     const [regionsList, setRegionsList] = useState([]);
@@ -48,6 +50,8 @@ export default function CreateClient({ params: { locale } }) {
         floor: '',
         appartment: '',
         dislikedMeals: '',
+        allergy: '',
+        deliveryTime: '',
         password: '',
         startingAt: null,
         bundleId: '',
@@ -171,6 +175,27 @@ export default function CreateClient({ params: { locale } }) {
         }
     };
 
+    
+    const fetchDeliveryPeriods = async () => {
+        try {
+            const adminToken = localStorage.getItem('token');
+            const res = await axios.get(`${process.env.API_URL}/delivery/periods`, {
+                headers: {
+                    Authorization: `Bearer ${adminToken}`
+                }
+            });
+            setPeriods(res.data?.periods || []);
+        } catch (error) {
+            toast.error(error?.response?.data?.message || error.message);
+        }
+    };
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            fetchDeliveryPeriods();
+        }
+    }, []);
+
     // HANDLERS
     async function createClient(event) {
         event.preventDefault();
@@ -199,6 +224,8 @@ export default function CreateClient({ params: { locale } }) {
             floor: form.floor,
             appartment: form.appartment,
             dislikedMeals: options.hasDislikedMeals ? form.dislikedMeals : '',
+            allergy: form.allergy,
+            deliveryTime: form.deliveryTime,
             password: form.password,
             startingAt: form.startingAt ? form.startingAt.toLocaleDateString('en-US') : null,
             customBundle: options.bundleType === 'custom',
@@ -349,6 +376,25 @@ export default function CreateClient({ params: { locale } }) {
                                     <InputText id="dislikedMeals" value={form.dislikedMeals} onChange={(e) => setForm({ ...form, dislikedMeals: e.target.value })} placeholder={t('dislikedMealsPlaceholder')} className="w-full" />
                                 </div>
                             )}
+                            <div className="field col-6 mb-4">
+                                <label htmlFor="allergy" className="block font-medium mb-2">
+                                    {t('allergyLabel')}
+                                </label>
+                                <InputText id="allergy" value={form.allergy} onChange={(e) => setForm({ ...form, allergy: e.target.value })} placeholder={t('allergyPlaceholder')} className="w-full" />
+                            </div>
+                            <div className="field col-6 mb-4">
+                                <label htmlFor="deliveryPeriod" className="block font-medium mb-2">
+                                    {t('deliveryPeriodLabel')}
+                                </label>
+                                <Dropdown
+                                    id="deliveryPeriod"
+                                    value={form.deliveryTime}
+                                    options={periods || []}
+                                    onChange={(e) => setForm({ ...form, deliveryTime: e.value })}
+                                    placeholder={t('deliveryPeriodPlaceholder')}
+                                    className="w-full"
+                                />
+                            </div>
                         </div>
                     </div>
 

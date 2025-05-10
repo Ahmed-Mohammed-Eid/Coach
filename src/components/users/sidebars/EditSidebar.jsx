@@ -13,6 +13,7 @@ import axios from 'axios';
 export default function EditSidebar({ visible, onHide, onSubmit, editFormData, setEditFormData, genderOptions, governorateOptions, isRTL }) {
     const t = useTranslations('userProfile');
     const [regionsList, setRegionsList] = useState([]);
+    const [periods, setPeriods] = useState([]);
 
     // Fetch regions based on selected governorate
     const fetchRegions = async (governorateId) => {
@@ -36,6 +37,26 @@ export default function EditSidebar({ visible, onHide, onSubmit, editFormData, s
             setRegionsList([]);
         }
     };
+
+    const fetchDeliveryPeriods = async () => {
+        try {
+            const adminToken = localStorage.getItem('token');
+            const res = await axios.get(`${process.env.API_URL}/delivery/periods`, {
+                headers: {
+                    Authorization: `Bearer ${adminToken}`
+                }
+            });
+            setPeriods(res.data?.periods || []);
+        } catch (error) {
+            toast.error(error?.response?.data?.message || error.message);
+        }
+    };
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            fetchDeliveryPeriods();
+        }
+    }, []);
 
     // Fetch regions when the sidebar becomes visible
     useEffect(() => {
@@ -179,6 +200,31 @@ export default function EditSidebar({ visible, onHide, onSubmit, editFormData, s
                                 {t('dialogs.edit.carbs')}
                             </label>
                             <InputNumber id="carb" value={editFormData.carb} onValueChange={(e) => setEditFormData({ ...editFormData, carb: e.value })} className="w-full" min={0} />
+                        </div>
+                    </div>
+                </div>
+                <div className="grid formgrid p-fluid">
+                    <div className="col-12">
+                        <div className="field">
+                            <label htmlFor="allergy" className="block font-medium mb-2">
+                                {t('dialogs.edit.allergyLabel')}
+                            </label>
+                            <InputText id="allergy" value={editFormData.allergy} onChange={(e) => setEditFormData({ ...editFormData, allergy: e.target.value })} placeholder={t('dialogs.edit.allergyPlaceholder')} className="w-full" />
+                        </div>
+                    </div>
+                    <div className="col-12">
+                        <div className="field">
+                            <label htmlFor="deliveryPeriod" className="block font-medium mb-2">
+                                {t('dialogs.edit.deliveryPeriodLabel')}
+                            </label>
+                            <Dropdown
+                                id="deliveryPeriod"
+                                value={editFormData.deliveryTime}
+                                options={periods || []}
+                                onChange={(e) => setEditFormData({ ...editFormData, deliveryTime: e.value })}
+                                placeholder={t('dialogs.edit.deliveryPeriodPlaceholder')}
+                                className="w-full"
+                            />
                         </div>
                     </div>
                 </div>

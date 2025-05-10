@@ -107,6 +107,7 @@
         "uploadRegionsByExcel": "Upload Regions By Excel",
         "delivery": "Delivery",
         "deliveryList": "Delivery Zones List",
+        "deliveryPeriods": "Delivery Periods",
         "createDelivery": "Create Delivery Zone",
         "totalCookingMealsReport": "Total Cooking Meals Report"
     },
@@ -960,7 +961,11 @@
         "allowedDinnerLabel": "Allowed Dinner",
         "allowedDinnerPlaceholder": "Select allowed dinner",
         "calculateError": "Failed to calculate amount",
-        "calculatePrice": "Calculate Price"
+        "calculatePrice": "Calculate Price",
+        "allergyLabel": "Allergy",
+        "allergyPlaceholder": "Enter allergy details",
+        "deliveryPeriodLabel": "Delivery Period",
+        "deliveryPeriodPlaceholder": "Select delivery period"
     },
     "userProfile": {
         "gender": {
@@ -1043,7 +1048,11 @@
                 "carbs": "Carbohydrates (grams)",
                 "subscriptionId": "Subscription ID",
                 "dislikedMeals": "Disliked Meals",
-                "dislikedMealsPlaceholder": "Enter disliked meals"
+                "dislikedMealsPlaceholder": "Enter disliked meals",
+                "allergyLabel": "Allergy",
+                "allergyPlaceholder": "Enter allergy details",
+                "deliveryPeriodLabel": "Delivery Period",
+                "deliveryPeriodPlaceholder": "Select delivery period"
             },
             "unsubscribe": {
                 "header": "Unsubscribe Client",
@@ -1159,5 +1168,13 @@
         "updateSuccess": "Pricing updated successfully",
         "updateError": "Failed to update pricing",
         "authError": "Authentication error. Please log in again"
+    },
+    "deliveryPeriods": {
+        "pageTitle": "Manage Delivery Periods",
+        "chipsPlaceholder": "Enter delivery periods (e.g., Morning, Afternoon)",
+        "saveButtonLabel": "Save Periods",
+        "fetchPeriodsError": "Failed to fetch delivery periods. Please try again.",
+        "periodsSavedSuccess": "Delivery periods saved successfully!",
+        "savePeriodsError": "Failed to save delivery periods. Please try again."
     }
 }
