@@ -5,11 +5,11 @@ const withNextIntl = createNextIntlPlugin();
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     env: {
-        API_URL: 'https://coach.kportals.net/api/v1',
-        WEBSITE_URL: 'https://coach.kportals.net'
+        API_URL: 'https://api.your-couch.info/api/v1',
+        WEBSITE_URL: 'https://api.your-couch.info'
     },
     images: {
-        domains: ['kportals.net', 'coach.kportals.net', 'api.easydietkw.com', 'localhost']
+        domains: ['kportals.net', 'coach.kportals.net', 'api.easydietkw.com', 'localhost', 'api.your-couch.info', 'your-couch.info']
     }
 };
 
