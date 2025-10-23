@@ -109,7 +109,8 @@
         "deliveryList": "Delivery Zones List",
         "deliveryPeriods": "Delivery Periods",
         "createDelivery": "Create Delivery Zone",
-        "totalCookingMealsReport": "Total Cooking Meals Report"
+        "totalCookingMealsReport": "Total Cooking Meals Report",
+        "monthlyRevenueReport": "Monthly Revenue Report"
     },
     "DashboardHome": {
         "all": "All",

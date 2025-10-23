@@ -220,6 +220,11 @@ const AppMenu = () => {
                     label: t('AppMenu.totalCookingMealsReport'),
                     icon: 'pi pi-fw pi-list',
                     to: `/${locale}/reports/totals-cooking-meals`
+                },
+                {
+                    label: t('AppMenu.monthlyRevenueReport'),
+                    icon: 'pi pi-fw pi-list',
+                    to: `/${locale}/reports/monthly-revenue`
                 }
             ]
         },

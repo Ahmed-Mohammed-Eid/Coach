@@ -109,7 +109,8 @@
         "deliveryList": "قائمة مناطق التوصيل",
         "createDelivery": "إنشاء منطقة توصيل",
         "deliveryPeriods": "فترات التوصيل",
-        "totalCookingMealsReport": "تقرير إجمالي الوجبات المطبوخة"
+        "totalCookingMealsReport": "تقرير إجمالي الوجبات المطبوخة",
+        "monthlyRevenueReport": "تقرير الإيرادات الشهرية"
     },
     "DashboardHome": {
         "all": "الكل",
