@@ -18,22 +18,17 @@
         "fluentUI": "فلوينت UI",
         "primeOneDesign2022": "برايم ون ديزاين - 2022",
         "primeOneDesign2021": "برايم ون ديزاين - 2021",
-
         "coach": "كوتش",
-
         "bootstrapLightBlue": "بوتستراب أزرق فاتح",
         "bootstrapLightPurple": "بوتستراب بنفسجي فاتح",
         "bootstrapDarkBlue": "بوتستراب أزرق داكن",
         "bootstrapDarkPurple": "بوتستراب بنفسجي داكن",
-
         "materialLightIndigo": "ماتيريال نيلي فاتح",
         "materialLightDeepPurple": "ماتيريال بنفسجي غامق فاتح",
         "materialDarkIndigo": "ماتيريال نيلي داكن",
         "materialDarkDeepPurple": "ماتيريال بنفسجي غامق داكن",
-
         "tailwindLight": "تيلويند فاتح",
         "fluentLight": "فلوينت فاتح",
-
         "laraLightIndigo": "لارا نيلي فاتح",
         "laraLightBlue": "لارا أزرق فاتح",
         "laraLightPurple": "لارا بنفسجي فاتح",
@@ -42,7 +37,6 @@
         "laraDarkBlue": "لارا أزرق داكن",
         "laraDarkPurple": "لارا بنفسجي داكن",
         "laraDarkTeal": "لارا تيل داكن",
-
         "sagaBlue": "ساغا أزرق",
         "sagaGreen": "ساغا أخضر",
         "sagaOrange": "ساغا برتقالي",
@@ -111,7 +105,8 @@
         "deliveryPeriods": "فترات التوصيل",
         "totalCookingMealsReport": "تقرير إجمالي الوجبات المطبوخة",
         "monthlyRevenueReport": "تقرير الإيرادات الشهرية",
-        "dailyRevenueReport": "تقرير الإيرادات اليومية"
+        "dailyRevenueReport": "تقرير الإيرادات اليومية",
+        "bundlesSubscriptionsCountReport": "تقرير عدد اشتراكات الباقات"
     },
     "DashboardHome": {
         "all": "الكل",
@@ -429,7 +424,6 @@
         "update": "تحديث",
         "editMenuFor": "تعديل القائمة لـ"
     },
-
     "dayBoxes": {
         "deleteError": "فشل في حذف الصندوق",
         "deleteSuccess": "تم حذف الصندوق بنجاح",
@@ -1178,5 +1172,64 @@
         "fetchPeriodsError": "فشل في جلب فترات التوصيل. يرجى المحاولة مرة أخرى.",
         "periodsSavedSuccess": "تم حفظ فترات التوصيل بنجاح!",
         "savePeriodsError": "فشل في حفظ فترات التوصيل. يرجى المحاولة مرة أخرى."
+    },
+    "monthlyRevenue": {
+        "title": "تقرير الإيرادات الشهرية",
+        "selectMonth": "اختر الشهر",
+        "export": "تصدير",
+        "totalRevenue": "إجمالي الإيرادات",
+        "totalClients": "إجمالي العملاء",
+        "avgPerClient": "المتوسط لكل عميل",
+        "totalDays": "إجمالي الأيام",
+        "dailyRevenueBreakdown": "تفصيل الإيرادات اليومية",
+        "clientName": "اسم العميل",
+        "total": "الإجمالي",
+        "dailyTotals": "الإجماليات اليومية",
+        "noDataToExport": "لا توجد بيانات للتصدير",
+        "exportSuccess": "تم تصدير التقرير بنجاح!",
+        "exportError": "فشل تصدير التقرير",
+        "fetchError": "فشل في جلب بيانات الإيرادات",
+        "loadingError": "خطأ في تحميل تقرير الإيرادات"
+    },
+    "dailySales": {
+        "title": "تقرير المبيعات اليومية",
+        "dateFrom": "من تاريخ",
+        "dateTo": "إلى تاريخ",
+        "fetchReport": "جلب التقرير",
+        "export": "تصدير",
+        "totalClients": "إجمالي العملاء",
+        "totalSubscriptions": "إجمالي الاشتراكات",
+        "paymentsBreakdown": "تفصيل المدفوعات",
+        "clientName": "اسم العميل",
+        "subscriptions": "الاشتراكات",
+        "clientTotal": "إجمالي العميل",
+        "clientDiscounts": "خصومات العميل",
+        "subscription": "اشتراك(ات)",
+        "price": "السعر",
+        "discount": "الخصم",
+        "noPaymentsFound": "لم يتم العثور على مدفوعات للنطاق الزمني المحدد",
+        "noDataToExport": "لا توجد بيانات للتصدير",
+        "exportSuccess": "تم تصدير التقرير بنجاح!",
+        "exportError": "فشل تصدير التقرير",
+        "fetchError": "فشل في جلب بيانات المدفوعات",
+        "loadingError": "خطأ في تحميل تقرير المدفوعات"
+    },
+    "bundlesSubscriptions": {
+        "title": "عدد اشتراكات الباقات",
+        "dateFrom": "من تاريخ",
+        "dateTo": "إلى تاريخ",
+        "fetchReport": "جلب التقرير",
+        "export": "تصدير",
+        "totalSubscribers": "إجمالي المشتركين",
+        "totalBundles": "إجمالي الباقات",
+        "subscriptionsByBundle": "الاشتراكات حسب الباقة",
+        "bundlesBreakdown": "تفصيل الباقات",
+        "bundleName": "اسم الباقة",
+        "noBundlesFound": "لم يتم العثور على باقات للنطاق الزمني المحدد",
+        "noDataToExport": "لا توجد بيانات للتصدير",
+        "exportSuccess": "تم تصدير التقرير بنجاح!",
+        "exportError": "فشل تصدير التقرير",
+        "fetchError": "فشل في جلب بيانات الباقات",
+        "loadingError": "خطأ في تحميل تقرير الباقات"
     }
 }

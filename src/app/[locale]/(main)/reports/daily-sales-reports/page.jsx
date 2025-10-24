@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { Calendar } from 'primereact/calendar';
 import { Skeleton } from 'primereact/skeleton';
@@ -9,9 +8,12 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { useTranslations } from 'next-intl';
 import useExportToExcel from '../../../../../hooks/useExportToExcel';
 
-const DailySalesReportPage = () => {
+const DailySalesReportPage = ({ params: { locale } }) => {
+    const t = useTranslations('dailySales');
+    const isRTL = locale === 'ar';
     const [loading, setLoading] = useState(false);
     const [paymentsData, setPaymentsData] = useState([]);
     const [dateFrom, setDateFrom] = useState(null);
@@ -53,11 +55,11 @@ const DailySalesReportPage = () => {
             if (response.data.success) {
                 setPaymentsData(response.data.payments || []);
             } else {
-                toast.error('Failed to fetch payments data');
+                toast.error(t('fetchError'));
             }
         } catch (error) {
             console.error('Error fetching payments data:', error);
-            toast.error('Error loading payments report');
+            toast.error(t('loadingError'));
         } finally {
             setLoading(false);
         }
@@ -84,7 +86,7 @@ const DailySalesReportPage = () => {
     // Export to Excel
     const handleExport = () => {
         if (paymentsData.length === 0) {
-            toast.error('No data to export');
+            toast.error(t('noDataToExport'));
             return;
         }
 
@@ -120,10 +122,10 @@ const DailySalesReportPage = () => {
 
             const dateRange = `${formatDateForAPI(dateFrom)}_to_${formatDateForAPI(dateTo)}`;
             generateExcel(excelData, columns, `Daily_Sales_Report_${dateRange}_`);
-            toast.success('Report exported successfully!');
+            toast.success(t('exportSuccess'));
         } catch (error) {
             console.error('Error exporting data:', error);
-            toast.error('Failed to export report');
+            toast.error(t('exportError'));
         }
     };
 
@@ -153,10 +155,10 @@ const DailySalesReportPage = () => {
                         </div>
                         <div className="flex gap-3 mt-1 text-sm">
                             <span>
-                                Price: <strong>{subscription.bundlePrice.toFixed(3)} KD</strong>
+                                {t('price')}: <strong>{subscription.bundlePrice.toFixed(3)} KD</strong>
                             </span>
                             <span>
-                                Discount: <strong>{subscription.discountAmount.toFixed(3)} KD</strong>
+                                {t('discount')}: <strong>{subscription.discountAmount.toFixed(3)} KD</strong>
                             </span>
                         </div>
                     </div>
@@ -170,7 +172,7 @@ const DailySalesReportPage = () => {
         return (
             <div>
                 <div className="font-bold text-900">{rowData.clientName}</div>
-                <div className="text-sm text-500">{rowData.subscriptions.length} subscription(s)</div>
+                <div className="text-sm text-500">{rowData.subscriptions.length} {t('subscription')}</div>
             </div>
         );
     };
@@ -186,53 +188,53 @@ const DailySalesReportPage = () => {
     };
 
     return (
-        <div className="grid">
+        <div className="grid" dir={isRTL ? 'rtl' : 'ltr'}>
             <div className="col-12">
                 <div className="card">
                     <div className="flex flex-column md:flex-row justify-content-between align-items-start md:align-items-center mb-4 gap-3">
-                        <h1 className="text-3xl font-bold m-0">Daily Sales Report</h1>
+                        <h1 className="text-3xl font-bold m-0">{t('title')}</h1>
                         <div className="flex flex-wrap gap-2">
-                            <Calendar value={dateFrom} onChange={(e) => setDateFrom(e.value)} dateFormat="mm/dd/yy" placeholder="Date From" showIcon />
-                            <Calendar value={dateTo} onChange={(e) => setDateTo(e.value)} dateFormat="mm/dd/yy" placeholder="Date To" showIcon />
-                            <Button label="Fetch Report" icon="pi pi-search" onClick={fetchPaymentsData} loading={loading} />
-                            <Button label="Export" icon="pi pi-file-excel" className="p-button-success" onClick={handleExport} disabled={loading || paymentsData.length === 0} />
+                            <Calendar value={dateFrom} onChange={(e) => setDateFrom(e.value)} dateFormat="mm/dd/yy" placeholder={t('dateFrom')} showIcon />
+                            <Calendar value={dateTo} onChange={(e) => setDateTo(e.value)} dateFormat="mm/dd/yy" placeholder={t('dateTo')} showIcon />
+                            <Button label={t('fetchReport')} icon="pi pi-search" onClick={fetchPaymentsData} loading={loading} />
+                            <Button label={t('export')} icon="pi pi-file-excel" className="p-button-success" onClick={handleExport} disabled={loading || paymentsData.length === 0} />
                         </div>
                     </div>
 
                     {/* Statistics Cards */}
                     <div className="grid mb-4">
                         <div className="col-12 md:col-6">
-                            <Card className="bg-purple-50 border-purple-200">
+                            <div className="card bg-purple-50 border-purple-200">
                                 <div className="flex justify-content-between align-items-center">
                                     <div>
-                                        <div className="text-500 font-medium mb-2">Total Clients</div>
+                                        <div className="text-500 font-medium mb-2">{t('totalClients')}</div>
                                         <div className="text-2xl font-bold text-purple-600">{stats.totalClients}</div>
                                     </div>
                                     <div className="bg-purple-100 border-circle p-3">
                                         <i className="pi pi-users text-purple-600 text-2xl"></i>
                                     </div>
                                 </div>
-                            </Card>
+                            </div>
                         </div>
 
                         <div className="col-12 md:col-6">
-                            <Card className="bg-indigo-50 border-indigo-200">
+                            <div className="card bg-indigo-50 border-indigo-200">
                                 <div className="flex justify-content-between align-items-center">
                                     <div>
-                                        <div className="text-500 font-medium mb-2">Total Subscriptions</div>
+                                        <div className="text-500 font-medium mb-2">{t('totalSubscriptions')}</div>
                                         <div className="text-2xl font-bold text-indigo-600">{stats.totalSubscriptions}</div>
                                     </div>
                                     <div className="bg-indigo-100 border-circle p-3">
                                         <i className="pi pi-shopping-cart text-indigo-600 text-2xl"></i>
                                     </div>
                                 </div>
-                            </Card>
+                            </div>
                         </div>
                     </div>
 
                     {/* Sales Table */}
-                    <Card className="mt-4">
-                        <h2 className="text-xl font-bold mb-3">Payments Breakdown</h2>
+                    <div className="card mt-4">
+                        <h2 className="text-xl font-bold mb-3">{t('paymentsBreakdown')}</h2>
 
                         {loading ? (
                             <div className="flex flex-column gap-3">
@@ -241,14 +243,14 @@ const DailySalesReportPage = () => {
                                 <Skeleton height="100px" />
                             </div>
                         ) : (
-                            <DataTable value={paymentsData} showGridlines stripedRows responsiveLayout="scroll" emptyMessage="No payments found for the selected date range" className="p-datatable-sm">
-                                <Column field="clientName" header="Client Name" body={clientNameTemplate} style={{ minWidth: '180px' }} sortable />
-                                <Column header="Subscriptions" body={subscriptionsBodyTemplate} style={{ minWidth: '400px' }} />
-                                <Column field="totalBundlePrices" header="Client Total" body={totalBundlePricesTemplate} style={{ minWidth: '140px' }} sortable />
-                                <Column field="totalDiscounts" header="Client Discounts" body={totalDiscountsTemplate} style={{ minWidth: '150px' }} sortable />
+                            <DataTable value={paymentsData} showGridlines stripedRows responsiveLayout="scroll" emptyMessage={t('noPaymentsFound')} className="p-datatable-sm">
+                                <Column field="clientName" header={t('clientName')} body={clientNameTemplate} style={{ minWidth: '180px' }} sortable />
+                                <Column header={t('subscriptions')} body={subscriptionsBodyTemplate} style={{ minWidth: '400px' }} />
+                                <Column field="totalBundlePrices" header={t('clientTotal')} body={totalBundlePricesTemplate} style={{ minWidth: '140px' }} sortable />
+                                <Column field="totalDiscounts" header={t('clientDiscounts')} body={totalDiscountsTemplate} style={{ minWidth: '150px' }} sortable />
                             </DataTable>
                         )}
-                    </Card>
+                    </div>
                 </div>
             </div>
         </div>

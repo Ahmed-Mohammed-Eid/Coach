@@ -37,25 +37,21 @@ function ChangeDayMealsClient({ isRTL, id }) {
                     Authorization: `Bearer ${token}`
                 }
             });
-            return response.data;
-        } catch (error) {
-            console.error('Error fetching client data:', error);
-            return null;
-        }
-    }, [id]);
-
-    React.useEffect(() => {
-        const getClientData = async () => {
-            const data = await fetchClientData();
+            const data = await response.data;
             if (data) {
                 setPlanDays(data.planDays);
                 setClientData(data.clientData);
             } else {
                 toast.error(isRTL ? 'فشل في جلب بيانات العميل أو لا توجد أيام خطة متاحة.' : 'Failed to fetch client data or no plan days available.');
             }
-        };
+        } catch (error) {
+            console.error('Error fetching client data:', error);
+            return null;
+        }
+    }, [id, isRTL]);
 
-        getClientData();
+    React.useEffect(() => {
+        fetchClientData();
     }, [fetchClientData, isRTL]);
 
     // GET DAY MEALS
@@ -180,7 +176,7 @@ function ChangeDayMealsClient({ isRTL, id }) {
 
     return (
         <div>
-            <SubscriptionDays isRTL={isRTL} clientId={id} planDays={planDays} setPlanDays={setPlanDays} setSelectedDayToEdit={setSelectedDayToEdit} />
+            <SubscriptionDays isRTL={isRTL} clientId={id} planDays={planDays} setPlanDays={setPlanDays} setSelectedDayToEdit={setSelectedDayToEdit} fetchClientData={fetchClientData} />
             <Sidebar visible={!!selectedDayToEdit} onHide={resetStates} position={isRTL ? 'right' : 'left'} className="sidebar" dismissable={true} showCloseIcon={true} closeOnEscape={true} style={{ width: '50vw' }}>
                 {/* SELECTED DAY INFO */}
                 <h2>{isRTL ? 'تفاصيل اليوم المحدد' : 'Selected Day Details'}</h2>

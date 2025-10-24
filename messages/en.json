@@ -18,22 +18,17 @@
         "fluentUI": "Fluent UI",
         "primeOneDesign2022": "PrimeOne Design - 2022",
         "primeOneDesign2021": "PrimeOne Design - 2021",
-
         "coach": "Coach",
-
         "bootstrapLightBlue": "Bootstrap Light Blue",
         "bootstrapLightPurple": "Bootstrap Light Purple",
         "bootstrapDarkBlue": "Bootstrap Dark Blue",
         "bootstrapDarkPurple": "Bootstrap Dark Purple",
-
         "materialLightIndigo": "Material Light Indigo",
         "materialLightDeepPurple": "Material Light Deep Purple",
         "materialDarkIndigo": "Material Dark Indigo",
         "materialDarkDeepPurple": "Material Dark Deep Purple",
-
         "tailwindLight": "Tailwind Light",
         "fluentLight": "Fluent Light",
-
         "laraLightIndigo": "Lara Light Indigo",
         "laraLightBlue": "Lara Light Blue",
         "laraLightPurple": "Lara Light Purple",
@@ -42,7 +37,6 @@
         "laraDarkBlue": "Lara Dark Blue",
         "laraDarkPurple": "Lara Dark Purple",
         "laraDarkTeal": "Lara Dark Teal",
-
         "sagaBlue": "Saga Blue",
         "sagaGreen": "Saga Green",
         "sagaOrange": "Saga Orange",
@@ -111,7 +105,8 @@
         "createDelivery": "Create Delivery Zone",
         "totalCookingMealsReport": "Total Cooking Meals Report",
         "monthlyRevenueReport": "Monthly Revenue Report",
-        "dailyRevenueReport": "Daily Revenue Report"
+        "dailyRevenueReport": "Daily Revenue Report",
+        "bundlesSubscriptionsCountReport": "Bundles Subscriptions Count Report"
     },
     "DashboardHome": {
         "all": "All",
@@ -429,7 +424,6 @@
         "update": "Update",
         "editMenuFor": "Edit Menu For "
     },
-
     "dayBoxes": {
         "deleteError": "Failed to delete box",
         "deleteSuccess": "Box deleted successfully",
@@ -1178,5 +1172,64 @@
         "fetchPeriodsError": "Failed to fetch delivery periods. Please try again.",
         "periodsSavedSuccess": "Delivery periods saved successfully!",
         "savePeriodsError": "Failed to save delivery periods. Please try again."
+    },
+    "monthlyRevenue": {
+        "title": "Monthly Revenue Report",
+        "selectMonth": "Select Month",
+        "export": "Export",
+        "totalRevenue": "Total Revenue",
+        "totalClients": "Total Clients",
+        "avgPerClient": "Avg per Client",
+        "totalDays": "Total Days",
+        "dailyRevenueBreakdown": "Daily Revenue Breakdown",
+        "clientName": "Client Name",
+        "total": "Total",
+        "dailyTotals": "Daily Totals",
+        "noDataToExport": "No data to export",
+        "exportSuccess": "Report exported successfully!",
+        "exportError": "Failed to export report",
+        "fetchError": "Failed to fetch revenue data",
+        "loadingError": "Error loading revenue report"
+    },
+    "dailySales": {
+        "title": "Daily Sales Report",
+        "dateFrom": "Date From",
+        "dateTo": "Date To",
+        "fetchReport": "Fetch Report",
+        "export": "Export",
+        "totalClients": "Total Clients",
+        "totalSubscriptions": "Total Subscriptions",
+        "paymentsBreakdown": "Payments Breakdown",
+        "clientName": "Client Name",
+        "subscriptions": "Subscriptions",
+        "clientTotal": "Client Total",
+        "clientDiscounts": "Client Discounts",
+        "subscription": "subscription(s)",
+        "price": "Price",
+        "discount": "Discount",
+        "noPaymentsFound": "No payments found for the selected date range",
+        "noDataToExport": "No data to export",
+        "exportSuccess": "Report exported successfully!",
+        "exportError": "Failed to export report",
+        "fetchError": "Failed to fetch payments data",
+        "loadingError": "Error loading payments report"
+    },
+    "bundlesSubscriptions": {
+        "title": "Bundles Subscriptions Count",
+        "dateFrom": "Date From",
+        "dateTo": "Date To",
+        "fetchReport": "Fetch Report",
+        "export": "Export",
+        "totalSubscribers": "Total Subscribers",
+        "totalBundles": "Total Bundles",
+        "subscriptionsByBundle": "Subscriptions by Bundle",
+        "bundlesBreakdown": "Bundles Breakdown",
+        "bundleName": "Bundle Name",
+        "noBundlesFound": "No bundles found for the selected date range",
+        "noDataToExport": "No data to export",
+        "exportSuccess": "Report exported successfully!",
+        "exportError": "Failed to export report",
+        "fetchError": "Failed to fetch bundles data",
+        "loadingError": "Error loading bundles report"
     }
 }

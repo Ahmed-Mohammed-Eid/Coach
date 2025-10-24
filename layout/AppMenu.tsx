@@ -230,6 +230,11 @@ const AppMenu = () => {
                     label: t('AppMenu.dailyRevenueReport'),
                     icon: 'pi pi-fw pi-list',
                     to: `/${locale}/reports/daily-sales-reports`
+                },
+                {
+                    label: t('AppMenu.bundlesSubscriptionsCountReport'),
+                    icon: 'pi pi-fw pi-list',
+                    to: `/${locale}/reports/bundles-subscriptions-count`
                 }
             ]
         },

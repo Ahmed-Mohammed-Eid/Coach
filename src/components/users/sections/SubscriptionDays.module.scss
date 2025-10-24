@@ -196,11 +196,11 @@
             }
         }
 
-        .editButton {
+        .editButton,
+        .freezeButton {
             width: 100%;
             padding: 0.5rem;
             border-radius: 6px;
-            background: linear-gradient(145deg, var(--primary-500), var(--primary-600));
             color: white;
             border: none;
             cursor: pointer;
@@ -216,12 +216,35 @@
             }
 
             &:hover {
-                background: linear-gradient(145deg, var(--primary-600), var(--primary-700));
                 transform: translateY(-1px);
             }
 
             &:active {
                 transform: translateY(0);
+            }
+        }
+
+        .editButton {
+            background: linear-gradient(145deg, var(--primary-500), var(--primary-600));
+
+            &:hover {
+                background: linear-gradient(145deg, var(--primary-600), var(--primary-700));
+            }
+        }
+
+        .freezeButton {
+            background: linear-gradient(145deg, var(--blue-600), var(--blue-600));
+
+            &:hover {
+                background: linear-gradient(145deg, var(--blue-600), var(--blue-700));
+            }
+
+            &.unfreeze {
+                background: linear-gradient(145deg, var(--green-500), var(--green-600));
+
+                &:hover {
+                    background: linear-gradient(145deg, var(--green-600), var(--green-700));
+                }
             }
         }
     }

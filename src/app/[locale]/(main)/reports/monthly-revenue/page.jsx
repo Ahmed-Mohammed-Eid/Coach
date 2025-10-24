@@ -1,15 +1,17 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { Calendar } from 'primereact/calendar';
 import { Skeleton } from 'primereact/skeleton';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { useTranslations } from 'next-intl';
 import useExportToExcel from '../../../../../hooks/useExportToExcel';
 
-const MonthlyRevenuePage = () => {
+const MonthlyRevenuePage = ({ params: { locale } }) => {
+    const t = useTranslations('monthlyRevenue');
+    const isRTL = locale === 'ar';
     const [loading, setLoading] = useState(false);
     const [revenueData, setRevenueData] = useState([]);
     const [selectedMonth, setSelectedMonth] = useState(new Date());
@@ -52,11 +54,11 @@ const MonthlyRevenuePage = () => {
                 if (response.data.success) {
                     setRevenueData(response.data.result || []);
                 } else {
-                    toast.error('Failed to fetch revenue data');
+                    toast.error(t('fetchError'));
                 }
             } catch (error) {
                 console.error('Error fetching revenue data:', error);
-                toast.error('Error loading revenue report');
+                toast.error(t('loadingError'));
             } finally {
                 setLoading(false);
             }
@@ -124,7 +126,7 @@ const MonthlyRevenuePage = () => {
     // Export to Excel (you can enhance this with your existing export utility)
     const handleExport = () => {
         if (revenueData.length === 0) {
-            toast.error('No data to export');
+            toast.error(t('noDataToExport'));
             return;
         }
 
@@ -180,87 +182,87 @@ const MonthlyRevenuePage = () => {
 
             const monthName = selectedMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
             generateExcel(excelData, columns, `Monthly_Revenue_Report_${monthName}_`);
-            toast.success('Report exported successfully!');
+            toast.success(t('exportSuccess'));
         } catch (error) {
             console.error('Error exporting data:', error);
-            toast.error('Failed to export report');
+            toast.error(t('exportError'));
         }
     };
 
     return (
-        <div className="grid">
+        <div className="grid" dir={isRTL ? 'rtl' : 'ltr'}>
             <div className="col-12">
                 <div className="card">
                     <div className="flex justify-content-between align-items-center mb-4">
-                        <h1 className="text-3xl font-bold m-0">Monthly Revenue Report</h1>
+                        <h1 className="text-3xl font-bold m-0">{t('title')}</h1>
                         <div className="flex gap-2">
-                            <Calendar value={selectedMonth} onChange={(e) => setSelectedMonth(e.value)} view="month" dateFormat="MM/yy" placeholder="Select Month" />
-                            <Button label="Export" icon="pi pi-file-excel" className="p-button-success" onClick={handleExport} />
+                            <Calendar value={selectedMonth} onChange={(e) => setSelectedMonth(e.value)} view="month" dateFormat="MM/yy" placeholder={t('selectMonth')} />
+                            <Button label={t('export')} icon="pi pi-file-excel" className="p-button-success" onClick={handleExport} />
                         </div>
                     </div>
 
                     {/* Statistics Cards */}
                     <div className="grid mb-4">
                         <div className="col-12 md:col-6 lg:col-3">
-                            <Card className="bg-blue-50 border-blue-200">
+                            <div className="card bg-blue-50 border-blue-200">
                                 <div className="flex justify-content-between align-items-center">
                                     <div>
-                                        <div className="text-500 font-medium mb-2">Total Revenue</div>
+                                        <div className="text-500 font-medium mb-2">{t('totalRevenue')}</div>
                                         <div className="text-2xl font-bold text-blue-600">{stats.totalRevenue} KD</div>
                                     </div>
                                     <div className="bg-blue-100 border-circle p-3">
                                         <i className="pi pi-dollar text-blue-600 text-2xl"></i>
                                     </div>
                                 </div>
-                            </Card>
+                            </div>
                         </div>
 
                         <div className="col-12 md:col-6 lg:col-3">
-                            <Card className="bg-green-50 border-green-200">
+                            <div className="card bg-green-50 border-green-200">
                                 <div className="flex justify-content-between align-items-center">
                                     <div>
-                                        <div className="text-500 font-medium mb-2">Total Clients</div>
+                                        <div className="text-500 font-medium mb-2">{t('totalClients')}</div>
                                         <div className="text-2xl font-bold text-green-600">{stats.totalClients}</div>
                                     </div>
                                     <div className="bg-green-100 border-circle p-3">
                                         <i className="pi pi-users text-green-600 text-2xl"></i>
                                     </div>
                                 </div>
-                            </Card>
+                            </div>
                         </div>
 
                         <div className="col-12 md:col-6 lg:col-3">
-                            <Card className="bg-orange-50 border-orange-200">
+                            <div className="card bg-orange-50 border-orange-200">
                                 <div className="flex justify-content-between align-items-center">
                                     <div>
-                                        <div className="text-500 font-medium mb-2">Avg per Client</div>
+                                        <div className="text-500 font-medium mb-2">{t('avgPerClient')}</div>
                                         <div className="text-2xl font-bold text-orange-600">{stats.averageRevenuePerClient} KD</div>
                                     </div>
                                     <div className="bg-orange-100 border-circle p-3">
                                         <i className="pi pi-chart-line text-orange-600 text-2xl"></i>
                                     </div>
                                 </div>
-                            </Card>
+                            </div>
                         </div>
 
                         <div className="col-12 md:col-6 lg:col-3">
-                            <Card className="bg-purple-50 border-purple-200">
+                            <div className="card bg-purple-50 border-purple-200">
                                 <div className="flex justify-content-between align-items-center">
                                     <div>
-                                        <div className="text-500 font-medium mb-2">Total Days</div>
+                                        <div className="text-500 font-medium mb-2">{t('totalDays')}</div>
                                         <div className="text-2xl font-bold text-purple-600">{stats.totalDays}</div>
                                     </div>
                                     <div className="bg-purple-100 border-circle p-3">
                                         <i className="pi pi-calendar text-purple-600 text-2xl"></i>
                                     </div>
                                 </div>
-                            </Card>
+                            </div>
                         </div>
                     </div>
 
                     {/* Revenue Table */}
-                    <Card className="mt-4">
-                        <h2 className="text-xl font-bold mb-3">Daily Revenue Breakdown</h2>
+                    <div className="card mt-4">
+                        <h2 className="text-xl font-bold mb-3">{t('dailyRevenueBreakdown')}</h2>
 
                         {loading ? (
                             <Skeleton height="400px" />
@@ -289,7 +291,7 @@ const MonthlyRevenuePage = () => {
                                                     minWidth: '200px'
                                                 }}
                                             >
-                                                Client Name
+                                                {t('clientName')}
                                             </th>
                                             {dates.map((dateObj, index) => (
                                                 <th
@@ -325,7 +327,7 @@ const MonthlyRevenuePage = () => {
                                                     minWidth: '100px'
                                                 }}
                                             >
-                                                Total
+                                                {t('total')}
                                             </th>
                                         </tr>
                                     </thead>
@@ -404,7 +406,7 @@ const MonthlyRevenuePage = () => {
                                                     zIndex: 9
                                                 }}
                                             >
-                                                Daily Totals
+                                                {t('dailyTotals')}
                                             </td>
                                             {dates.map((dateObj, index) => {
                                                 const dailyTotal = calculateDailyTotal(index);
@@ -438,7 +440,7 @@ const MonthlyRevenuePage = () => {
                                 </table>
                             </div>
                         )}
-                    </Card>
+                    </div>
                 </div>
             </div>
 
