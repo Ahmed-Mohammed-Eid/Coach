@@ -110,7 +110,8 @@
         "createDelivery": "إنشاء منطقة توصيل",
         "deliveryPeriods": "فترات التوصيل",
         "totalCookingMealsReport": "تقرير إجمالي الوجبات المطبوخة",
-        "monthlyRevenueReport": "تقرير الإيرادات الشهرية"
+        "monthlyRevenueReport": "تقرير الإيرادات الشهرية",
+        "dailyRevenueReport": "تقرير الإيرادات اليومية"
     },
     "DashboardHome": {
         "all": "الكل",
@@ -145,7 +146,7 @@
         "deleteCategorySuccess": "تم حذف الفئة بنجاح.",
         "deleteCategoryError": "فشل في حذف الفئة.",
         "fetchCategoriesError": "فشل في جلب الفئات.",
-        "currentPageReportTemplate": "عرض {first} إلى {last} من {totalRecords} إدخالاً",
+        "currentPageReportTemplate": "عرض إلى من إدخالاً",
         "addCategory": "إضافة فئة",
         "categoryAddedSuccess": "تمت إضافة الفئة بنجاح.",
         "editCategory": "تعديل الفئة",

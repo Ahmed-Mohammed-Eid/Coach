@@ -110,7 +110,8 @@
         "deliveryPeriods": "Delivery Periods",
         "createDelivery": "Create Delivery Zone",
         "totalCookingMealsReport": "Total Cooking Meals Report",
-        "monthlyRevenueReport": "Monthly Revenue Report"
+        "monthlyRevenueReport": "Monthly Revenue Report",
+        "dailyRevenueReport": "Daily Revenue Report"
     },
     "DashboardHome": {
         "all": "All",
@@ -145,7 +146,7 @@
         "deleteCategorySuccess": "Category deleted successfully.",
         "deleteCategoryError": "Failed to delete the category.",
         "fetchCategoriesError": "Failed to fetch categories.",
-        "currentPageReportTemplate": "Showing {first} to {last} of {totalRecords} entries",
+        "currentPageReportTemplate": "Showing to of entries",
         "addCategory": "Add Category",
         "categoryAddedSuccess": "Category added successfully.",
         "editCategory": "Edit Category",
