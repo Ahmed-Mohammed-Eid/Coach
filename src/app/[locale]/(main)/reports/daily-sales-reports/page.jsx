@@ -104,7 +104,8 @@ const DailySalesReportPage = ({ params: { locale } }) => {
                         'Bundle Price': subscription.bundlePrice,
                         'Discount Amount': subscription.discountAmount,
                         'Total Bundle Prices': client.totalBundlePrices,
-                        'Total Discounts': client.totalDiscounts
+                        'Total Discounts': client.totalDiscounts,
+                        'Net': (client.totalBundlePrices - client.totalDiscounts).toFixed(3)
                     });
                 });
             });
@@ -117,7 +118,8 @@ const DailySalesReportPage = ({ params: { locale } }) => {
                 { header: 'Bundle Price', accessor: 'Bundle Price' },
                 { header: 'Discount Amount', accessor: 'Discount Amount' },
                 { header: 'Total Bundle Prices', accessor: 'Total Bundle Prices' },
-                { header: 'Total Discounts', accessor: 'Total Discounts' }
+                { header: 'Total Discounts', accessor: 'Total Discounts' },
+                { header: 'Net', accessor: 'Net' }
             ];
 
             const dateRange = `${formatDateForAPI(dateFrom)}_to_${formatDateForAPI(dateTo)}`;
