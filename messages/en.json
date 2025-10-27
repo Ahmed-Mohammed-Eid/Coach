@@ -1212,7 +1212,8 @@
         "exportSuccess": "Report exported successfully!",
         "exportError": "Failed to export report",
         "fetchError": "Failed to fetch payments data",
-        "loadingError": "Error loading payments report"
+        "loadingError": "Error loading payments report",
+        "net": "Net"
     },
     "bundlesSubscriptions": {
         "title": "Bundles Subscriptions Count",

@@ -1212,7 +1212,8 @@
         "exportSuccess": "تم تصدير التقرير بنجاح!",
         "exportError": "فشل تصدير التقرير",
         "fetchError": "فشل في جلب بيانات المدفوعات",
-        "loadingError": "خطأ في تحميل تقرير المدفوعات"
+        "loadingError": "خطأ في تحميل تقرير المدفوعات",
+        "net": "صافي"
     },
     "bundlesSubscriptions": {
         "title": "عدد اشتراكات الباقات",

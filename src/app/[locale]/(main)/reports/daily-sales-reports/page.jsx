@@ -160,6 +160,10 @@ const DailySalesReportPage = ({ params: { locale } }) => {
                             <span>
                                 {t('discount')}: <strong>{subscription.discountAmount.toFixed(3)} KD</strong>
                             </span>
+                            {/* Net */}
+                            <span>
+                                {t('net')}: <strong>{(subscription.bundlePrice - subscription.discountAmount).toFixed(3)} KD</strong>
+                            </span>
                         </div>
                     </div>
                 ))}
@@ -185,6 +189,11 @@ const DailySalesReportPage = ({ params: { locale } }) => {
     // Template for total discounts
     const totalDiscountsTemplate = (rowData) => {
         return <span className="font-semibold text-orange-600">{rowData.totalDiscounts.toFixed(3)} KD</span>;
+    };
+
+    // Template for net amount
+    const netAmountTemplate = (rowData) => {
+        return <span className="font-semibold text-green-600">{(rowData.totalBundlePrices - rowData.totalDiscounts).toFixed(3)} KD</span>;
     };
 
     return (
@@ -248,6 +257,7 @@ const DailySalesReportPage = ({ params: { locale } }) => {
                                 <Column header={t('subscriptions')} body={subscriptionsBodyTemplate} style={{ minWidth: '400px' }} />
                                 <Column field="totalBundlePrices" header={t('clientTotal')} body={totalBundlePricesTemplate} style={{ minWidth: '140px' }} sortable />
                                 <Column field="totalDiscounts" header={t('clientDiscounts')} body={totalDiscountsTemplate} style={{ minWidth: '150px' }} sortable />
+                                <Column field="net" header={t('net')} body={netAmountTemplate} style={{ minWidth: '120px' }} sortable />
                             </DataTable>
                         )}
                     </div>
