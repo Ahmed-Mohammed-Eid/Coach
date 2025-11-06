@@ -71,6 +71,7 @@ function ChangeDayMealsClient({ isRTL, id }) {
                 }
             });
             setDayMeals(response?.data ?? {});
+            setDeliveryNote(response?.data?.deliveryNote || '');
             // Update selected meals while preserving notes
             const selectedMeals = response?.data?.selectedMeals?.map((meal) => {
                 return {
@@ -127,7 +128,7 @@ function ChangeDayMealsClient({ isRTL, id }) {
                     Authorization: `Bearer ${token}`
                 }
             });
-            toast.success(response?.data?.message || isRTL ? 'تم تحديث الوجبات بنجاح.' : 'Meals updated successfully.');
+            toast.success(response?.data?.message || (isRTL ? 'تم تحديث الوجبات بنجاح.' : 'Meals updated successfully.'));
 
             // SEND DELIVERY NOTE IF EXISTS
             if (deliveryNote) {

@@ -94,17 +94,23 @@ const ClientsMonitorOverview = ({ data, loading, locale }) => {
     };
 
     const daysLeftTemplate = (rowData) => {
-        const daysLeft = calculateDaysLeft(rowData.subscripedBundle?.endingDate);
+        // Handle both structures: newClients/endingClients vs renewedClients
+        const endingDate = rowData.clientId?.subscripedBundle?.endingDate || rowData.subscripedBundle?.endingDate;
+        const daysLeft = calculateDaysLeft(endingDate);
         return <Tag value={`${daysLeft} ${locale === 'ar' ? 'يوم' : 'days'}`} severity={getSeverity(daysLeft)} />;
     };
 
     const bundleNameTemplate = (rowData) => {
-        const bundleName = locale === 'ar' ? rowData.subscripedBundle?.bundleId?.bundleName : rowData.subscripedBundle?.bundleId?.bundleNameEn;
+        // Handle both structures: newClients/endingClients vs renewedClients
+        const bundleData = rowData.bundleId || rowData.subscripedBundle?.bundleId;
+        const bundleName = locale === 'ar' ? bundleData?.bundleName : bundleData?.bundleNameEn;
         return <span>{bundleName || '-'}</span>;
     };
 
     const endingDateTemplate = (rowData) => {
-        return <span>{formatDate(rowData.subscripedBundle?.endingDate, locale)}</span>;
+        // Handle both structures: newClients/endingClients vs renewedClients
+        const endingDate = rowData.clientId?.subscripedBundle?.endingDate || rowData.subscripedBundle?.endingDate;
+        return <span>{formatDate(endingDate, locale)}</span>;
     };
 
     const actionTemplate = (rowData) => {
@@ -134,8 +140,11 @@ const ClientsMonitorOverview = ({ data, loading, locale }) => {
     const renderClientDetails = () => {
         if (!selectedClient) return null;
 
-        const bundle = selectedClient.subscripedBundle?.bundleId || {};
-        const subscription = selectedClient.subscripedBundle || {};
+        // Handle both structures: newClients/endingClients vs renewedClients
+        const isRenewedClient = !!selectedClient.clientId;
+        const clientData = isRenewedClient ? selectedClient.clientId : selectedClient;
+        const bundleData = isRenewedClient ? selectedClient.bundleId : selectedClient.subscripedBundle?.bundleId;
+        const subscriptionData = isRenewedClient ? clientData.subscripedBundle : selectedClient.subscripedBundle;
 
         return (
             <div className="grid">
@@ -145,15 +154,15 @@ const ClientsMonitorOverview = ({ data, loading, locale }) => {
                         <div className="flex flex-column gap-3">
                             <div className="flex justify-content-between">
                                 <span className="font-semibold">{t.clientName}:</span>
-                                <span>{selectedClient.clientName}</span>
+                                <span>{clientData.clientName || selectedClient.clientName}</span>
                             </div>
                             <div className="flex justify-content-between">
                                 <span className="font-semibold">{t.phoneNumber}:</span>
-                                <span>{selectedClient.phoneNumber}</span>
+                                <span>{clientData.phoneNumber || selectedClient.phoneNumber}</span>
                             </div>
                             <div className="flex justify-content-between">
                                 <span className="font-semibold">{t.subscriptionId}:</span>
-                                <span>{selectedClient.subscriptionId || '-'}</span>
+                                <span>{clientData.subscriptionId || selectedClient.subscriptionId || '-'}</span>
                             </div>
                         </div>
                     </div>
@@ -165,15 +174,15 @@ const ClientsMonitorOverview = ({ data, loading, locale }) => {
                         <div className="flex flex-column gap-3">
                             <div className="flex justify-content-between">
                                 <span className="font-semibold">{t.bundleName}:</span>
-                                <span>{locale === 'ar' ? bundle.bundleName : bundle.bundleNameEn}</span>
+                                <span>{locale === 'ar' ? bundleData?.bundleName : bundleData?.bundleNameEn}</span>
                             </div>
                             <div className="flex justify-content-between">
                                 <span className="font-semibold">{t.bundleType}:</span>
-                                <span>{bundle.customBundle ? t.custom : t.standard}</span>
+                                <span>{bundleData?.customBundle ? t.custom : t.standard}</span>
                             </div>
                             <div className="flex justify-content-between">
                                 <span className="font-semibold">{t.mealsCount}:</span>
-                                <span>{bundle.mealsNumber || '-'}</span>
+                                <span>{bundleData?.mealsNumber || subscriptionData?.mealsNumber || '-'}</span>
                             </div>
                         </div>
                     </div>
@@ -187,29 +196,29 @@ const ClientsMonitorOverview = ({ data, loading, locale }) => {
                             <div className="col-12 md:col-6">
                                 <div className="flex justify-content-between mb-3">
                                     <span className="font-semibold">{t.startDate}:</span>
-                                    <span>{formatDate(subscription.startingDate, locale)}</span>
+                                    <span>{formatDate(subscriptionData?.startingDate, locale)}</span>
                                 </div>
                                 <div className="flex justify-content-between mb-3">
                                     <span className="font-semibold">{t.endingDate}:</span>
-                                    <span>{formatDate(subscription.endingDate, locale)}</span>
+                                    <span>{formatDate(subscriptionData?.endingDate, locale)}</span>
                                 </div>
                             </div>
                             <div className="col-12 md:col-6">
                                 <div className="flex justify-content-between mb-3">
                                     <span className="font-semibold">{t.period}:</span>
-                                    <span>{formatPeriod(subscription.bundlePeriod)}</span>
+                                    <span>{formatPeriod(subscriptionData?.bundlePeriod)}</span>
                                 </div>
                                 <div className="flex justify-content-between mb-3">
                                     <span className="font-semibold">{t.status}:</span>
-                                    <Tag value={subscription.isPaid ? t.paid : t.unpaid} severity={subscription.isPaid ? 'success' : 'danger'} />
+                                    <Tag value={subscriptionData?.isPaid ? t.paid : t.unpaid} severity={subscriptionData?.isPaid ? 'success' : 'danger'} />
                                 </div>
                             </div>
-                            {bundle.mealsType && bundle.mealsType.length > 0 && (
+                            {subscriptionData?.mealsType && subscriptionData.mealsType.length > 0 && (
                                 <div className="col-12">
                                     <div className="flex justify-content-between mb-3">
                                         <span className="font-semibold">{t.mealsType}:</span>
                                         <div className="flex gap-2">
-                                            {bundle.mealsType.map((meal, index) => (
+                                            {subscriptionData.mealsType.map((meal, index) => (
                                                 <Tag key={index} value={meal} severity="info" />
                                             ))}
                                         </div>
@@ -266,8 +275,8 @@ const ClientsMonitorOverview = ({ data, loading, locale }) => {
                 {loading ? (
                     renderSkeleton()
                 ) : (
-                    <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
-                        <TabPanel header={t.endingClients}>
+                    <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+                        <TabPanel header={t.endingClients} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                             <DataTable
                                 value={data?.endingClients || []}
                                 emptyMessage={renderEmptyMessage()}
@@ -278,6 +287,7 @@ const ClientsMonitorOverview = ({ data, loading, locale }) => {
                                 stripedRows
                                 responsiveLayout="stack"
                                 breakpoint="960px"
+                                dir={locale === 'ar' ? 'rtl' : 'ltr'}
                             >
                                 <Column field="clientName" header={t.clientName} sortable />
                                 <Column field="phoneNumber" header={t.phoneNumber} />
@@ -298,6 +308,7 @@ const ClientsMonitorOverview = ({ data, loading, locale }) => {
                                 stripedRows
                                 responsiveLayout="stack"
                                 breakpoint="960px"
+                                dir={locale === 'ar' ? 'rtl' : 'ltr'}
                             >
                                 <Column field="clientName" header={t.clientName} sortable />
                                 <Column field="phoneNumber" header={t.phoneNumber} />
@@ -317,9 +328,10 @@ const ClientsMonitorOverview = ({ data, loading, locale }) => {
                                 stripedRows
                                 responsiveLayout="stack"
                                 breakpoint="960px"
+                                dir={locale === 'ar' ? 'rtl' : 'ltr'}
                             >
-                                <Column field="clientName" header={t.clientName} sortable />
-                                <Column field="phoneNumber" header={t.phoneNumber} />
+                                <Column field="clientId.clientName" header={t.clientName} sortable body={(rowData) => rowData.clientId?.clientName || '-'} />
+                                <Column field="clientId.phoneNumber" header={t.phoneNumber} body={(rowData) => rowData.clientId?.phoneNumber || '-'} />
                                 <Column body={bundleNameTemplate} header={t.bundleName} />
                                 <Column body={endingDateTemplate} header={t.endingDate} sortable />
                                 <Column body={actionTemplate} style={{ width: '5rem' }} />
@@ -329,7 +341,16 @@ const ClientsMonitorOverview = ({ data, loading, locale }) => {
                 )}
             </div>
 
-            <Dialog header={selectedClient?.clientName} visible={detailsVisible} style={{ width: '90%', maxWidth: '800px' }} onHide={hideDetails} footer={dialogFooter} breakpoints={{ '960px': '90vw', '640px': '100vw' }} maximizable>
+            <Dialog
+                header={selectedClient?.clientName || selectedClient?.clientId?.clientName}
+                visible={detailsVisible}
+                style={{ width: '90%', maxWidth: '800px' }}
+                onHide={hideDetails}
+                footer={dialogFooter}
+                breakpoints={{ '960px': '90vw', '640px': '100vw' }}
+                maximizable
+                dir={locale === 'ar' ? 'rtl' : 'ltr'}
+            >
                 {renderClientDetails()}
             </Dialog>
         </>
